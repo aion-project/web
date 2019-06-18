@@ -7,7 +7,5 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'web';
 
-  username = new FormControl("");
 }
