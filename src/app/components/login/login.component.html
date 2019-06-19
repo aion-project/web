@@ -1,13 +1,24 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <label>
-    Username:
-    <input type="text" formControlName="username">
-  </label>
+<div class="row">
+  <div class="col-4"></div>
+  <mat-card elevation="5" class="col-4 login-card">
+    <mat-card-header>
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-subtitle class="error" *ngIf="error">{{ error }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content>
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field>
+          <input matInput type="text" formControlName="username" placeholder="Username">
+        </mat-form-field>
 
-  <label>
-    Password:
-    <input type="password" formControlName="password">
-  </label>
+        <mat-form-field>
+          <input matInput type="password" formControlName="password" placeholder="Password">
+        </mat-form-field>
 
-  <button type="submit">Login</button>
-</form>
+        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div class="col-4"></div>
+</div>
