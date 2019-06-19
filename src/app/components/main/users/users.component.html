@@ -1,3 +1,27 @@
-<p>
-  users works!
-</p>
+<mat-toolbar>
+  <h1>Users</h1>
+</mat-toolbar>
+<mat-tab-group *ngIf="currentUser?.roles">
+  <mat-tab label="List">
+    <table mat-table [dataSource]="displayedData" class="mat-elevation-z8">
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef> Firstname </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef> Lastname </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab *ngIf="isAdmin" label="Create"> Content 2 </mat-tab>
+</mat-tab-group>

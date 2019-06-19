@@ -26,4 +26,13 @@ export class UserService {
     return this.http.get(UserService.BASE_URL + UserService.ENDPOINT_ME, options)
   }
 
+  getAll() {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.http.get(UserService.BASE_URL, options)
+  }
+
 }
