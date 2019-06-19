@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginGuard } from './auth/login.guard';
+import { httpInterceptorProviders } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +24,14 @@ import { MainComponent } from './components/main/main.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    LoginGuard,
+    // httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
