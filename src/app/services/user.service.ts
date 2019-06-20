@@ -11,6 +11,7 @@ export class UserService {
 
   // ENDPOINTS
   static ENDPOINT_ME = "me"
+  static ENDPOINT_CREATE = "create"
 
   constructor(
     private http: HttpClient,
@@ -33,6 +34,22 @@ export class UserService {
       })
     }
     return this.http.get(UserService.BASE_URL, options)
+  }
+
+  create(firstname: String, lastname: String, username: String, email: String, password: String) {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    let data = {
+      firstname: firstname,
+      lastname: lastname,
+      username: username,
+      email: email,
+      password: password,
+    }
+    return this.http.post(UserService.BASE_URL + UserService.ENDPOINT_CREATE, data, options)
   }
 
 }

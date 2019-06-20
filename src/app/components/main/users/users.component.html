@@ -23,5 +23,33 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-tab>
-  <mat-tab *ngIf="isAdmin" label="Create"> Content 2 </mat-tab>
+  <mat-tab *ngIf="isAdmin" label="Create">
+    <div class="container">
+      <span class="error" *ngIf="error">{{error}}</span>
+
+      <form class="create-form" [formGroup]="createForm" (ngSubmit)="create()">
+        <mat-form-field>
+          <input matInput type="text" formControlName="firstname" placeholder="Firstname">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" formControlName="lastname" placeholder="Lastname">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" formControlName="username" placeholder="Username">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="email" formControlName="email" placeholder="Email">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" formControlName="password" placeholder="Password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">Create</button>
+      </form>
+    </div>
+  </mat-tab>
 </mat-tab-group>
