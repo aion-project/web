@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { AppConfig } from '../config/app-config'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  static BASE_URL = "http://localhost:8080/users/"
+  static USER_URL = AppConfig.BASE_URL + "/users/"
 
   // ENDPOINTS
   static ENDPOINT_ME = "me"
-  static ENDPOINT_CREATE = "create"
 
   constructor(
     private http: HttpClient,
@@ -24,7 +24,7 @@ export class UserService {
         "Authorization": "Bearer " + this.authService.getToken()
       })
     }
-    return this.http.get(UserService.BASE_URL + UserService.ENDPOINT_ME, options)
+    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options)
   }
 
   getAll() {
@@ -33,23 +33,24 @@ export class UserService {
         "Authorization": "Bearer " + this.authService.getToken()
       })
     }
-    return this.http.get(UserService.BASE_URL, options)
+    return this.http.get(UserService.USER_URL, options)
   }
 
-  create(firstname: String, lastname: String, username: String, email: String, password: String) {
+  create(firstName: String, lastName: String, username: String, email: String, password: String) {
     let options = {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.authService.getToken()
       })
     }
     let data = {
-      firstname: firstname,
-      lastname: lastname,
+      firstName: firstName,
+      lastName: lastName,
       username: username,
       email: email,
       password: password,
     }
-    return this.http.post(UserService.BASE_URL + UserService.ENDPOINT_CREATE, data, options)
+    console.log(data);
+    return this.http.post(UserService.USER_URL, data, options)
   }
 
 }

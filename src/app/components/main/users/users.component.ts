@@ -13,8 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class UsersComponent implements OnInit {
 
   createForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
     username: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl('')
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   isLoading: boolean = false
   isAdmin: boolean
   currentUser: any
-  displayedColumns: string[] = ['firstname', 'lastname', 'username']
+  displayedColumns: string[] = ['firstName', 'lastName', 'username']
   displayedData: any
 
   constructor(
@@ -35,15 +35,15 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.userService.me().pipe(first()).subscribe(user => {
       this.currentUser = user
-      if (this.currentUser.roles.some(role => role.name == "ADMIN"))
+      if (this.currentUser.roles.some(role => role == "Admin"))
         this.isAdmin = true
     })
     this.fetchUsers()
   }
 
   create() {
-    let firstname = this.createForm.controls['firstname'].value as string;
-    let lastname = this.createForm.controls['lastname'].value as string;
+    let firstname = this.createForm.controls['firstName'].value as string;
+    let lastname = this.createForm.controls['lastName'].value as string;
     let username = this.createForm.controls['username'].value as string;
     let email = this.createForm.controls['email'].value as string;
     let password = this.createForm.controls['password'].value as string;
@@ -61,6 +61,7 @@ export class UsersComponent implements OnInit {
       } else {
         this.error = err.toString()
       }
+      console.log(err);
       this.isLoading = false
     })
   }
