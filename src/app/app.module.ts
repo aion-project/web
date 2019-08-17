@@ -14,6 +14,8 @@ import { LoginGuard } from './auth/login.guard';
 import { httpInterceptorProviders } from './auth/auth.interceptor';
 import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
+import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
+import { SelectRoleComponent } from './components/main/users/user-detail/select-role/select-role.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,12 @@ import { HomeComponent } from './components/main/home/home.component';
     LoginComponent,
     MainComponent,
     UsersComponent,
-    HomeComponent
+    UserDetailComponent,
+    HomeComponent,
+    SelectRoleComponent
+  ],
+  entryComponents: [
+    SelectRoleComponent
   ],
   imports: [
     BrowserModule,

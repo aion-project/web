@@ -6,6 +6,7 @@ import { LoginGuard } from './auth/login.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
+import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
@@ -13,6 +14,7 @@ const routes: Routes = [
     path: "", component: MainComponent, canActivate: [AuthGuard],
     children: [
       { path: "users", component: UsersComponent },
+      { path: "user/:userId", component: UserDetailComponent },
       { path: "", component: HomeComponent }
     ]
   }

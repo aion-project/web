@@ -2,6 +2,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "assets/css/simple-grid.scss";
 
+* {
+  font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
+}
+
 .error {
   color: red;
 }

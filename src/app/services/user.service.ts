@@ -27,6 +27,15 @@ export class UserService {
     return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options)
   }
 
+  get(userId: String) {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.http.get(UserService.USER_URL + userId, options)
+  }
+
   getAll() {
     let options = {
       headers: new HttpHeaders({
@@ -51,6 +60,30 @@ export class UserService {
     }
     console.log(data);
     return this.http.post(UserService.USER_URL, data, options)
+  }
+
+  addRole(userId: String, roleName: String) {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    let data = {
+      roleName: roleName,
+    }
+    return this.http.post(UserService.USER_URL + userId + "/addRole", data, options)
+  }
+
+  removeRole(userId: String, roleName: String) {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    let data = {
+      roleName: roleName,
+    }
+    return this.http.post(UserService.USER_URL + userId + "/removeRole", data, options)
   }
 
 }

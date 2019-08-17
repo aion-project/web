@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   isLoading: boolean = false
   isAdmin: boolean
   currentUser: any
-  displayedColumns: string[] = ['firstName', 'lastName', 'username']
+  displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email']
   displayedData: any
 
   constructor(

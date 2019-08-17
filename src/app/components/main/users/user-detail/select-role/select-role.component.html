@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Select role</h1>
+<div mat-dialog-content class="content">
+  <mat-chip-list>
+    <mat-chip *ngFor="let role of roles" (click)="onRoleSelected(role.name)">
+      {{ role.name }}
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
