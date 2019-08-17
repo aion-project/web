@@ -12,13 +12,13 @@
     <mat-card-subtitle>Assign user roles</mat-card-subtitle>
     <mat-card-content>
         <mat-chip-list>
-            <mat-chip *ngFor="let userRole of user?.roles" [removable]="true" (removed)="onRoleRemove(userRole)">
+            <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole)">
                 {{ userRole }}
-                <mat-icon matChipRemove>cancel</mat-icon>
+                <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
     </mat-card-content>
-    <mat-card-actions class="actions">
+    <mat-card-actions *ngIf="isAdmin" class="actions">
         <button mat-flat-button (click)="onRoleAdd()">
             <mat-icon>add</mat-icon>
             Add

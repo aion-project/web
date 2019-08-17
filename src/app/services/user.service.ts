@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app-config'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,15 @@ export class UserService {
       })
     }
     return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options)
+  }
+
+  myRoles() {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options).pipe(map((user: any) => user.roles))
   }
 
   get(userId: String) {

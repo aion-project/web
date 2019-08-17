@@ -15,8 +15,9 @@ import { SelectRoleComponent } from './select-role/select-role.component';
 export class UserDetailComponent implements OnInit {
 
   private userId: String
-
+  
   user: any = []
+  isAdmin: boolean = false
 
   constructor(
     private userService: UserService,
@@ -25,6 +26,10 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userService.myRoles().pipe(first()).subscribe((roles: any[]) => {
+      if (roles.some(role => role == "Admin"))
+        this.isAdmin = true
+    })
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
       this.userId = map.get("userId")
       this.fetchUserInfo()
