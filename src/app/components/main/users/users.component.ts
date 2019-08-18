@@ -68,7 +68,6 @@ export class UsersComponent implements OnInit {
 
   fetchUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      console.log(users)
       this.displayedData = users
     })
   }

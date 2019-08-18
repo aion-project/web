@@ -23,7 +23,6 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.userService.me().pipe(
       first(),
-      tap(res => console.log(res))
     ).subscribe(res => this.user = res)
   }
 
