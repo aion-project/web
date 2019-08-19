@@ -95,5 +95,18 @@ export class UserService {
     }
     return this.http.post(UserService.USER_URL + userId + "/removeRole", data, options)
   }
+  
+  setEnable(userId: String, isEnabled: String) {
+    let options = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + this.authService.getToken()
+      })
+    }
+    let data = {
+      isEnabled: isEnabled,
+    }
+    return this.http.post(UserService.USER_URL + userId + "/setEnable", data, options)
+    
+  }
 
 }
