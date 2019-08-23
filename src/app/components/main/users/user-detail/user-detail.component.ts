@@ -57,6 +57,12 @@ export class UserDetailComponent implements OnInit {
     })
   }
 
+  onSetEnable(isEnable) {
+    this.userService.setEnable(this.userId, isEnable).toPromise().then(_ => {
+      this.fetchUserInfo()
+    })
+  }
+
   fetchUserInfo() {
     this.userService.get(this.userId).pipe(first()).subscribe(user => {
       this.user = user

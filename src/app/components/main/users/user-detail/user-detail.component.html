@@ -7,21 +7,48 @@
     <div>{{ user?.email }}</div>
 </div>
 <mat-divider></mat-divider>
-<mat-card class="container roles-card">
-    <mat-card-title>Roles</mat-card-title>
-    <mat-card-subtitle>Assign user roles</mat-card-subtitle>
-    <mat-card-content>
-        <mat-chip-list>
-            <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole)">
-                {{ userRole }}
-                <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
-    </mat-card-content>
-    <mat-card-actions *ngIf="isAdmin" class="actions">
-        <button mat-flat-button (click)="onRoleAdd()">
-            <mat-icon>add</mat-icon>
-            Add
-        </button>
-    </mat-card-actions>
-</mat-card>
+<div class="container">
+    <mat-card class="section">
+        <mat-card-title>Roles</mat-card-title>
+        <mat-card-subtitle>Assign user roles</mat-card-subtitle>
+        <mat-card-content>
+            <mat-chip-list>
+                <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole)">
+                    {{ userRole }}
+                    <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+        <mat-card-actions *ngIf="isAdmin" class="actions">
+            <button mat-flat-button (click)="onRoleAdd()">
+                <mat-icon>add</mat-icon>
+                ADD
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+<div class="container">
+    <mat-card *ngIf="isAdmin" class="section">
+        <mat-card-title>Manage</mat-card-title>
+        <mat-card-subtitle>Block/unblock or delete user</mat-card-subtitle>
+        <mat-card-content>
+            <p>User is currently
+                <span *ngIf="user?.enabled">enabled.</span>
+                <span *ngIf="!user?.enabled">blocked.</span>
+            </p>
+            <button *ngIf="user?.enabled" mat-flat-button color="warn" (click)="onSetEnable(false)">
+                BLOCK
+            </button>
+            <button *ngIf="!user?.enabled" mat-flat-button color="primary" (click)="onSetEnable(true)">
+                UNBLOCK
+            </button>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-content style="padding-top: 16px;">
+            <p>Remove user from the system</p>
+            <button mat-flat-button color="warn" (click)="onDelete()">
+                DELETE
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
