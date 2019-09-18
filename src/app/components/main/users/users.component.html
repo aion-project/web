@@ -6,7 +6,7 @@
     <table mat-table [dataSource]="displayedData" class="mat-elevation-z8">
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"><a [routerLink]="['/user', element.id]"> {{element.username}} </a></td>
+        <td mat-cell *matCellDef="let element"><a [routerLink]="['/users', element.id]"> {{element.username}} </a></td>
       </ng-container>
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef> Firstname </th>

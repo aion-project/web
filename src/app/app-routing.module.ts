@@ -7,6 +7,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
+import { ProfileComponent } from './components/main/profile/profile.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
@@ -14,8 +15,10 @@ const routes: Routes = [
     path: "", component: MainComponent, canActivate: [AuthGuard],
     children: [
       { path: "users", component: UsersComponent },
-      { path: "user/:userId", component: UserDetailComponent },
-      { path: "", component: HomeComponent }
+      { path: "users/:userId", component: UserDetailComponent },
+      { path: "profile", component: ProfileComponent },
+      { path: "home", component: HomeComponent },
+      { path: "", redirectTo:"/home", pathMatch: "full"}
     ]
   }
 ];

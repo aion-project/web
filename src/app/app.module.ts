@@ -16,6 +16,7 @@ import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
 import { SelectRoleComponent } from './components/main/users/user-detail/select-role/select-role.component';
+import { ProfileComponent } from './components/main/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SelectRoleComponent } from './components/main/users/user-detail/select-
     UsersComponent,
     UserDetailComponent,
     HomeComponent,
-    SelectRoleComponent
+    SelectRoleComponent,
+    ProfileComponent
   ],
   entryComponents: [
     SelectRoleComponent

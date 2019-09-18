@@ -1,5 +1,11 @@
 .user-detail {
   margin-right: 16px;
+  text-decoration: none;
+  color: white;
+}
+
+.active {
+  color: blue;
 }
 
 .main-container {
@@ -8,4 +14,8 @@
 
 .side-nav {
   width: 240px;
+}
+
+.selected {
+  background-color: #f5f5f5;
 }
