@@ -47,8 +47,8 @@ export class UserService {
     return this.http.post(UserService.USER_URL, data)
   }
 
-  delete() {
-
+  delete(userId: String) {
+    return this.http.delete(UserService.USER_URL + userId)
   }
 
   addRole(userId: String, roleName: String) {

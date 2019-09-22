@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { RoleService } from 'src/app/services/role.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { SelectRoleComponent } from './select-role/select-role.component';
+import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,14 +16,15 @@ import { SelectRoleComponent } from './select-role/select-role.component';
 export class UserDetailComponent implements OnInit {
 
   private userId: String
-  
+
   user: any = []
   isAdmin: boolean = false
 
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -58,9 +60,31 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSetEnable(isEnable) {
-    this.userService.setEnable(this.userId, isEnable).toPromise().then(_ => {
-      this.fetchUserInfo()
-    })
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.setEnable(this.userId, isEnable).toPromise().then(_ => {
+          this.fetchUserInfo()
+        })
+      }
+    });
+  }
+
+  onDelete() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.delete(this.userId).toPromise().then(_ => {
+          this.router.navigateByUrl("/users")
+        })
+      }
+    });
   }
 
   fetchUserInfo() {
