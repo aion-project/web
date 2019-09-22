@@ -17,6 +17,7 @@ import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
 import { SelectRoleComponent } from './components/main/users/user-detail/select-role/select-role.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
+import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,12 @@ import { ProfileComponent } from './components/main/profile/profile.component';
     UserDetailComponent,
     HomeComponent,
     SelectRoleComponent,
+    ConfirmDialogComponent,
     ProfileComponent
   ],
   entryComponents: [
-    SelectRoleComponent
+    SelectRoleComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { ProfileComponent } from './components/main/profile/profile.component';
   providers: [
     AuthGuard,
     LoginGuard,
-    // httpInterceptorProviders
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

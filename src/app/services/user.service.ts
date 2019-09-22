@@ -20,47 +20,22 @@ export class UserService {
   ) { }
 
   me() {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options)
+    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME)
   }
 
   myRoles() {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME, options).pipe(map((user: any) => user.roles))
+    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(map((user: any) => user.roles))
   }
 
   get(userId: String) {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.get(UserService.USER_URL + userId, options)
+    return this.http.get(UserService.USER_URL + userId)
   }
 
   getAll() {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.get(UserService.USER_URL, options)
+    return this.http.get(UserService.USER_URL)
   }
 
   create(firstName: String, lastName: String, username: String, email: String, password: String) {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
     let data = {
       firstName: firstName,
       lastName: lastName,
@@ -69,40 +44,29 @@ export class UserService {
       password: password,
     }
     console.log(data);
-    return this.http.post(UserService.USER_URL, data, options)
+    return this.http.post(UserService.USER_URL, data)
+  }
+
+  delete() {
+
   }
 
   addRole(userId: String, roleName: String) {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
     let data = {
       roleName: roleName,
     }
-    return this.http.post(UserService.USER_URL + userId + "/addRole", data, options)
+    return this.http.post(UserService.USER_URL + userId + "/addRole", data)
   }
 
   removeRole(userId: String, roleName: String) {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
     let data = {
       roleName: roleName,
     }
-    return this.http.post(UserService.USER_URL + userId + "/removeRole", data, options)
+    return this.http.post(UserService.USER_URL + userId + "/removeRole", data)
   }
   
   setEnable(userId: String, isEnabled: Boolean) {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.post(UserService.USER_URL + userId + "/setEnable/" + isEnabled, null, options)
-  }
 
+    return this.http.post(UserService.USER_URL + userId + "/setEnable/" + isEnabled, null)
+  }
 }

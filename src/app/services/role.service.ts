@@ -16,11 +16,6 @@ export class RoleService {
   ) { }
 
   getAll() {
-    let options = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.authService.getToken()
-      })
-    }
-    return this.http.get(RoleService.ROLE_URL, options)
+    return this.http.get(RoleService.ROLE_URL)
   }
 }
