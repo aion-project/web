@@ -5,9 +5,19 @@
   <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
   <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
   <div>{{ user?.email }}</div>
+  <button mat-stroked-button (click)="onEditProfile()">Edit</button>
 </div>
 <mat-divider></mat-divider>
 <div class="container">
+  <mat-card *ngIf="user?.bio" class="section">
+    <mat-card-title>Bio</mat-card-title>
+    <!-- <mat-card-subtitle>Roles assign to you</mat-card-subtitle> -->
+    <mat-card-content>
+      <p>
+        {{user?.bio}}
+      </p>
+    </mat-card-content>
+  </mat-card>
   <mat-card class="section">
     <mat-card-title>Roles</mat-card-title>
     <mat-card-subtitle>Roles assign to you</mat-card-subtitle>
@@ -17,15 +27,6 @@
           {{ userRole }}
         </mat-chip>
       </mat-chip-list>
-    </mat-card-content>
-  </mat-card>
-  <mat-card *ngIf="user?.bio" class="section">
-    <mat-card-title>Bio</mat-card-title>
-    <!-- <mat-card-subtitle>Roles assign to you</mat-card-subtitle> -->
-    <mat-card-content>
-      <p>
-        {{user?.bio}}
-      </p>
     </mat-card-content>
   </mat-card>
 </div>

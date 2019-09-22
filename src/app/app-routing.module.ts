@@ -8,17 +8,18 @@ import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
+import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
   {
     path: "", component: MainComponent, canActivate: [AuthGuard],
     children: [
-      { path: "users", component: UsersComponent },
       { path: "users/:userId", component: UserDetailComponent },
+      { path: "users", component: UsersComponent },
       { path: "profile", component: ProfileComponent },
       { path: "home", component: HomeComponent },
-      { path: "", redirectTo:"/home", pathMatch: "full"}
+      { path: "", redirectTo: "/home", pathMatch: "full" }
     ]
   }
 ];

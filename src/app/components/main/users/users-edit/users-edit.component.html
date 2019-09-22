@@ -1,0 +1,27 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title>{{ Edit }}</h1>
+<form class="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content class="content">
+    <span class="error" *ngIf="error">{{error}}</span>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="firstName" placeholder="Firstname">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="lastName" placeholder="Lastname">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="email" formControlName="email" placeholder="Email">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isProfile" class="form-full-width">
+      <input matInput type="text" formControlName="bio" placeholder="Bio">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onSubmit()">Save</button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
+</form>

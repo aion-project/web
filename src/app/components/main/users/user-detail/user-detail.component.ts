@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
+import { UsersEditComponent } from '../users-edit/users-edit.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -36,6 +37,19 @@ export class UserDetailComponent implements OnInit {
       this.userId = map.get("userId")
       this.fetchUserInfo()
     })
+  }
+
+  onEditProfile() {
+    const dialogRef = this.dialog.open(UsersEditComponent, {
+      width: '640px',
+      data: this.userId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchUserInfo();
+      }
+    });
   }
 
   onRoleAdd() {

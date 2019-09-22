@@ -47,6 +47,16 @@ export class UserService {
     return this.http.post(UserService.USER_URL, data)
   }
 
+  update(userId: String, firstName: String, lastName: String, email: String, bio: String) {
+    let data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      bio: bio,
+    }
+    return this.http.put(UserService.USER_URL + userId, data)
+  }
+
   delete(userId: String) {
     return this.http.delete(UserService.USER_URL + userId)
   }
