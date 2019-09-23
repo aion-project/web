@@ -1,7 +1,23 @@
+.toolbar {
+  margin-bottom: 3px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.14);
+  background-color: #ffffff !important;
+}
+
+.toolbar .logo-icon {
+  height: 42px;
+}
+
+.toolbar .logo-text {
+  margin-left: 6px;
+  font-size: 24px;
+  color: #555 !important;
+}
+
 .user-detail {
   margin-right: 16px;
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .active {
@@ -14,6 +30,14 @@
 
 .side-nav {
   width: 240px;
+}
+
+.side-nav .title {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 20px 24px 0px 24px;
+  text-transform: uppercase;
 }
 
 .selected {

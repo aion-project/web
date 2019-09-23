@@ -1,5 +1,6 @@
-<mat-toolbar color="primary">
-  <h1>aion</h1>
+<mat-toolbar class="toolbar">
+  <img class="logo-icon" src="assets/images/logo.png" />
+  <h1 class="logo-text">aion</h1>
   <span class="spacer"></span>
   <a *ngIf="!!user" class="user-detail" [routerLink]="['/profile/']">
     <span>{{ user?.firstName }} {{ user?.lastName }}</span>
@@ -9,11 +10,38 @@
 <mat-drawer-container class="main-container">
   <mat-drawer class="side-nav" mode="side" opened>
     <mat-nav-list class="side-top-nav">
-      <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected"> Home </a>
-      <a mat-list-item [routerLink]="['/users']" routerLinkActive="selected"> Users </a>
+      <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <h4 mat-line> Home </h4>
+      </a>
     </mat-nav-list>
+    <mat-divider></mat-divider>
+    <div class="title">
+      Sections
+    </div>
+    <mat-nav-list class="side-top-nav">
+      <a mat-list-item [routerLink]="['/events']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>event</mat-icon>
+        <h4 mat-line> Events </h4>
+      </a>
+      <a mat-list-item [routerLink]="['/locations']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>room</mat-icon>
+        <h4 mat-line> Locations </h4>
+      </a>
+      <a mat-list-item [routerLink]="['/users']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>people</mat-icon>
+        <h4 mat-line> Users </h4>
+      </a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <div class="title">
+      Personal
+    </div>
     <mat-nav-list *ngIf="!!user" class="side-bottom-nav">
-      <a mat-list-item [routerLink]="['/profile/']" routerLinkActive="selected"> Profile </a>
+      <a mat-list-item [routerLink]="['/profile/']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line> Profile </h4>
+      </a>
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
