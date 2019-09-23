@@ -5,13 +5,13 @@
     <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
     <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
     <div>{{ user?.email }}</div>
-    <button mat-stroked-button (click)="onEditProfile()">Edit</button>
+    <button *ngIf="isAdmin" mat-stroked-button (click)="onEditProfile()">Edit</button>
 </div>
 <mat-divider></mat-divider>
 <div class="container">
     <mat-card class="section">
         <mat-card-title>Roles</mat-card-title>
-        <mat-card-subtitle>Assign user roles</mat-card-subtitle>
+        <mat-card-subtitle>Assigned user roles</mat-card-subtitle>
         <mat-card-content>
             <mat-chip-list>
                 <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole)">
