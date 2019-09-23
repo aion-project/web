@@ -31,7 +31,7 @@
 <div class="container">
     <mat-card *ngIf="isAdmin" class="section">
         <mat-card-title>Manage</mat-card-title>
-        <mat-card-subtitle>Block/unblock or delete user</mat-card-subtitle>
+        <div class="card-section-title">Block</div>
         <mat-card-content>
             <p>User is currently
                 <span *ngIf="user?.enabled">enabled.</span>
@@ -45,7 +45,8 @@
             </button>
         </mat-card-content>
         <mat-divider></mat-divider>
-        <mat-card-content style="padding-top: 16px;">
+        <div class="card-section-title subsection">Delete</div>
+        <mat-card-content>
             <p>Remove user from the system</p>
             <button mat-flat-button color="warn" (click)="onDelete()">
                 DELETE

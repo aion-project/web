@@ -26,3 +26,25 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 .mat-toolbar {
     background: none;
 }
+
+.mat-card {
+    border-radius: 8px !important;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-section-title {
+    color: rgba(0, 0, 0, 0.38);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 0px;
+    text-transform: uppercase;
+}
+
+// Dialog styles
+.mat-dialog-container {
+    border-radius: 8px !important;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
