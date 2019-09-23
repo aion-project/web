@@ -1,11 +1,15 @@
-<div class="header">
-    <button [routerLink]="['/users']" mat-icon-button aria-label="Back">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
-    <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
-    <div>{{ user?.email }}</div>
-    <button *ngIf="isAdmin" mat-stroked-button (click)="onEditProfile()">Edit</button>
+<div class="container">
+    <mat-toolbar>
+        <button [routerLink]="['/users']" mat-icon-button aria-label="Back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="header">
+        <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
+        <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
+        <div>{{ user?.email }}</div>
+        <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button (click)="onEditProfile()">Edit</button>
+    </div>
 </div>
 <mat-divider></mat-divider>
 <div class="container">
@@ -27,8 +31,6 @@
             </button>
         </mat-card-actions>
     </mat-card>
-</div>
-<div class="container">
     <mat-card *ngIf="isAdmin" class="section">
         <mat-card-title>Manage</mat-card-title>
         <div class="card-section-title">Block</div>

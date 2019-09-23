@@ -1,7 +1,11 @@
 .toolbar {
-  margin-bottom: 3px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.14);
   background-color: #ffffff !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 }
 
 .toolbar .logo-icon {
@@ -26,9 +30,11 @@
 
 .main-container {
   height: 100%;
+  padding-top: 64px;
 }
 
 .side-nav {
+  margin-top: 64px;
   width: 240px;
 }
 

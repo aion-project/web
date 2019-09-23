@@ -3,12 +3,20 @@
   <h1 class="logo-text">aion</h1>
   <span class="spacer"></span>
   <a *ngIf="!!user" class="user-detail" [routerLink]="['/profile/']">
-    <span>{{ user?.firstName }} {{ user?.lastName }}</span>
+    <button mat-flat-button>{{ user?.firstName }} {{ user?.lastName }}</button>
   </a>
-  <button mat-flat-button (click)=" logout()">Logout</button>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More options">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>LOGOUT</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
-<mat-drawer-container class="main-container">
-  <mat-drawer class="side-nav" mode="side" opened>
+<mat-sidenav-container class="main-container">
+  <mat-sidenav class="side-nav" mode="side" opened>
     <mat-nav-list class="side-top-nav">
       <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected">
         <mat-icon mat-list-icon>home</mat-icon>
@@ -43,8 +51,8 @@
         <h4 mat-line> Profile </h4>
       </a>
     </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

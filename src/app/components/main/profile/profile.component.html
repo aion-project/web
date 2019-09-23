@@ -1,11 +1,13 @@
-<mat-toolbar>
-  <h1>Profile</h1>
-</mat-toolbar>
-<div class="header">
-  <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
-  <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
-  <div>{{ user?.email }}</div>
-  <button mat-stroked-button (click)="onEditProfile()">Edit</button>
+<div class="container">
+  <mat-toolbar>
+    <h1>Profile</h1>
+  </mat-toolbar>
+  <div class="header">
+    <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
+    <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
+    <div>{{ user?.email }}</div>
+    <button class="edit-button" mat-stroked-button color="primary" (click)="onEditProfile()">Edit</button>
+  </div>
 </div>
 <mat-divider></mat-divider>
 <div class="container">

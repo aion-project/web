@@ -19,6 +19,7 @@ import { SelectRoleComponent } from './components/main/users/user-detail/select-
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
+import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,13 @@ import { UsersEditComponent } from './components/main/users/users-edit/users-edi
     ConfirmDialogComponent,
     ProfileComponent,
     UsersEditComponent,
+    UsersCreateComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
     ConfirmDialogComponent,
     UsersEditComponent,
+    UsersCreateComponent,
   ],
   imports: [
     BrowserModule,

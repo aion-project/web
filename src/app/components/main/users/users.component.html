@@ -1,56 +1,35 @@
-<mat-toolbar>
-  <h1>Users</h1>
-</mat-toolbar>
-<mat-tab-group *ngIf="currentUser?.roles">
-  <mat-tab label="List">
-    <table mat-table [dataSource]="displayedData" class="mat-elevation-z8">
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"><a [routerLink]="['/users', element.id]"> {{element.username}} </a></td>
-      </ng-container>
-      <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef> Firstname </th>
-        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef> Lastname </th>
-        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </mat-tab>
-  <mat-tab *ngIf="isAdmin" label="Create">
-    <div class="container">
-      <span class="error" *ngIf="error">{{error}}</span>
-
-      <form class="create-form" [formGroup]="createForm" (ngSubmit)="create()">
-        <mat-form-field>
-          <input matInput type="text" formControlName="firstName" placeholder="Firstname">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" formControlName="lastName" placeholder="Lastname">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" formControlName="username" placeholder="Username">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="email" formControlName="email" placeholder="Email">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="password" formControlName="password" placeholder="Password">
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">Create</button>
-      </form>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+<div class="container">
+  <mat-toolbar>
+    <h1>Users</h1>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" (click)="create()">
+      <mat-icon>add</mat-icon>
+      CREATE
+    </button>
+  </mat-toolbar>
+  <mat-tab-group *ngIf="currentUser?.roles">
+    <mat-tab label="List">
+      <table mat-table [dataSource]="displayedData" class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Username </th>
+          <td mat-cell *matCellDef="let element"><a [routerLink]="['/users', element.id]"> {{element.username}} </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> Firstname </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Lastname </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,7 +1,6 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<h1 mat-dialog-title *ngIf="isProfile">Edit Profile</h1>
-<h1 mat-dialog-title *ngIf="!isProfile">Edit User</h1>
-<form class="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+<h1 mat-dialog-title>Create User</h1>
+<form class="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content class="content">
     <span class="error" *ngIf="error">{{error}}</span>
 
@@ -14,15 +13,19 @@
     </mat-form-field>
 
     <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="username" placeholder="Username">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
       <input matInput type="email" formControlName="email" placeholder="Email">
     </mat-form-field>
 
-    <mat-form-field *ngIf="isProfile" class="form-full-width">
-      <textarea matInput formControlName="bio" placeholder="Bio"></textarea>
+    <mat-form-field class="form-full-width">
+      <input matInput type="password" formControlName="password" placeholder="Password">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-button color="primary" (click)="onSubmit()">Save</button>
+    <button mat-button color="primary" (click)="onSubmit()">Create</button>
     <button mat-button (click)="onCancel()">Cancel</button>
   </div>
 </form>
