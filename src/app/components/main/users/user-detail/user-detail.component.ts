@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from '../users-edit/users-edit.component';
+import { AppConfig } from 'src/app/config/app-config';
 
 @Component({
   selector: 'app-user-detail',
@@ -104,6 +105,9 @@ export class UserDetailComponent implements OnInit {
   fetchUserInfo() {
     this.userService.get(this.userId).pipe(first()).subscribe(user => {
       this.user = user
+      if (this.user.avatarUrl != null) {
+        this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
+      }
     })
   }
 }

@@ -5,10 +5,16 @@
         </button>
     </mat-toolbar>
     <div class="header">
-        <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
-        <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
-        <div>{{ user?.email }}</div>
-        <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button (click)="onEditProfile()">Edit</button>
+        <div class="avatar-container">
+            <img *ngIf="user?.avatarUrl" class="avatar" [src]="user?.avatarUrl">
+        </div>
+        <div class="user-detail-container">
+            <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
+            <h2 class="mat-display-1 compact">{{ user?.lastName }}</h2>
+            <div>{{ user?.email }}</div>
+            <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
+                (click)="onEditProfile()">Edit</button>
+        </div>
     </div>
 </div>
 <mat-divider></mat-divider>

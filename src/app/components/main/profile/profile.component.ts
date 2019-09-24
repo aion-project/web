@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { UsersEditComponent } from '../users/users-edit/users-edit.component';
+import { AppConfig } from 'src/app/config/app-config';
 
 @Component({
   selector: 'app-profile',
@@ -38,6 +39,9 @@ export class ProfileComponent implements OnInit {
   fetchMe() {
     this.userService.me().pipe(first()).subscribe(user => {
       this.user = user
+      if (this.user.avatarUrl != null) {
+        this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
+      }
     })
   }
 
