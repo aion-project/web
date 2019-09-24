@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { UsersEditComponent } from '../users/users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
+import { AvatarUploadComponent } from '../users/user-detail/avatar-upload/avatar-upload.component';
 
 @Component({
   selector: 'app-profile',
@@ -35,12 +36,25 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
+  
+  onChangeAvatar() {
+    const dialogRef = this.dialog.open(AvatarUploadComponent, {
+      width: '640px',
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchMe();
+      }
+    });
+  }
+  
   fetchMe() {
     this.userService.me().pipe(first()).subscribe(user => {
       this.user = user
       if (this.user.avatarUrl != null) {
-        this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
+        let url = AppConfig.BASE_URL + this.user.avatarUrl + '?random+\=' + Math.random()
+        this.user.avatarUrl = url;
       }
     })
   }

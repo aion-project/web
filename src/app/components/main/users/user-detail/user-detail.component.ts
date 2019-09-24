@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { RoleService } from 'src/app/services/role.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { SelectRoleComponent } from './select-role/select-role.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';

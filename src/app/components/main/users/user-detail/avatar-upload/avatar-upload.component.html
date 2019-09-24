@@ -1,0 +1,11 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title>Upload Avatar</h1>
+<div mat-dialog-content class="content">
+  <div class="form-full-width">
+    <input type="file" accept="image/*" (change)="onFileChange($event)">
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onSubmit()">Upload</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

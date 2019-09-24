@@ -3,7 +3,7 @@
     <h1>Profile</h1>
   </mat-toolbar>
   <div class="header">
-    <div class="avatar-container">
+    <div class="avatar-container" (click)="onChangeAvatar()">
       <img *ngIf="user?.avatarUrl" class="avatar" [src]="user?.avatarUrl">
     </div>
     <div class="user-detail-container">

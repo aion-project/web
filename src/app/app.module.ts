@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { ProfileComponent } from './components/main/profile/profile.component';
 import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
 import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
+import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
 
 @NgModule({
   declarations: [
@@ -34,18 +35,21 @@ import { UsersCreateComponent } from './components/main/users/users-create/users
     ProfileComponent,
     UsersEditComponent,
     UsersCreateComponent,
+    AvatarUploadComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
     ConfirmDialogComponent,
     UsersEditComponent,
     UsersCreateComponent,
+    AvatarUploadComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MaterialModule
   ],

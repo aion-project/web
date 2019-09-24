@@ -13,6 +13,7 @@ export class UserService {
 
   // ENDPOINTS
   static ENDPOINT_ME = "me"
+  static ENDPOINT_UPLOAD_AVATAR = "me/uploadAvatar"
 
   constructor(
     private http: HttpClient,
@@ -76,7 +77,15 @@ export class UserService {
   }
   
   setEnable(userId: String, isEnabled: Boolean) {
-
     return this.http.post(UserService.USER_URL + userId + "/setEnable/" + isEnabled, null)
+  }
+
+  uploadAvatar(ext, mime, data) {
+    let image = {
+      ext: ext,
+      mime: mime,
+      data: data,
+    }
+    return this.http.post(UserService.USER_URL + UserService.ENDPOINT_UPLOAD_AVATAR, image)
   }
 }
