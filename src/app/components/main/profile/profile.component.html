@@ -5,6 +5,9 @@
   <div class="header">
     <div class="avatar-container" (click)="onChangeAvatar()">
       <img *ngIf="user?.avatarUrl" class="avatar" [src]="user?.avatarUrl">
+      <div class="avatar-hover">
+        <mat-icon>camera_alt</mat-icon>
+      </div>
     </div>
     <div class="user-detail-container">
       <div class="mat-display-2 compact"> {{ user?.firstName }}</div>
