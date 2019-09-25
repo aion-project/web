@@ -19,6 +19,14 @@
 </div>
 <mat-divider></mat-divider>
 <div class="container">
+    <mat-card *ngIf="user?.bio" class="section">
+        <mat-card-title>Bio</mat-card-title>
+        <mat-card-content>
+            <p>
+                {{user?.bio}}
+            </p>
+        </mat-card-content>
+    </mat-card>
     <mat-card class="section">
         <mat-card-title>Roles</mat-card-title>
         <mat-card-subtitle>Assigned user roles</mat-card-subtitle>
