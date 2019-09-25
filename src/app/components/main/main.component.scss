@@ -53,3 +53,17 @@
 .selected {
   background-color: #f5f5f5;
 }
+
+.thumbnail-container {
+  position: relative;
+  padding: 0 !important;
+  margin-left: 4px;
+  width: 28px !important;
+  height: 28px !important;
+  overflow: hidden;
+}
+
+.thumbnail {
+  position: absolute;
+  width: 100%;
+}

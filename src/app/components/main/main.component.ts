@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, first } from 'rxjs/operators';
+import { AppConfig } from 'src/app/config/app-config';
 
 @Component({
   selector: 'app-main',
@@ -23,7 +24,13 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.userService.me().pipe(
       first(),
-    ).subscribe(res => this.user = res)
+    ).subscribe(res => {
+      this.user = res
+      if (this.user.thumbnailUrl != null) {
+        let url = AppConfig.BASE_URL + this.user.thumbnailUrl + '?random+\=' + Math.random()
+        this.user.thumbnailUrl = url;
+      }
+    })
   }
 
   logout() {
