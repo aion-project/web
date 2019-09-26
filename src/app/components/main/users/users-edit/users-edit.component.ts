@@ -43,7 +43,7 @@ export class UsersEditComponent implements OnInit {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        bio: user.bio
+        bio: user.bio != null ? user.bio : "" 
       })
     })
   }
