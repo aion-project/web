@@ -44,3 +44,9 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 .mat-button-wrapper .material-icons {
     line-height: 0.9 !important;
 }
+
+.mat-progress-bar {
+    height: 6px !important;
+    margin-bottom: 8px !important;
+    border-radius: 3px;
+}
