@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 <h1 mat-dialog-title>Create User</h1>
-<form class="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div mat-dialog-content class="content">
+<div mat-dialog-content class="content">
+  <form class="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
     <span class="error" *ngIf="error">{{error}}</span>
 
     <mat-form-field class="form-full-width">
@@ -23,9 +23,9 @@
     <mat-form-field class="form-full-width">
       <input matInput type="password" formControlName="password" placeholder="Password">
     </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button color="primary" (click)="onSubmit()">Create</button>
-    <button mat-button (click)="onCancel()">Cancel</button>
-  </div>
-</form>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit()">Create</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>
