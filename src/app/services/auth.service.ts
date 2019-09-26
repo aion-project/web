@@ -17,10 +17,6 @@ export class AuthService {
     return !!localStorage.getItem("token");
   }
 
-  getToken() {
-    return localStorage.getItem('token')
-  }
-
   login(username: string, password: string): Observable<Boolean> {
     let body = "grant_type=password&username=" + username + "&password=" + password + "&scope=full"
     let options = {

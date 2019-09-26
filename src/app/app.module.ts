@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+import { JwtModule } from "@auth0/angular-jwt";
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
@@ -11,7 +12,6 @@ import { MainComponent } from './components/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginGuard } from './auth/login.guard';
-import { httpInterceptorProviders } from './auth/auth.interceptor';
 import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
@@ -21,6 +21,11 @@ import { ConfirmDialogComponent } from './components/common/confirm-dialog/confi
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
 import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
 import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
+import { AppConfig } from './config/app-config';
+
+export function getToken() {
+  return localStorage.getItem('token')
+}
 
 @NgModule({
   declarations: [
@@ -51,12 +56,17 @@ import { AvatarUploadComponent } from './components/main/users/user-detail/avata
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: getToken,
+        whitelistedDomains: [AppConfig.AUTH0_WHITELIST_BASE_URL]
+      }
+    }),
     MaterialModule
   ],
   providers: [
     AuthGuard,
-    LoginGuard,
-    httpInterceptorProviders
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })
