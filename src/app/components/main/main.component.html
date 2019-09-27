@@ -33,8 +33,8 @@
     <div class="title">
       Personal
     </div>
-    <mat-nav-list *ngIf="!!user" class="side-bottom-nav">
-      <a mat-list-item [routerLink]="['/profile/']" routerLinkActive="selected">
+    <mat-nav-list class="side-bottom-nav">
+      <a mat-list-item *ngIf="!!user" [routerLink]="['/profile/']" routerLinkActive="selected">
         <div mat-list-icon class="thumbnail-container">
           <img *ngIf="user?.thumbnailUrl" class="thumbnail" [src]="user?.thumbnailUrl">
           <mat-icon *ngIf="!user?.thumbnailUrl">person</mat-icon>
@@ -54,6 +54,8 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="content-container">
-    <router-outlet></router-outlet>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
