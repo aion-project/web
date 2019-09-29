@@ -61,14 +61,13 @@ export class UsersEditComponent implements OnInit {
       this.isLoading = false
       this.dialogRef.close(true)
     }, (err) => {
-      if (err instanceof HttpErrorResponse) {
-        this.error = err.message
+      if (err instanceof HttpErrorResponse && err.error.msg) {
+        this.error = err.error.msg
       } else {
         this.error = err.toString()
       }
       console.log(err);
       this.isLoading = false
-      this.dialogRef.close()
     })
   }
 
