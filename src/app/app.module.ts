@@ -22,6 +22,9 @@ import { UsersEditComponent } from './components/main/users/users-edit/users-edi
 import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
 import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
 import { AppConfig } from './config/app-config';
+import { ActiveGuard } from './auth/active.guard';
+import { UnactiveGuard } from './auth/unactive.guard';
+import { ActivateComponent } from './components/activate/activate.component';
 
 export function getToken() {
   return localStorage.getItem('token')
@@ -31,6 +34,7 @@ export function getToken() {
   declarations: [
     AppComponent,
     LoginComponent,
+    ActivateComponent,
     MainComponent,
     UsersComponent,
     UserDetailComponent,
@@ -66,7 +70,9 @@ export function getToken() {
   ],
   providers: [
     AuthGuard,
-    LoginGuard
+    LoginGuard,
+    ActiveGuard,
+    UnactiveGuard
   ],
   bootstrap: [AppComponent]
 })

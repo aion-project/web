@@ -14,6 +14,7 @@ export class UserService {
   // ENDPOINTS
   static ENDPOINT_ME = "me"
   static ENDPOINT_UPLOAD_AVATAR = "me/uploadAvatar"
+  static ENDPOINT_ACTIVATE = "me/activate"
 
   constructor(
     private http: HttpClient,
@@ -26,6 +27,10 @@ export class UserService {
 
   myRoles() {
     return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(map((user: any) => user.roles))
+  }
+
+  activate() {
+    return this.http.post(UserService.USER_URL + UserService.ENDPOINT_ACTIVATE, null)
   }
 
   get(userId: String) {
@@ -75,7 +80,7 @@ export class UserService {
     }
     return this.http.post(UserService.USER_URL + userId + "/removeRole", data)
   }
-  
+
   setEnable(userId: String, isEnabled: Boolean) {
     return this.http.post(UserService.USER_URL + userId + "/setEnable/" + isEnabled, null)
   }

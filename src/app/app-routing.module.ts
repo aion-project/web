@@ -9,11 +9,15 @@ import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
+import { ActiveGuard } from './auth/active.guard';
+import { ActivateComponent } from './components/activate/activate.component';
+import { UnactiveGuard } from './auth/unactive.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+  { path: "activate", component: ActivateComponent, canActivate: [UnactiveGuard] },
   {
-    path: "", component: MainComponent, canActivate: [AuthGuard],
+    path: "", component: MainComponent, canActivate: [AuthGuard, ActiveGuard],
     children: [
       { path: "users/:userId", component: UserDetailComponent },
       { path: "users", component: UsersComponent },

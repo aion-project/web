@@ -1,0 +1,11 @@
+<div class="container tos-container">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <div class="mat-display-2 compact title"> Let't get started! </div>
+  <h2 class="mat-display-1 compact subtitle"> Terms of Service</h2>
+  <div class="tos">
+    <iframe src="https://www.wikihow.com/images/sampledocs/a/Terms-and-Conditions-for-Website.txt"></iframe>
+  </div>
+  <button class="activate-button" color="primary" mat-flat-button (click)="onActivateAccount()">
+    Agree and Activate
+  </button>
+</div>
