@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { first } from 'rxjs/operators';
+import { first, filter, skipUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { UsersCreateComponent } from './users-create/users-create.component';
@@ -23,7 +23,10 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.me().pipe(first()).subscribe(user => {
+    this.userService.me().pipe(
+      filter(user => user != null),
+      first(),
+    ).subscribe(user => {
       this.currentUser = user
       if (this.currentUser.roles.some(role => role == "Admin"))
         this.isAdmin = true

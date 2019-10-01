@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { first, map } from 'rxjs/operators';
+import { first, map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -12,7 +12,8 @@ export class ActiveGuard implements CanActivate {
   constructor(public userService: UserService, public router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.userService.me().pipe(
+    return this.userService.me(true).pipe(
+      filter(user => user != null),
       first(),
       map((user: any) => {
         if (!!user.active)

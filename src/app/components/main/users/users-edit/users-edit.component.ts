@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { first } from 'rxjs/operators';
+import { first, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users-edit',
@@ -35,15 +35,17 @@ export class UsersEditComponent implements OnInit {
   ngOnInit() {
     this.isProfile = this.data == null
     let fetchMeObservable = this.isProfile ?
-      this.userService.me().pipe(first()) :
-      this.userService.get(this.data).pipe(first())
+      this.userService.me().pipe(
+        filter(user => user != null),
+        first(),
+      ) : this.userService.get(this.data).pipe(first())
     fetchMeObservable.subscribe((user: any) => {
       this.user = user
       this.editForm.setValue({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        bio: user.bio != null ? user.bio : "" 
+        bio: user.bio != null ? user.bio : ""
       })
     })
   }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app-config'
-import { map } from 'rxjs/operators';
+import { map, first, flatMap } from 'rxjs/operators';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,27 @@ export class UserService {
   static ENDPOINT_UPLOAD_AVATAR = "me/uploadAvatar"
   static ENDPOINT_ACTIVATE = "me/activate"
 
+  private userSubject = new BehaviorSubject(null);
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {
 
-  me() {
-    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME)
+  }
+
+  me(force: boolean = false): Observable<any> {
+    if (force) {
+      return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(
+        first(),
+        flatMap(user => {
+          this.userSubject.next(user)
+          return this.userSubject.asObservable()
+        })
+      )
+    } else {
+      return this.userSubject.asObservable()
+    }
   }
 
   myRoles() {

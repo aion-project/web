@@ -3,7 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tap, first } from 'rxjs/operators';
+import { tap, first, filter } from 'rxjs/operators';
 import { AppConfig } from 'src/app/config/app-config';
 
 @Component({
@@ -22,8 +22,8 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.me().pipe(
-      first(),
+    this.userService.me(true).pipe(
+      filter(user => user != null),
     ).subscribe(res => {
       this.user = res
       if (this.user.thumbnailUrl != null) {

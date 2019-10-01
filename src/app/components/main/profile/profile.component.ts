@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { first, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { UsersEditComponent } from '../users/users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
@@ -36,21 +36,24 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  
+
   onChangeAvatar() {
     const dialogRef = this.dialog.open(AvatarUploadComponent, {
       width: '640px',
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.fetchMe();
       }
     });
   }
-  
+
   fetchMe() {
-    this.userService.me().pipe(first()).subscribe(user => {
+    this.userService.me(true).pipe(
+      filter(user => user != null),
+      first(),
+    ).subscribe(user => {
       this.user = user
       if (this.user.avatarUrl != null) {
         let url = AppConfig.BASE_URL + this.user.avatarUrl + '?random+\=' + Math.random()
