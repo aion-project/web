@@ -15,6 +15,7 @@ export class UserService {
   static ENDPOINT_ME = "me"
   static ENDPOINT_UPLOAD_AVATAR = "me/uploadAvatar"
   static ENDPOINT_ACTIVATE = "me/activate"
+  static ENDPOINT_CHANGE_PASSWORD = "me/changePassword"
 
   private userSubject = new BehaviorSubject(null);
 
@@ -104,5 +105,13 @@ export class UserService {
       data: data,
     }
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_UPLOAD_AVATAR, image)
+  }
+
+  changePassword(currentPassword: string, newPassword: string) {
+    let data = {
+      currentPassword: currentPassword,
+      newPassword: newPassword
+    }
+    return this.http.post(UserService.USER_URL + UserService.ENDPOINT_CHANGE_PASSWORD, data)
   }
 }

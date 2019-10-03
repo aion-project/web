@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { UsersEditComponent } from '../users/users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
 import { AvatarUploadComponent } from '../users/user-detail/avatar-upload/avatar-upload.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @Component({
   selector: 'app-profile',
@@ -50,7 +51,9 @@ export class ProfileComponent implements OnInit {
   }
 
   onChangePassword() {
-    
+    this.dialog.open(ChangePasswordComponent, {
+      width: '640px'
+    });
   }
 
   fetchMe() {

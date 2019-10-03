@@ -23,6 +23,7 @@ import { ActiveGuard } from './auth/active.guard';
 import { UnactiveGuard } from './auth/unactive.guard';
 import { ActivateComponent } from './components/activate/activate.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UsersEditComponent,
     UsersCreateComponent,
     AvatarUploadComponent,
+    ChangePasswordComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
@@ -46,6 +48,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UsersEditComponent,
     UsersCreateComponent,
     AvatarUploadComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
