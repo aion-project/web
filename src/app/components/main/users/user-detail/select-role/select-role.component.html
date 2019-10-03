@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Select role</h1>
 <div mat-dialog-content class="content">
   <mat-chip-list>
-    <mat-chip *ngFor="let role of roles" (click)="onRoleSelected(role.name)">
-      {{ role.name }}
+    <mat-chip *ngFor="let role of roles" (click)="onRoleSelected(role.id)">
+      {{ role.name | titlecase }}
     </mat-chip>
   </mat-chip-list>
 </div>

@@ -13,10 +13,6 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <table mat-table [dataSource]="displayedData">
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef> Username </th>
-          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-        </ng-container>
         <ng-container matColumnDef="firstName">
           <th mat-header-cell *matHeaderCellDef> Firstname </th>
           <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>

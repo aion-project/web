@@ -49,6 +49,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  onChangePassword() {
+    
+  }
+
   fetchMe() {
     this.userService.me(true).pipe(
       filter(user => user != null),

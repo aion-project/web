@@ -2,16 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { JwtModule } from "@auth0/angular-jwt";
+import { OKTA_CONFIG, OktaAuthModule, OktaCallbackComponent, OktaLoginRedirectComponent } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './auth/auth.guard';
-import { LoginGuard } from './auth/login.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersComponent } from './components/main/users/users.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { UserDetailComponent } from './components/main/users/user-detail/user-detail.component';
@@ -25,15 +22,12 @@ import { AppConfig } from './config/app-config';
 import { ActiveGuard } from './auth/active.guard';
 import { UnactiveGuard } from './auth/unactive.guard';
 import { ActivateComponent } from './components/activate/activate.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
-export function getToken() {
-  return localStorage.getItem('token')
-}
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     ActivateComponent,
     MainComponent,
     UsersComponent,
@@ -60,19 +54,14 @@ export function getToken() {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: getToken,
-        whitelistedDomains: [AppConfig.AUTH0_WHITELIST_BASE_URL]
-      }
-    }),
+    OktaAuthModule,
     MaterialModule
   ],
   providers: [
-    AuthGuard,
-    LoginGuard,
     ActiveGuard,
-    UnactiveGuard
+    UnactiveGuard,
+    { provide: OKTA_CONFIG, useValue: AppConfig.OKTA_CLIENT_CONFIG },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

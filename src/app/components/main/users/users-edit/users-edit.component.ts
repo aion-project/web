@@ -4,7 +4,6 @@ import { UserService } from 'src/app/services/user.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from 'src/app/services/auth.service';
 import { first, filter } from 'rxjs/operators';
 
 @Component({

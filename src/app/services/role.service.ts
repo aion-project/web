@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app-config';
 
 @Injectable({
@@ -11,8 +10,7 @@ export class RoleService {
   static ROLE_URL = AppConfig.BASE_URL + "/roles"
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService
+    private http: HttpClient
   ) { }
 
   getAll() {

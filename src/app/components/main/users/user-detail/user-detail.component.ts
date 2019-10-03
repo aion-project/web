@@ -29,7 +29,7 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userService.myRoles().pipe(first()).subscribe((roles: any[]) => {
-      if (roles.some(role => role == "Admin"))
+      if (roles.some(role => role.name == "admin"))
         this.isAdmin = true
     })
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
@@ -66,8 +66,8 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  onRoleRemove(roleName) {
-    this.userService.removeRole(this.userId, roleName).toPromise().then(_ => {
+  onRoleRemove(roleId) {
+    this.userService.removeRole(this.userId, roleId).toPromise().then(_ => {
       this.fetchUserInfo()
     })
   }

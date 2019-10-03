@@ -14,7 +14,6 @@ export class UsersCreateComponent implements OnInit {
   createForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    username: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl('')
   })
@@ -33,11 +32,10 @@ export class UsersCreateComponent implements OnInit {
   onSubmit() {
     let firstname = this.createForm.controls['firstName'].value as string;
     let lastname = this.createForm.controls['lastName'].value as string;
-    let username = this.createForm.controls['username'].value as string;
     let email = this.createForm.controls['email'].value as string;
     let password = this.createForm.controls['password'].value as string;
     this.isLoading = true
-    this.userService.create(firstname, lastname, username, email, password).subscribe((res: any) => {
+    this.userService.create(firstname, lastname, email, password).subscribe((res: any) => {
       this.isLoading = false
       this.dialogRef.close(true)
     }, (err) => {

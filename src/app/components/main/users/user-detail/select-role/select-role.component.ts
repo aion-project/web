@@ -30,8 +30,8 @@ export class SelectRoleComponent implements OnInit {
   fetchRoles() {
     console.log(this.data.currentRoles)
     this.roleService.getAll().pipe(first(), map((roles: any[]) => {
-      return roles.filter((roles: any) => {
-        return !(this.data.currentRoles != null && this.data.currentRoles.includes(roles.name))
+      return roles.filter((role: any) => {
+        return !(this.data.currentRoles != null && this.data.currentRoles.some(it => it.name == role.name))
       })
     })).subscribe((roles: any[]) => {
       this.roles = roles

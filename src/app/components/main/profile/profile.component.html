@@ -34,9 +34,19 @@
     <mat-card-content>
       <mat-chip-list>
         <mat-chip *ngFor="let userRole of user?.roles">
-          {{ userRole }}
+          {{ userRole.name | titlecase }}
         </mat-chip>
       </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="section">
+    <mat-card-title>Settings</mat-card-title>
+    <div class="card-section-title">Account Password</div>
+    <mat-card-content>
+      <p>Change account sign-in password.</p>
+      <button mat-flat-button color="primary" (click)="onChangePassword()">
+        Create new password
+      </button>
     </mat-card-content>
   </mat-card>
 </div>

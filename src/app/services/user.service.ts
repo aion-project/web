@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service';
 import { AppConfig } from '../config/app-config'
 import { map, first, flatMap } from 'rxjs/operators';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
@@ -20,8 +19,7 @@ export class UserService {
   private userSubject = new BehaviorSubject(null);
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService
+    private http: HttpClient
   ) {
 
   }
@@ -56,11 +54,10 @@ export class UserService {
     return this.http.get(UserService.USER_URL)
   }
 
-  create(firstName: String, lastName: String, username: String, email: String, password: String) {
+  create(firstName: String, lastName: String, email: String, password: String) {
     let data = {
       firstName: firstName,
       lastName: lastName,
-      username: username,
       email: email,
       password: password,
     }
@@ -82,16 +79,16 @@ export class UserService {
     return this.http.delete(UserService.USER_URL + userId)
   }
 
-  addRole(userId: String, roleName: String) {
+  addRole(userId: String, roleId: String) {
     let data = {
-      roleName: roleName,
+      roleId: roleId,
     }
     return this.http.post(UserService.USER_URL + userId + "/addRole", data)
   }
 
-  removeRole(userId: String, roleName: String) {
+  removeRole(userId: String, roleId: String) {
     let data = {
-      roleName: roleName,
+      roleId: roleId,
     }
     return this.http.post(UserService.USER_URL + userId + "/removeRole", data)
   }

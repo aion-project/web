@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, first, filter } from 'rxjs/operators';
 import { AppConfig } from 'src/app/config/app-config';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService,
+    private oktaService: OktaAuthService,
     private router: Router
   ) { }
 
@@ -34,8 +34,9 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout()
-    this.router.navigate(['/login'])
+    this.oktaService.logout().then(_ => {
+      this.router.navigate(['/login'])
+    })
   }
 
 }
