@@ -24,6 +24,7 @@ import { UnactiveGuard } from './auth/unactive.guard';
 import { ActivateComponent } from './components/activate/activate.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ChangePasswordComponent } from './components/main/profile/change-passwo
     UsersCreateComponent,
     AvatarUploadComponent,
     ChangePasswordComponent,
+    LoginComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
@@ -57,13 +59,12 @@ import { ChangePasswordComponent } from './components/main/profile/change-passwo
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    OktaAuthModule,
-    MaterialModule
+    MaterialModule,
+    OktaAuthModule.initAuth(AppConfig.OKTA_CLIENT_CONFIG),
   ],
   providers: [
     ActiveGuard,
     UnactiveGuard,
-    { provide: OKTA_CONFIG, useValue: AppConfig.OKTA_CLIENT_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

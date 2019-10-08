@@ -9,13 +9,19 @@ import { ActiveGuard } from './auth/active.guard';
 import { ActivateComponent } from './components/activate/activate.component';
 import { UnactiveGuard } from './auth/unactive.guard';
 import { OktaAuthGuard, OktaCallbackComponent, OktaLoginRedirectComponent } from '@okta/okta-angular';
+import { LoginComponent } from './components/login/login.component';
+
+export function onAuthRequired({ oktaAuth, router }) {
+  router.navigate(['/login']);
+}
 
 const routes: Routes = [
   { path: "implicit/callback", component: OktaCallbackComponent },
-  { path: "login", component: OktaLoginRedirectComponent },
+  { path: "login", component: LoginComponent },
   { path: "activate", component: ActivateComponent, canActivate: [UnactiveGuard] },
   {
     path: "", component: MainComponent, canActivate: [OktaAuthGuard, ActiveGuard],
+    data: { onAuthRequired },
     children: [
       { path: "users/:userId", component: UserDetailComponent },
       { path: "users", component: UsersComponent },
