@@ -1,0 +1,52 @@
+#okta-signin-container {
+    .o-form-fieldset {
+        margin: 1rem 0;
+    }
+    
+    .o-form-input-username input {
+      width: 100%;
+    }
+    
+    .okta-form-input-field input {
+      width: 100%;
+    }
+    
+    /* Button styles */
+    .o-form-button-bar {
+      margin-bottom: 1rem;
+      display: flex;
+    }
+
+    .button {
+      align-items: flex-end;
+      box-sizing: border-box;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      outline: 0;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+      display: inline-block;
+      white-space: nowrap;
+      text-decoration: none;
+      vertical-align: baseline;
+      text-align: center;
+      margin-left: auto;
+      min-width: 64px;
+      line-height: 36px;
+      padding: 0 16px;
+      border-radius: 4px;
+      overflow: visible;
+    }
+
+    .button-primary {
+      background-color: #3f51b5;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+}
