@@ -1,20 +1,56 @@
+$accent-color: #2196f3;
+
 #okta-signin-container {
-    .o-form-fieldset {
-        margin: 1rem 0;
+    /* Link styles */
+    a {
+      text-decoration: none;
+      color: #666666;
     }
-    
-    .o-form-input-username input {
-      width: 100%;
+
+    .help-links {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .help-links li a {
+      color: $accent-color;
+    }
+
+    .o-form-fieldset {
+        margin-top: 2rem;
     }
     
     .okta-form-input-field input {
       width: 100%;
+      border: none;
+      padding: 4px 0 4px 0;
+      border-bottom: 1px solid #222222;
     }
-    
+
+    .okta-form-input-field input:focus{
+      border: none;
+      outline: none;
+      border-bottom: 2px solid $accent-color;
+    } 
+
+    /* Error styles */
+    .infobox {
+      color: red !important;
+    }
+
+    .okta-form-input-error {
+      color: red;
+    } 
+
     /* Button styles */
     .o-form-button-bar {
       margin-bottom: 1rem;
       display: flex;
+    }
+    
+    .email-button {
+      margin-bottom: 1rem;
+      margin-left: auto;
     }
 
     .button {
@@ -42,8 +78,13 @@
       overflow: visible;
     }
 
+    .btn-disabled {
+      color: rgba(0,0,0,.26) !important;
+      background-color: rgba(0,0,0,.12) !important;
+    }
+
     .button-primary {
-      background-color: #3f51b5;
+      background-color: $accent-color;
       color: #ffffff;
       font-size: 14px;
       font-weight: 500;
