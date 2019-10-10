@@ -1,0 +1,47 @@
+import { Injectable } from '@angular/core';
+import { AppConfig } from '../config/app-config';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LocationService {
+
+  static LOCATION_URL = AppConfig.BASE_URL + "/locations/"
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  get(locationId: String) {
+    return this.http.get(LocationService.LOCATION_URL + locationId)
+  }
+
+  getAll() {
+    return this.http.get(LocationService.LOCATION_URL)
+  }
+
+  create(name: String, level: String, description: String) {
+    let data = {
+      name: name,
+      level: level,
+      description: description
+    }
+    return this.http.post(LocationService.LOCATION_URL, data)
+  }
+
+  update(locationId: String, name: String, level: String, description: String) {
+    let data = {
+      name: name,
+      level: level,
+      description: description
+    }
+    return this.http.put(LocationService.LOCATION_URL + locationId, data)
+  }
+
+  delete(locationId: String) {
+    return this.http.delete(LocationService.LOCATION_URL + locationId)
+  }
+
+}
