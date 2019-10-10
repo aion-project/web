@@ -26,6 +26,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/main/locations/locations.component';
+import { LocationDetailComponent } from './components/main/locations/location-detail/location-detail.component';
+import { LocationCreateEditComponent } from './components/main/locations/location-create-edit/location-create-edit.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { LocationsComponent } from './components/main/locations/locations.compon
     AvatarUploadComponent,
     ChangePasswordComponent,
     LocationsComponent,
+    LocationDetailComponent,
+    LocationCreateEditComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
@@ -53,6 +57,7 @@ import { LocationsComponent } from './components/main/locations/locations.compon
     UsersCreateComponent,
     AvatarUploadComponent,
     ChangePasswordComponent,
+    LocationCreateEditComponent,
   ],
   imports: [
     BrowserModule,

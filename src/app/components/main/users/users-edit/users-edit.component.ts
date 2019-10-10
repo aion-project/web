@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { first, filter } from 'rxjs/operators';
 
@@ -26,7 +25,7 @@ export class UsersEditComponent implements OnInit {
   user: any
 
   constructor(
-    public dialogRef: MatDialogRef<UserDetailComponent>,
+    public dialogRef: MatDialogRef<UsersEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
     private userService: UserService,
   ) { }

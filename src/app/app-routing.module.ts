@@ -11,6 +11,7 @@ import { UnactiveGuard } from './auth/unactive.guard';
 import { OktaAuthGuard, OktaCallbackComponent, OktaLoginRedirectComponent } from '@okta/okta-angular';
 import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/main/locations/locations.component';
+import { LocationDetailComponent } from './components/main/locations/location-detail/location-detail.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -26,6 +27,7 @@ const routes: Routes = [
     children: [
       { path: "users/:userId", component: UserDetailComponent },
       { path: "users", component: UsersComponent },
+      { path: "locations/:locationId", component: LocationDetailComponent },
       { path: "locations", component: LocationsComponent },
       { path: "profile", component: ProfileComponent },
       { path: "home", component: HomeComponent },

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { LocationService } from 'src/app/services/location.service';
 import { UserService } from 'src/app/services/user.service';
 import { first } from 'rxjs/operators';
+import { LocationCreateEditComponent } from './location-create-edit/location-create-edit.component';
 
 @Component({
   selector: 'app-locations',
@@ -31,16 +32,15 @@ export class LocationsComponent implements OnInit {
   }
 
   create() {
-    // TODO - Implement location creation
-    // const dialogRef = this.dialog.open(UsersCreateComponent, {
-    //   width: '640px'
-    // });
+    const dialogRef = this.dialog.open(LocationCreateEditComponent, {
+      width: '640px'
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.fetchUsers();
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchLocations();
+      }
+    });
   }
 
   fetchLocations() {

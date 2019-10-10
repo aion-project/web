@@ -1,0 +1,36 @@
+<div class="container">
+    <mat-toolbar>
+        <button [routerLink]="['/locations']" mat-icon-button aria-label="Back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="header">
+        <div class="user-detail-container">
+            <div class="mat-display-2 compact"> {{ location?.name }}</div>
+            <h2 class="mat-display-1 compact">Level {{ location?.level }}</h2>
+            <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
+                (click)="onEditLocation()">Edit</button>
+        </div>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div class="container">
+    <mat-card *ngIf="location?.description" class="section">
+        <mat-card-title>Description</mat-card-title>
+        <mat-card-content>
+            <p>
+                {{location?.description}}
+            </p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="isAdmin" class="section">
+        <mat-card-title>Manage</mat-card-title>
+        <div class="card-section-title subsection">Delete</div>
+        <mat-card-content>
+            <p>Remove location from the system</p>
+            <button mat-flat-button color="warn" (click)="onDelete()">
+                DELETE
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
