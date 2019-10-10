@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppConfig } from '../config/app-config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class LocationService {
     private http: HttpClient
   ) { }
 
-  get(locationId: String) {
-    return this.http.get(LocationService.LOCATION_URL + locationId)
+  get(locationId: String): Observable<Location> {
+    return this.http.get(LocationService.LOCATION_URL + locationId).pipe(map(this.toLocation))
   }
 
-  getAll() {
-    return this.http.get(LocationService.LOCATION_URL)
+  getAll(): Observable<Location[]> {
+    return this.http.get(LocationService.LOCATION_URL).pipe(map((res: any[]) => res.map(this.toLocation)))
   }
 
   create(name: String, level: String, description: String) {
@@ -44,4 +45,5 @@ export class LocationService {
     return this.http.delete(LocationService.LOCATION_URL + locationId)
   }
 
+  private toLocation = res => res as Location
 }

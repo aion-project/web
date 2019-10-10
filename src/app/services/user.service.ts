@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../config/app-config'
 import { map, first, flatMap } from 'rxjs/operators';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { User } from '../model/User';
+import { Role } from '../model/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class UserService {
   static ENDPOINT_ACTIVATE = "me/activate"
   static ENDPOINT_CHANGE_PASSWORD = "me/changePassword"
 
-  private userSubject = new BehaviorSubject(null);
+  private userSubject = new BehaviorSubject<User>(null);
 
   constructor(
     private http: HttpClient
@@ -25,12 +27,12 @@ export class UserService {
 
   }
 
-  me(force: boolean = false): Observable<any> {
+  me(force: boolean = false): Observable<User> {
     if (force) {
       return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(
         first(),
         flatMap(user => {
-          this.userSubject.next(user)
+          this.userSubject.next(user as User)
           return this.userSubject.asObservable()
         })
       )
@@ -39,20 +41,22 @@ export class UserService {
     }
   }
 
-  myRoles() {
-    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(map((user: any) => user.roles))
+  myRoles(): Observable<Role[]> {
+    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(
+      map((user: any) => user.roles as Role[])
+    )
   }
 
   activate() {
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_ACTIVATE, null)
   }
 
-  get(userId: String) {
-    return this.http.get(UserService.USER_URL + userId)
+  get(userId: String): Observable<User> {
+    return this.http.get(UserService.USER_URL + userId).pipe(map(this.toUser))
   }
 
-  getAll() {
-    return this.http.get(UserService.USER_URL)
+  getAll(): Observable<User[]> {
+    return this.http.get(UserService.USER_URL).pipe(map((res: any[]) => res.map(this.toUser)))
   }
 
   create(firstName: String, lastName: String, email: String, password: String) {
@@ -114,4 +118,6 @@ export class UserService {
     }
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_CHANGE_PASSWORD, data)
   }
+
+  private toUser = res => res as User
 }
