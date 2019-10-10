@@ -42,7 +42,7 @@ export class UserService {
   }
 
   myRoles(): Observable<Role[]> {
-    return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(
+    return this.me().pipe(
       map((user: any) => user.roles as Role[])
     )
   }

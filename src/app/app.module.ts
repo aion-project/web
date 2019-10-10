@@ -25,6 +25,7 @@ import { ActivateComponent } from './components/activate/activate.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
 import { LoginComponent } from './components/login/login.component';
+import { LocationsComponent } from './components/main/locations/locations.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
     ActivateComponent,
     MainComponent,
+    LoginComponent,
     UsersComponent,
     UserDetailComponent,
     HomeComponent,
@@ -42,7 +44,7 @@ import { LoginComponent } from './components/login/login.component';
     UsersCreateComponent,
     AvatarUploadComponent,
     ChangePasswordComponent,
-    LoginComponent,
+    LocationsComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
