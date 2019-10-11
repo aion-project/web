@@ -16,7 +16,8 @@ export class LocationCreateEditComponent implements OnInit {
   locationForm = new FormGroup({
     name: new FormControl(''),
     level: new FormControl(''),
-    description: new FormControl('')
+    description: new FormControl(''),
+    ac: new FormControl(false),
   })
 
   error: any
@@ -38,7 +39,8 @@ export class LocationCreateEditComponent implements OnInit {
         this.locationForm.setValue({
           name: this.location.name,
           level: this.location.level,
-          description: this.location.description
+          description: this.location.description,
+          ac: this.location.ac
         })
       })
     }
@@ -48,12 +50,13 @@ export class LocationCreateEditComponent implements OnInit {
     let name = this.locationForm.controls['name'].value as string;
     let level = this.locationForm.controls['level'].value as string;
     let description = this.locationForm.controls['description'].value as string;
+    let ac = this.locationForm.controls['ac'].value as boolean;
     this.isLoading = true
     var submitObservable: Observable<any>
     if (this.isEditing) {
-      submitObservable = this.locationService.update(this.locationId, name, level, description)
+      submitObservable = this.locationService.update(this.locationId, name, level, description, ac)
     } else {
-      submitObservable = this.locationService.create(name, level, description)
+      submitObservable = this.locationService.create(name, level, description, ac)
 
     }
     submitObservable.subscribe(() => {

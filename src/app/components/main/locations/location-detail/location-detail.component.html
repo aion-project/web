@@ -16,11 +16,15 @@
 <mat-divider></mat-divider>
 <div class="container">
     <mat-card *ngIf="location?.description" class="section">
-        <mat-card-title>Description</mat-card-title>
+        <mat-card-title>Infomation</mat-card-title>
+        <div class="card-section-title subsection">Description</div>
         <mat-card-content>
-            <p>
-                {{location?.description}}
-            </p>
+            <p> {{location?.description}} </p>
+        </mat-card-content>
+        <div class="card-section-title subsection">Air Condition</div>
+        <mat-card-content>
+            <p *ngIf="location?.ac"> Available </p>
+            <p *ngIf="!location?.ac"> Unavailable </p>
         </mat-card-content>
     </mat-card>
     <mat-card *ngIf="isAdmin" class="section">
