@@ -12,6 +12,7 @@ import { OktaAuthGuard, OktaCallbackComponent, OktaLoginRedirectComponent } from
 import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/main/locations/locations.component';
 import { LocationDetailComponent } from './components/main/locations/location-detail/location-detail.component';
+import { ResourcesComponent } from './components/main/resources/resources.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: "users", component: UsersComponent },
       { path: "locations/:locationId", component: LocationDetailComponent },
       { path: "locations", component: LocationsComponent },
+      { path: "resources", component: ResourcesComponent },
       { path: "profile", component: ProfileComponent },
       { path: "home", component: HomeComponent },
       { path: "", redirectTo: "/home", pathMatch: "full" }

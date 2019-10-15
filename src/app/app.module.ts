@@ -16,7 +16,7 @@ import { SelectRoleComponent } from './components/main/users/user-detail/select-
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
-import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
+import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';4
 import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
 import { AppConfig } from './config/app-config';
 import { ActiveGuard } from './auth/active.guard';
@@ -28,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/main/locations/locations.component';
 import { LocationDetailComponent } from './components/main/locations/location-detail/location-detail.component';
 import { LocationCreateEditComponent } from './components/main/locations/location-create-edit/location-create-edit.component';
+import { ResourcesComponent } from './components/main/resources/resources.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { LocationCreateEditComponent } from './components/main/locations/locatio
     LocationsComponent,
     LocationDetailComponent,
     LocationCreateEditComponent,
+    ResourcesComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
