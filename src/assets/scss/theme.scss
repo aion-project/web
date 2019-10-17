@@ -32,7 +32,29 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
 }
 
+// Section
+.section-header {
+    font-size: 28px !important;
+}
+
 // Dialog styles
+.mat-dialog-header {
+    background-color: #2196f3;
+    margin: -24px -24px 20px -24px !important;
+    padding: 24px 24px 20px 24px !important;
+    height: 72px;
+    color: white;
+    font-size: 28px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-dialog-header .mat-dialog-title {
+    margin: 0;
+    margin-top: auto;
+    font-size: 28px;
+}
+
 .mat-dialog-container {
     border-radius: 8px !important;
 }
@@ -46,7 +68,9 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 }
 
 .mat-progress-bar {
+
     height: 6px !important;
     margin-bottom: 8px !important;
     border-radius: 3px;
 }
+

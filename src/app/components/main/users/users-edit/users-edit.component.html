@@ -1,6 +1,8 @@
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<h1 mat-dialog-title *ngIf="isProfile">Edit Profile</h1>
-<h1 mat-dialog-title *ngIf="!isProfile">Edit User</h1>
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title *ngIf="isProfile">Edit Profile</h1>
+  <h1 mat-dialog-title *ngIf="!isProfile">Edit User</h1>
+</div>
 <div mat-dialog-content class="content">
   <form class="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <span class="error" *ngIf="error">{{error}}</span>

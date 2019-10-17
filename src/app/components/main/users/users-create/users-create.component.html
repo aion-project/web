@@ -1,5 +1,7 @@
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<h1 mat-dialog-title>Create User</h1>
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title>Create User</h1>
+</div>
 <div mat-dialog-content class="content">
   <form class="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
     <span class="error" *ngIf="error">{{error}}</span>
