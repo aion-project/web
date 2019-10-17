@@ -1,7 +1,4 @@
 <div class="container">
-  <mat-toolbar>
-    <h1 class="section-header">Profile</h1>
-  </mat-toolbar>
   <div class="header">
     <div class="avatar-container" (click)="onChangeAvatar()">
       <img *ngIf="user?.avatarUrl" class="avatar" [src]="user?.avatarUrl">
@@ -21,7 +18,6 @@
 <div class="container">
   <mat-card *ngIf="user?.bio" class="section">
     <mat-card-title>Bio</mat-card-title>
-    <!-- <mat-card-subtitle>Roles assign to you</mat-card-subtitle> -->
     <mat-card-content>
       <p>
         {{user?.bio}}

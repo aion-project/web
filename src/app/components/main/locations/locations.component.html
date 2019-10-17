@@ -1,33 +1,18 @@
-<div class="container">
-  <mat-toolbar>
-    <h1 class="section-header">Locations</h1>
-    <span class="spacer"></span>
-    <button mat-flat-button color="primary" (click)="create()">
-      <mat-icon>add</mat-icon>
-      CREATE
-    </button>
+<div class="location-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="section-header">Locations</h1>
+    </mat-toolbar-row>
   </mat-toolbar>
-  <mat-card class="section">
-    <mat-card-title>Listing</mat-card-title>
-    <mat-card-subtitle>Locations in the system</mat-card-subtitle>
-    <mat-divider></mat-divider>
-    <mat-card-content class="listing-content">
-      <table mat-table [dataSource]="displayedData">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="level">
-          <th mat-header-cell *matHeaderCellDef> Level </th>
-          <td mat-cell *matCellDef="let element"> {{element.level}} </td>
-        </ng-container>
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row" [routerLink]="['/locations', row.id]"></tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
+  <nav class="location-nav" mat-tab-nav-bar backgroundColor="primary">
+    <a mat-tab-link [routerLink]="['/locations/listing']" routerLinkActive #listing_rla="routerLinkActive"
+      [active]="listing_rla.isActive">
+      Listing
+    </a>
+    <a mat-tab-link [routerLink]="['/locations/resources']" routerLinkActive #resource_rla="routerLinkActive"
+      [active]="resource_rla.isActive">
+      Resources
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
 </div>

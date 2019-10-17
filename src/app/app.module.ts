@@ -28,7 +28,9 @@ import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/main/locations/locations.component';
 import { LocationDetailComponent } from './components/main/locations/location-detail/location-detail.component';
 import { LocationCreateEditComponent } from './components/main/locations/location-create-edit/location-create-edit.component';
-import { ResourcesComponent } from './components/main/resources/resources.component';
+import { ResourcesComponent } from './components/main/locations/resources/resources.component';
+import { LocationListingComponent } from './components/main/locations/location-listing/location-listing.component';
+import { UserListingComponent } from './components/main/users/user-listing/user-listing.component';
 
 
 @NgModule({
@@ -45,9 +47,11 @@ import { ResourcesComponent } from './components/main/resources/resources.compon
     ProfileComponent,
     UsersEditComponent,
     UsersCreateComponent,
+    UserListingComponent,
     AvatarUploadComponent,
     ChangePasswordComponent,
     LocationsComponent,
+    LocationListingComponent,
     LocationDetailComponent,
     LocationCreateEditComponent,
     ResourcesComponent,
