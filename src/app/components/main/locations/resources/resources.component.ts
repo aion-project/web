@@ -14,7 +14,7 @@ export class ResourcesComponent implements OnInit {
 
   isAdmin: boolean
   currentUser: any
-  displayedColumns: string[] = ['name','description']
+  displayedColumns: string[] = ['name', 'description']
   displayedData: any
 
   constructor(
@@ -24,9 +24,8 @@ export class ResourcesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.myRoles().pipe(first()).subscribe((roles: any[]) => {
-      if (roles.some(role => role.name == "admin"))
-        this.isAdmin = true
+    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin
     })
     this.fetchResources()
   }

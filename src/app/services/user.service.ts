@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../config/app-config'
-import { map, first, flatMap } from 'rxjs/operators';
+import { map, first, flatMap, tap } from 'rxjs/operators';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../model/User';
 import { Role } from '../model/Role';
@@ -28,7 +28,7 @@ export class UserService {
   }
 
   me(force: boolean = false): Observable<User> {
-    if (force) {
+    if (force || !this.userSubject.value) {
       return this.http.get(UserService.USER_URL + UserService.ENDPOINT_ME).pipe(
         first(),
         flatMap(user => {
@@ -41,9 +41,10 @@ export class UserService {
     }
   }
 
-  myRoles(): Observable<Role[]> {
+  isRole(role): Observable<Boolean> {
     return this.me().pipe(
-      map((user: any) => user.roles as Role[])
+      first(),
+      map((user: any) => user.roles.some(it => it.name == role))
     )
   }
 

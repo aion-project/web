@@ -28,9 +28,8 @@ export class LocationDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.myRoles().pipe(first()).subscribe((roles: any[]) => {
-      if (roles.some(role => role.name == "admin"))
-        this.isAdmin = true
+    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin
     })
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
       this.locationId = map.get("locationId")

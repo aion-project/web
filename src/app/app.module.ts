@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { OKTA_CONFIG, OktaAuthModule, OktaCallbackComponent, OktaLoginRedirectComponent } from '@okta/okta-angular';
+import { OktaAuthModule } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
@@ -19,7 +19,6 @@ import { UsersEditComponent } from './components/main/users/users-edit/users-edi
 import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';4
 import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
 import { AppConfig } from './config/app-config';
-import { ActiveGuard } from './auth/active.guard';
 import { UnactiveGuard } from './auth/unactive.guard';
 import { ActivateComponent } from './components/activate/activate.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -31,7 +30,8 @@ import { LocationCreateEditComponent } from './components/main/locations/locatio
 import { ResourcesComponent } from './components/main/locations/resources/resources.component';
 import { LocationListingComponent } from './components/main/locations/location-listing/location-listing.component';
 import { UserListingComponent } from './components/main/users/user-listing/user-listing.component';
-
+import { LoginGuard } from './auth/login.guard';
+import { AdminGuard } from './auth/admin.guard';
 
 @NgModule({
   declarations: [
@@ -76,8 +76,9 @@ import { UserListingComponent } from './components/main/users/user-listing/user-
     OktaAuthModule.initAuth(AppConfig.OKTA_CLIENT_CONFIG),
   ],
   providers: [
-    ActiveGuard,
     UnactiveGuard,
+    LoginGuard,
+    AdminGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

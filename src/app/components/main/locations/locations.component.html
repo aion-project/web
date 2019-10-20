@@ -4,7 +4,7 @@
       <h1 class="section-header">Locations</h1>
     </mat-toolbar-row>
   </mat-toolbar>
-  <nav class="location-nav" mat-tab-nav-bar backgroundColor="primary">
+  <nav *ngIf="isAdmin" class="location-nav" mat-tab-nav-bar backgroundColor="primary">
     <a mat-tab-link [routerLink]="['/locations/listing']" routerLinkActive #listing_rla="routerLinkActive"
       [active]="listing_rla.isActive">
       Listing

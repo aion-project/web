@@ -23,9 +23,8 @@ export class LocationListingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.myRoles().pipe(first()).subscribe((roles: any[]) => {
-      if (roles.some(role => role.name == "admin"))
-        this.isAdmin = true
+    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin) => {
+      this.isAdmin = isAdmin
     })
     this.fetchLocations()
   }
