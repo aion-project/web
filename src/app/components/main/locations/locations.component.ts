@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { first } from 'rxjs/operators';
-import { LocationCreateEditComponent } from './location-create-edit/location-create-edit.component';
 
 @Component({
   selector: 'app-locations',
