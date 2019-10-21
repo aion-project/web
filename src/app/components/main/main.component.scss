@@ -8,11 +8,18 @@
   z-index: 2;
 }
 
-.toolbar .logo-icon {
-  height: 42px;
+.side-nav-header {
+  display: flex;
+  padding: 16px 16px;
+  padding-bottom: 8px;
 }
 
-.toolbar .logo-text {
+.side-nav-header .logo-icon {
+  height: 42px;
+  margin: auto 0;
+}
+
+.side-nav-header .logo-text {
   margin-left: 6px;
   font-size: 24px;
   color: #555 !important;
@@ -20,7 +27,7 @@
 
 .main-container {
   height: 100%;
-  padding-top: 64px;
+  // padding-top: 64px;
 }
 
 .content-container .content {
@@ -28,7 +35,7 @@
 }
 
 .side-nav {
-  margin-top: 64px;
+  // margin-top: 64px;
   width: 280px;
 }
 

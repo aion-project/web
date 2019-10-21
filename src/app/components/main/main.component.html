@@ -1,10 +1,12 @@
-<mat-toolbar class="toolbar">
-  <img class="logo-icon" src="assets/images/logo.png" />
-  <h1 class="logo-text">aion</h1>
+<!-- <mat-toolbar class="toolbar">
   <span class="spacer"></span>
-</mat-toolbar>
+</mat-toolbar> -->
 <mat-sidenav-container class="main-container">
   <mat-sidenav class="side-nav" mode="side" opened>
+    <div class="side-nav-header">
+      <img class="logo-icon" src="assets/images/logo.png" />
+      <h1 class="logo-text">aion</h1>
+    </div>
     <mat-nav-list class="side-top-nav">
       <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected">
         <mat-icon mat-list-icon>home</mat-icon>
