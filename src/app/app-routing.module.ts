@@ -1,3 +1,4 @@
+import { ResourceDetailComponent } from './components/main/locations/resources/resource-detail/resource-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
       },
       {
         path: "locations", component: LocationsComponent, children: [
+          { path: "resources/:resourceId", component: ResourceDetailComponent },
           { path: "resources", component: ResourcesComponent, canActivate: [AdminGuard] },
           { path: "listing/:locationId", component: LocationDetailComponent },
           { path: "listing", component: LocationListingComponent },
