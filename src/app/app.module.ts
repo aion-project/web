@@ -33,6 +33,7 @@ import { UserListingComponent } from './components/main/users/user-listing/user-
 import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { LoaderComponent } from './components/common/loader/loader.component';
+import { ResourceCreateEditComponent } from './components/main/locations/resources/resource-create-edit/resource-create-edit.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { LoaderComponent } from './components/common/loader/loader.component';
     LocationCreateEditComponent,
     ResourcesComponent,
     LoaderComponent,
+    ResourceCreateEditComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
@@ -66,6 +68,7 @@ import { LoaderComponent } from './components/common/loader/loader.component';
     AvatarUploadComponent,
     ChangePasswordComponent,
     LocationCreateEditComponent,
+    ResourceCreateEditComponent,
   ],
   imports: [
     BrowserModule,

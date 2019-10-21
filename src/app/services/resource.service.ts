@@ -24,29 +24,25 @@ export class ResourceService {
     return this.http.get(ResourceService.RESOURCE_URL).pipe(map((res: any[]) => res.map(this.toResource)))
   }
 
-  // create(name: String, level: String, description: String, ac: Boolean) {
-  //   let data = {
-  //     name: name,
-  //     level: level,
-  //     description: description,
-  //     ac: ac
-  //   }
-  //   return this.http.post(LocationService.LOCATION_URL, data)
-  // }
+  create(name: String, description: String) {
+    let data = {
+      name: name,
+      description: description,
+    }
+    return this.http.post(ResourceService.RESOURCE_URL, data)
+  }
 
-  // update(locationId: String, name: String, level: String, description: String, ac: Boolean) {
-  //   let data = {
-  //     name: name,
-  //     level: level,
-  //     description: description,
-  //     ac: ac
-  //   }
-  //   return this.http.put(LocationService.LOCATION_URL + locationId, data)
-  // }
+  update(resourceId: String, name: String,description: String) {
+    let data = {
+      name: name,
+      description: description,
+    }
+    return this.http.put(ResourceService.RESOURCE_URL + resourceId, data)
+  }
 
-  // delete(locationId: String) {
-  //   return this.http.delete(LocationService.LOCATION_URL + locationId)
-  // }
+  delete(resourceId: String) {
+    return this.http.delete(ResourceService.RESOURCE_URL + resourceId)
+  }
 
   private toResource = res => res as Resource
 }

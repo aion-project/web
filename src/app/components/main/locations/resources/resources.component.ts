@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { first } from 'rxjs/operators';
 import { ResourceService } from 'src/app/services/resource.service';
 import { UserService } from 'src/app/services/user.service';
-import { resource } from 'selenium-webdriver/http';
+import { ResourceCreateEditComponent } from './resource-create-edit/resource-create-edit.component';
 
 @Component({
   selector: 'app-resources',
@@ -30,17 +30,17 @@ export class ResourcesComponent implements OnInit {
     this.fetchResources()
   }
 
-  // create() {
-  //   const dialogRef = this.dialog.open(LocationCreateEditComponent, {
-  //     width: '640px'
-  //   });
+  create() {
+    const dialogRef = this.dialog.open(ResourceCreateEditComponent, {
+      width: '640px'
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       this.fetchLocations();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchResources();
+      }
+    });
+  }
 
   fetchResources() {
     this.resourceService.getAll().pipe(first()).subscribe(resource => {
