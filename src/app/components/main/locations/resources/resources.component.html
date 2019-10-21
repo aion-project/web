@@ -10,7 +10,8 @@
     <mat-card-subtitle>Resources in the system</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
-      <table mat-table [dataSource]="displayedData">
+      <app-loader *ngIf="!displayedData"></app-loader>
+      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -20,7 +21,8 @@
           <td mat-cell *matCellDef="let element"> {{element.description}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row" [routerLink]="['/locations', row.id]"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
+          [routerLink]="['/locations', row.id]"></tr>
       </table>
     </mat-card-content>
   </mat-card>

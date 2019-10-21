@@ -10,7 +10,8 @@
     <mat-card-subtitle>Locations in the system</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
-      <table mat-table [dataSource]="displayedData">
+      <app-loader *ngIf="!displayedData"></app-loader>
+      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>

@@ -10,7 +10,8 @@
     <mat-card-subtitle>Users in the system</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
-      <table mat-table [dataSource]="displayedData">
+      <app-loader *ngIf="!displayedData"></app-loader>
+      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
         <ng-container matColumnDef="firstName">
           <th mat-header-cell *matHeaderCellDef> Firstname </th>
           <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>

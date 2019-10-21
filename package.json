@@ -24,6 +24,7 @@
     "@angular/router": "~8.0.0",
     "@okta/okta-angular": "^1.2.2",
     "@okta/okta-signin-widget": "^3.3.1",
+    "placeholder-loading": "^0.2.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

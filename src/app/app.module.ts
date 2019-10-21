@@ -32,6 +32,7 @@ import { LocationListingComponent } from './components/main/locations/location-l
 import { UserListingComponent } from './components/main/users/user-listing/user-listing.component';
 import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { LoaderComponent } from './components/common/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AdminGuard } from './auth/admin.guard';
     LocationDetailComponent,
     LocationCreateEditComponent,
     ResourcesComponent,
+    LoaderComponent,
   ],
   entryComponents: [
     SelectRoleComponent,

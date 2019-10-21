@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/placeholder-loading/src/scss/placeholder-loading.scss",
               "src/styles.scss"
             ],
             "scripts": []
