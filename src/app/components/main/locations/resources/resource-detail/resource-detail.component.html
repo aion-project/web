@@ -1,6 +1,6 @@
 <div class="container">
   <mat-toolbar>
-      <button [routerLink]="['/resources']" mat-icon-button aria-label="Back">
+      <button [routerLink]="['/locations/resources']" mat-icon-button aria-label="Back">
           <mat-icon>arrow_back</mat-icon>
       </button>
   </mat-toolbar>
@@ -8,7 +8,7 @@
       <div class="user-detail-container">
           <div class="mat-display-2 compact"> {{ resource?.name }}</div>
           <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
-              (click)="onEditLocation()">Edit</button>
+              (click)="onEditResource()">Edit</button>
       </div>
   </div>
 </div>
