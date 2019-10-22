@@ -1,0 +1,53 @@
+.header {
+    padding: 1rem 1rem 2rem 1rem;
+}
+
+.avatar-container {
+    display: inline-block;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 196px;
+    height: 196px;
+    background-color: #efefef;
+}
+
+.avatar-container img {
+    width: 196px;
+    height: 196px;
+    object-fit: cover;
+}
+
+.location-detail-container {
+    display: inline-block;
+    position: relative;
+    top: -32px;
+    left: 24px;
+}
+
+.compact {
+    margin: 0 !important;
+}
+
+.edit-button {
+    margin-top: 16px;
+}
+
+.section {
+    margin-top: 2rem;
+}
+
+.section-inline {
+    display: inline-block;
+}
+
+.section .subsection {
+    padding-top: 16px;
+}
+
+.section .actions .material-icons {
+    font-size: 21px;
+}
+
+.section .actions {
+    font-size: 21px;
+}
