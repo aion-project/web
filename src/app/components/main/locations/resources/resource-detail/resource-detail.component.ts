@@ -51,19 +51,19 @@ export class ResourceDetailComponent implements OnInit {
     });
   }
 
-  // onDelete() {
-  //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-  //     width: '320px'
-  //   });
+  onDelete() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       this.resourceService.delete(this.resourceId).toPromise().then(_ => {
-  //         this.router.navigateByUrl("/locations/resources")
-  //       })
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.resourceService.delete(this.resourceId).toPromise().then(_ => {
+          this.router.navigateByUrl("/locations/resources")
+        })
+      }
+    });
+  }
 
   fetchResourceInfo() {
     this.resourceService.get(this.resourceId).pipe(first()).subscribe(resource => {
