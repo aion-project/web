@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { LocationService } from 'src/app/services/location.service';
 import { LocationCreateEditComponent } from '../location-create-edit/location-create-edit.component';
+import { SelectResourceComponent } from './select-resource/select-resource.component';
 
 @Component({
   selector: 'app-location-detail',
@@ -59,6 +60,21 @@ export class LocationDetailComponent implements OnInit {
       if (result) {
         this.locationService.delete(this.locationId).toPromise().then(_ => {
           this.router.navigateByUrl("/locations")
+        })
+      }
+    });
+  }
+
+  onResourceAdd() {
+    const dialogRef = this.dialog.open(SelectResourceComponent, {
+      width: '320px',
+      data: { roleName: null, currentRoles: this.user.roles }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.addRole(this.userId, result).toPromise().then(_ => {
+          this.fetchUserInfo()
         })
       }
     });
