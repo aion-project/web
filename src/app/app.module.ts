@@ -34,6 +34,8 @@ import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { LoaderComponent } from './components/common/loader/loader.component';
 import { ResourceCreateEditComponent } from './components/main/locations/resources/resource-create-edit/resource-create-edit.component';
+import { ResourceDetailComponent } from './components/main/locations/resources/resource-detail/resource-detail.component';
+import { SelectResourceComponent } from './components/main/locations/location-detail/select-resource/select-resource.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { ResourceCreateEditComponent } from './components/main/locations/resourc
     ResourcesComponent,
     LoaderComponent,
     ResourceCreateEditComponent,
+    ResourceDetailComponent,
+    SelectResourceComponent,
   ],
   entryComponents: [
     SelectRoleComponent,
@@ -69,6 +73,7 @@ import { ResourceCreateEditComponent } from './components/main/locations/resourc
     ChangePasswordComponent,
     LocationCreateEditComponent,
     ResourceCreateEditComponent,
+    SelectResourceComponent,
   ],
   imports: [
     BrowserModule,
