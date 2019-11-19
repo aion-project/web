@@ -66,18 +66,18 @@ export class LocationDetailComponent implements OnInit {
   }
 
   onResourceAdd() {
-    const dialogRef = this.dialog.open(SelectResourceComponent, {
-      width: '320px',
-      data: { roleName: null, currentRoles: this.user.roles }
-    });
+    // const dialogRef = this.dialog.open(SelectResourceComponent, {
+    //   width: '320px',
+    //   data: { roleName: null, currentRoles: this.user.roles }
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.userService.addRole(this.userId, result).toPromise().then(_ => {
-          this.fetchUserInfo()
-        })
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.userService.addRole(this.userId, result).toPromise().then(_ => {
+    //       this.fetchUserInfo()
+    //     })
+    //   }
+    // });
   }
 
   fetchLocationInfo() {
