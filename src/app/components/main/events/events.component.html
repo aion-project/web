@@ -1,0 +1,18 @@
+<div class="events-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="section-header">Events</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <nav class="events-nav" mat-tab-nav-bar backgroundColor="primary">
+    <a mat-tab-link [routerLink]="['/events/listing']" routerLinkActive #listing_rla="routerLinkActive"
+      [active]="listing_rla.isActive">
+      Events
+    </a>
+    <a mat-tab-link [routerLink]="['/events/subjects']" routerLinkActive #groups_rla="routerLinkActive"
+      [active]="groups_rla.isActive">
+      Subjects
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

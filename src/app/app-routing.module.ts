@@ -30,6 +30,7 @@ import { SelectResourceComponent } from './components/main/locations/location-de
 import { GroupsComponent } from './components/main/users/groups/groups.component';
 import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
 import { GroupDetailComponent } from './components/main/users/groups/group-detail/group-detail.component';
+import { EventsComponent } from './components/main/events/events.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -44,12 +45,8 @@ const routes: Routes = [
     data: { onAuthRequired },
     children: [
       {
-        path: "users", component: UsersComponent, children: [
-          { path: "groups/:groupId", component: GroupDetailComponent },
-          { path: "groups", component: GroupsComponent },
-          { path: "listing/:userId", component: UserDetailComponent },
-          { path: "listing", component: UserListingComponent },
-          { path: "", pathMatch: "full", redirectTo: "listing" },
+        path: "events", component: EventsComponent, children: [
+          
         ]
       },
       {
@@ -58,6 +55,15 @@ const routes: Routes = [
           { path: "resources", component: ResourcesComponent, canActivate: [AdminGuard] },
           { path: "listing/:locationId", component: LocationDetailComponent },
           { path: "listing", component: LocationListingComponent },
+          { path: "", pathMatch: "full", redirectTo: "listing" },
+        ]
+      },
+      {
+        path: "users", component: UsersComponent, children: [
+          { path: "groups/:groupId", component: GroupDetailComponent },
+          { path: "groups", component: GroupsComponent },
+          { path: "listing/:userId", component: UserDetailComponent },
+          { path: "listing", component: UserListingComponent },
           { path: "", pathMatch: "full", redirectTo: "listing" },
         ]
       },
@@ -91,6 +97,7 @@ export const ScreenComponents = [
   ResourceDetailComponent,
   GroupsComponent,
   GroupDetailComponent,
+  EventsComponent,
 ];
 
 export const DialogComponents = [
