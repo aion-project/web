@@ -28,6 +28,7 @@ import { LocationCreateEditComponent } from './components/main/locations/locatio
 import { ResourceCreateEditComponent } from './components/main/locations/resources/resource-create-edit/resource-create-edit.component';
 import { SelectResourceComponent } from './components/main/locations/location-detail/select-resource/select-resource.component';
 import { GroupsComponent } from './components/main/users/groups/groups.component';
+import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -100,4 +101,5 @@ export const DialogComponents = [
   LocationCreateEditComponent,
   ResourceCreateEditComponent,
   SelectResourceComponent,
+  GroupCreateEditComponent,
 ];

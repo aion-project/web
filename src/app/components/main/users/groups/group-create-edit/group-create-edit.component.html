@@ -1,0 +1,23 @@
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title *ngIf="!isEditing">Create Resource</h1>
+  <h1 mat-dialog-title *ngIf="isEditing">Edit Resource</h1>
+</div>
+<div mat-dialog-content class="content">
+  <form class="group-form" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+    <span class="error" *ngIf="error">{{error}}</span>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="name" placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="description" placeholder="Description">
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit()">Save</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

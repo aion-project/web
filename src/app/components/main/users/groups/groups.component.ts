@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { GroupService } from 'src/app/services/group.service';
+import { GroupCreateEditComponent } from './group-create-edit/group-create-edit.component';
 
 @Component({
   selector: 'app-groups',
@@ -30,15 +31,15 @@ export class GroupsComponent implements OnInit {
   }
 
   create() {
-    // const dialogRef = this.dialog.open(ResourceCreateEditComponent, {
-    //   width: '640px'
-    // });
+    const dialogRef = this.dialog.open(GroupCreateEditComponent, {
+      width: '640px'
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.fetchResources();
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchResources();
+      }
+    });
   }
 
   fetchResources() {
