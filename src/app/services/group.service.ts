@@ -10,18 +10,18 @@ import { Group } from '../model/Group';
 })
 export class GroupService {
 
-  static LOCATION_URL = AppConfig.BASE_URL + "/groups/"
+  static GROUP_URL = AppConfig.BASE_URL + "/groups/"
 
   constructor(
     private http: HttpClient
   ) { }
 
   get(groupId: String): Observable<Group> {
-    return this.http.get(GroupService.LOCATION_URL + groupId).pipe(first(), map(this.toGroup))
+    return this.http.get(GroupService.GROUP_URL + groupId).pipe(first(), map(this.toGroup))
   }
 
   getAll(): Observable<Group[]> {
-    return this.http.get(GroupService.LOCATION_URL).pipe(first(), map((res: any[]) => res.map(this.toGroup)))
+    return this.http.get(GroupService.GROUP_URL).pipe(first(), map((res: any[]) => res.map(this.toGroup)))
   }
 
   create(name: String, description: String) {
@@ -29,19 +29,19 @@ export class GroupService {
       name: name,
       description: description,
     }
-    return this.http.post(GroupService.LOCATION_URL, data)
+    return this.http.post(GroupService.GROUP_URL, data)
   }
 
-  update(locationId: String, name: String, description: String) {
+  update(groupId: String, name: String, description: String) {
     let data = {
       name: name,
       description: description,
     }
-    return this.http.put(GroupService.LOCATION_URL + locationId, data)
+    return this.http.put(GroupService.GROUP_URL + groupId, data)
   }
 
-  delete(locationId: String) {
-    return this.http.delete(GroupService.LOCATION_URL + locationId)
+  delete(groupId: String) {
+    return this.http.delete(GroupService.GROUP_URL + groupId)
   }
 
   private toGroup = res => res as Group
