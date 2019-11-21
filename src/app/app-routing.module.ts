@@ -17,6 +17,17 @@ import { LocationListingComponent } from './components/main/locations/location-l
 import { UserListingComponent } from './components/main/users/user-listing/user-listing.component';
 import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { LoaderComponent } from './components/common/loader/loader.component';
+import { SelectRoleComponent } from './components/main/users/user-detail/select-role/select-role.component';
+import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
+import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
+import { UsersCreateComponent } from './components/main/users/users-create/users-create.component';
+import { AvatarUploadComponent } from './components/main/users/user-detail/avatar-upload/avatar-upload.component';
+import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
+import { LocationCreateEditComponent } from './components/main/locations/location-create-edit/location-create-edit.component';
+import { ResourceCreateEditComponent } from './components/main/locations/resources/resource-create-edit/resource-create-edit.component';
+import { SelectResourceComponent } from './components/main/locations/location-detail/select-resource/select-resource.component';
+import { GroupsComponent } from './components/main/users/groups/groups.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -32,6 +43,8 @@ const routes: Routes = [
     children: [
       {
         path: "users", component: UsersComponent, children: [
+          // { path: "groups/:groupId", component: LocationDetailComponent },
+          { path: "groups", component: GroupsComponent },
           { path: "listing/:userId", component: UserDetailComponent },
           { path: "listing", component: UserListingComponent },
           { path: "", pathMatch: "full", redirectTo: "listing" },
@@ -59,3 +72,32 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export const ScreenComponents = [
+  ActivateComponent,
+  MainComponent,
+  LoginComponent,
+  UsersComponent,
+  UserDetailComponent,
+  HomeComponent,
+  ProfileComponent,
+  UserListingComponent,
+  LocationsComponent,
+  LocationListingComponent,
+  LocationDetailComponent,
+  ResourcesComponent,
+  ResourceDetailComponent,
+  GroupsComponent,
+];
+
+export const DialogComponents = [
+  SelectRoleComponent,
+  ConfirmDialogComponent,
+  UsersEditComponent,
+  UsersCreateComponent,
+  AvatarUploadComponent,
+  ChangePasswordComponent,
+  LocationCreateEditComponent,
+  ResourceCreateEditComponent,
+  SelectResourceComponent,
+];
