@@ -29,6 +29,7 @@ import { ResourceCreateEditComponent } from './components/main/locations/resourc
 import { SelectResourceComponent } from './components/main/locations/location-detail/select-resource/select-resource.component';
 import { GroupsComponent } from './components/main/users/groups/groups.component';
 import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
+import { GroupDetailComponent } from './components/main/users/groups/group-detail/group-detail.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -44,7 +45,7 @@ const routes: Routes = [
     children: [
       {
         path: "users", component: UsersComponent, children: [
-          // { path: "groups/:groupId", component: LocationDetailComponent },
+          { path: "groups/:groupId", component: GroupDetailComponent },
           { path: "groups", component: GroupsComponent },
           { path: "listing/:userId", component: UserDetailComponent },
           { path: "listing", component: UserListingComponent },
@@ -89,6 +90,7 @@ export const ScreenComponents = [
   ResourcesComponent,
   ResourceDetailComponent,
   GroupsComponent,
+  GroupDetailComponent,
 ];
 
 export const DialogComponents = [
