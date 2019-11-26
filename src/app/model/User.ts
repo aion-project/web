@@ -1,4 +1,5 @@
 import { Role } from './Role';
+import { Group } from './Group';
 
 export interface User {
     id: String,
@@ -10,5 +11,6 @@ export interface User {
     roles?: Role[]
     avatarUrl?: String,
     thumbnailUrl?: String,
-    bio?: String
+    bio?: String,
+    groups: Group[],
 }

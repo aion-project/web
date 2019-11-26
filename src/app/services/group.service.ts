@@ -48,14 +48,14 @@ export class GroupService {
     const data = {
       user: userId
     }
-    return this.http.post(GroupService.GROUP_URL + "/" + groupId + "/addUser", data).pipe(first());
+    return this.http.post(GroupService.GROUP_URL + groupId + "/addUser", data).pipe(first());
   }
 
   removeUser(groupId: String, userId: String) {
     const data = {
       user: userId
     }
-    return this.http.post(GroupService.GROUP_URL + "/" + groupId + "/removeUser", data).pipe(first());
+    return this.http.post(GroupService.GROUP_URL + groupId + "/removeUser", data).pipe(first());
   }
 
   private toGroup = res => res as Group

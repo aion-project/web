@@ -31,6 +31,7 @@ import { GroupsComponent } from './components/main/users/groups/groups.component
 import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
 import { GroupDetailComponent } from './components/main/users/groups/group-detail/group-detail.component';
 import { EventsComponent } from './components/main/events/events.component';
+import { SelectGroupComponent } from './components/main/users/user-detail/select-group/select-group.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -111,4 +112,5 @@ export const DialogComponents = [
   ResourceCreateEditComponent,
   SelectResourceComponent,
   GroupCreateEditComponent,
+  SelectGroupComponent,
 ];

@@ -45,6 +45,24 @@
             </button>
         </mat-card-actions>
     </mat-card>
+    <mat-card class="section">
+        <mat-card-title>Groups</mat-card-title>
+        <mat-card-subtitle>Groups user are in</mat-card-subtitle>
+        <mat-card-content>
+            <mat-chip-list>
+                <mat-chip *ngFor="let group of user?.groups" [removable]="isAdmin" (removed)="onGroupRemove(group.id)">
+                    {{ group.name }}
+                    <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+        <mat-card-actions *ngIf="isAdmin" class="actions">
+            <button mat-flat-button (click)="onGroupAdd()">
+                <mat-icon>add</mat-icon>
+                ADD
+            </button>
+        </mat-card-actions>
+    </mat-card>
     <mat-card *ngIf="isAdmin" class="section">
         <mat-card-title>Manage</mat-card-title>
         <div class="card-section-title">Block</div>

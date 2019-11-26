@@ -7,6 +7,8 @@ import { SelectRoleComponent } from './select-role/select-role.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from '../users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
+import { GroupService } from 'src/app/services/group.service';
+import { SelectGroupComponent } from './select-group/select-group.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -21,10 +23,11 @@ export class UserDetailComponent implements OnInit {
   isAdmin: boolean = false
 
   constructor(
-    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
+    private userService: UserService,
+    private groupService: GroupService,
   ) { }
 
   ngOnInit() {
@@ -50,6 +53,7 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  // Roles
   onRoleAdd() {
     const dialogRef = this.dialog.open(SelectRoleComponent, {
       width: '320px',
@@ -67,6 +71,28 @@ export class UserDetailComponent implements OnInit {
 
   onRoleRemove(roleId) {
     this.userService.removeRole(this.userId, roleId).toPromise().then(_ => {
+      this.fetchUserInfo()
+    })
+  }
+
+  // Groups
+  onGroupAdd() {
+    const dialogRef = this.dialog.open(SelectGroupComponent, {
+      width: '640px',
+      data: { currentGroups: this.user.groups }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.groupService.addUser(result, this.userId).toPromise().then(_ => {
+          this.fetchUserInfo()
+        })
+      }
+    });
+  }
+
+  onGroupRemove(groupId) {
+    this.groupService.removeUser(groupId, this.userId).toPromise().then(_ => {
       this.fetchUserInfo()
     })
   }
@@ -102,6 +128,7 @@ export class UserDetailComponent implements OnInit {
   fetchUserInfo() {
     this.userService.get(this.userId).pipe(first()).subscribe(user => {
       this.user = user
+      console.log(user);
       if (this.user.avatarUrl != null) {
         this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
       }
