@@ -8,7 +8,7 @@ import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog
 import { UsersEditComponent } from '../users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
 import { GroupService } from 'src/app/services/group.service';
-import { SelectGroupComponent } from './select-group/select-group.component';
+import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -57,7 +57,7 @@ export class UserDetailComponent implements OnInit {
   onRoleAdd() {
     const dialogRef = this.dialog.open(SelectRoleComponent, {
       width: '320px',
-      data: { roleName: null, currentRoles: this.user.roles }
+      data: { type: null, currentRoles: this.user.roles }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -77,9 +77,9 @@ export class UserDetailComponent implements OnInit {
 
   // Groups
   onGroupAdd() {
-    const dialogRef = this.dialog.open(SelectGroupComponent, {
+    const dialogRef = this.dialog.open(SelectElementComponent, {
       width: '640px',
-      data: { currentGroups: this.user.groups }
+      data: { type: SelectElementType.GROUP, current: this.user.groups }
     });
 
     dialogRef.afterClosed().subscribe(result => {

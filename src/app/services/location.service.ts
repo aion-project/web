@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AppConfig } from '../config/app-config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
+import { Location } from "../model/Location";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,21 @@ export class LocationService {
 
   delete(locationId: String) {
     return this.http.delete(LocationService.LOCATION_URL + locationId)
+  }
+
+
+  addResource(locationId: String, resourceId: String) {
+    const data = {
+      resource: resourceId
+    }
+    return this.http.post(LocationService.LOCATION_URL + locationId + "/addResource", data).pipe(first());
+  }
+
+  removeUser(locationId: String, resourceId: String) {
+    const data = {
+      resource: resourceId
+    }
+    return this.http.post(LocationService.LOCATION_URL + locationId + "/removeResource", data).pipe(first());
   }
 
   private toLocation = res => res as Location

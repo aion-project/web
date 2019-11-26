@@ -27,14 +27,13 @@
             <p *ngIf="!location?.ac"> Unavailable </p>
         </mat-card-content>
     </mat-card>
-    <!-- ----------------------------- -->
     <mat-card class="section">
         <mat-card-title>Resources</mat-card-title>
         <mat-card-subtitle>Assigned resources to locations</mat-card-subtitle>
         <mat-card-content>
             <mat-chip-list>
-                <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole.id)">
-                    {{ userRole.name | titlecase }}
+                <mat-chip *ngFor="let resource of location?.resources" [removable]="isAdmin" (removed)="onResourceRemove(resource.id)">
+                    {{ resource.name | titlecase }}
                     <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
                 </mat-chip>
             </mat-chip-list>
@@ -46,7 +45,6 @@
             </button>
         </mat-card-actions>
     </mat-card>
-    <!-- ----------------------------- -->
     <mat-card *ngIf="isAdmin" class="section">
         <mat-card-title>Manage</mat-card-title>
         <div class="card-section-title subsection">Delete</div>

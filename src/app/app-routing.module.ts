@@ -17,7 +17,6 @@ import { LocationListingComponent } from './components/main/locations/location-l
 import { UserListingComponent } from './components/main/users/user-listing/user-listing.component';
 import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
-import { LoaderComponent } from './components/common/loader/loader.component';
 import { SelectRoleComponent } from './components/main/users/user-detail/select-role/select-role.component';
 import { ConfirmDialogComponent } from './components/common/confirm-dialog/confirm-dialog.component';
 import { UsersEditComponent } from './components/main/users/users-edit/users-edit.component';
@@ -26,12 +25,12 @@ import { AvatarUploadComponent } from './components/main/users/user-detail/avata
 import { ChangePasswordComponent } from './components/main/profile/change-password/change-password.component';
 import { LocationCreateEditComponent } from './components/main/locations/location-create-edit/location-create-edit.component';
 import { ResourceCreateEditComponent } from './components/main/locations/resources/resource-create-edit/resource-create-edit.component';
-import { SelectResourceComponent } from './components/main/locations/location-detail/select-resource/select-resource.component';
 import { GroupsComponent } from './components/main/users/groups/groups.component';
 import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
 import { GroupDetailComponent } from './components/main/users/groups/group-detail/group-detail.component';
 import { EventsComponent } from './components/main/events/events.component';
 import { SelectGroupComponent } from './components/main/users/user-detail/select-group/select-group.component';
+import { SelectElementComponent } from './components/common/select-element/select-element.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -110,7 +109,6 @@ export const DialogComponents = [
   ChangePasswordComponent,
   LocationCreateEditComponent,
   ResourceCreateEditComponent,
-  SelectResourceComponent,
   GroupCreateEditComponent,
-  SelectGroupComponent,
+  SelectElementComponent,
 ];

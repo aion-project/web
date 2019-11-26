@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { LocationService } from 'src/app/services/location.service';
 import { LocationCreateEditComponent } from '../location-create-edit/location-create-edit.component';
-import { SelectResourceComponent } from './select-resource/select-resource.component';
+import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
+import { Location } from "../../../../model/Location";
 
 @Component({
   selector: 'app-location-detail',
@@ -22,10 +23,10 @@ export class LocationDetailComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private locationService: LocationService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
+    private locationService: LocationService,
   ) { }
 
   ngOnInit() {
@@ -66,18 +67,32 @@ export class LocationDetailComponent implements OnInit {
   }
 
   onResourceAdd() {
-    // const dialogRef = this.dialog.open(SelectResourceComponent, {
-    //   width: '320px',
-    //   data: { roleName: null, currentRoles: this.user.roles }
-    // });
+    const dialogRef = this.dialog.open(SelectElementComponent, {
+      width: '640px',
+      data: { type: SelectElementType.RESOURCE, current: this.location.resources }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.userService.addRole(this.userId, result).toPromise().then(_ => {
-    //       this.fetchUserInfo()
-    //     })
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.locationService.addResource(this.locationId, result).toPromise().then(_ => {
+          this.fetchLocationInfo()
+        })
+      }
+    });
+  }
+
+  onResourceRemove(resourceId) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.locationService.removeUser(this.locationId, resourceId).toPromise().then(_ => {
+          this.fetchLocationInfo()
+        });
+      }
+    });
   }
 
   fetchLocationInfo() {
