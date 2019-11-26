@@ -92,9 +92,17 @@ export class UserDetailComponent implements OnInit {
   }
 
   onGroupRemove(groupId) {
-    this.groupService.removeUser(groupId, this.userId).toPromise().then(_ => {
-      this.fetchUserInfo()
-    })
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.groupService.removeUser(groupId, this.userId).toPromise().then(_ => {
+          this.fetchUserInfo()
+        });
+      }
+    });
   }
 
   onSetEnable(isEnable) {
