@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule, MatToolbarModule, MatDrawerContainer, MatSidenavModule, MatListModule, MatTabsModule, MatTableModule, MatIconModule, MatChipsModule, MatDialogModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule, M
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
+    AngularDateTimePickerModule,
   ],
   exports: [
     MatInputModule,
@@ -33,6 +35,7 @@ import { MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule, M
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
+    AngularDateTimePickerModule,
   ]
 })
 export class MaterialModule { }

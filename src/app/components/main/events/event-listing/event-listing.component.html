@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-toolbar>
+    <span class="spacer"></span>
+    <button *ngIf="isAdmin" mat-flat-button color="primary" (click)="create()">
+      <mat-icon>add</mat-icon>
+      CREATE
+    </button>
+  </mat-toolbar>
+  <mat-card class="section">
+    <mat-card-subtitle>Events in the system</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content class="listing-content">
+      <app-loader *ngIf="!displayedData"></app-loader>
+      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.startDateTime}} {{ element.endDateTime }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
+          [routerLink]="['/events/listing', row.id]"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

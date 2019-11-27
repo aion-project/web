@@ -1,0 +1,36 @@
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title *ngIf="!isEditing">Create Event</h1>
+  <h1 mat-dialog-title *ngIf="isEditing">Edit Event</h1>
+</div>
+<div mat-dialog-content class="content">
+  <form class="event-form" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <span class="error" *ngIf="error">{{error}}</span>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="name" placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="description" placeholder="Description">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeStart" [owlDateTimeTrigger]="timeStart" formControlName="startDateTime"
+        placeholder="Start Date/Time" autocomplete="off">
+      <owl-date-time #timeStart></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeStart">calendar_today</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeEnd" [owlDateTimeTrigger]="timeEnd" formControlName="endDateTime"
+        placeholder="End Date/Time" autocomplete="off">
+      <owl-date-time #timeEnd></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit()">Save</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>
