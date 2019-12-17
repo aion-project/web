@@ -35,6 +35,7 @@ import { EventListingComponent } from './components/main/events/event-listing/ev
 import { EventCreateEditComponent } from './components/main/events/event-create-edit/event-create-edit.component';
 import { EventDetailComponent } from './components/main/events/event-detail/event-detail.component';
 import { SubjectsComponent } from './components/main/events/subjects/subjects/subjects.component';
+import { SubjectCreateEditComponent } from './components/main/events/subjects/subject-create-edit/subject-create-edit.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -122,4 +123,5 @@ export const DialogComponents = [
   GroupCreateEditComponent,
   SelectElementComponent,
   EventCreateEditComponent,
+  SubjectCreateEditComponent,
 ];

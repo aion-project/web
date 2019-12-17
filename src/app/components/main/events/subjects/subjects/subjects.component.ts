@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { EventService } from 'src/app/services/event.service';
 import { first } from 'rxjs/operators';
 import { SubjectService } from 'src/app/services/subject.service';
+import { SubjectCreateEditComponent } from '../subject-create-edit/subject-create-edit.component';
 
 @Component({
   selector: 'app-subjects',
@@ -30,15 +31,15 @@ export class SubjectsComponent implements OnInit {
   }
 
   create() {
-    // const dialogRef = this.dialog.open(EventCreateEditComponent, {
-    //   width: '640px'
-    // });
+    const dialogRef = this.dialog.open(SubjectCreateEditComponent, {
+      width: '640px'
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.fetchEvents();
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchSubjects();
+      }
+    });
   }
 
   fetchSubjects() {
