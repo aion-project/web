@@ -36,6 +36,7 @@ import { EventCreateEditComponent } from './components/main/events/event-create-
 import { EventDetailComponent } from './components/main/events/event-detail/event-detail.component';
 import { SubjectsComponent } from './components/main/events/subjects/subjects/subjects.component';
 import { SubjectCreateEditComponent } from './components/main/events/subjects/subject-create-edit/subject-create-edit.component';
+import { SubjectDetailComponent } from './components/main/events/subjects/subject-detail/subject-detail.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -51,7 +52,8 @@ const routes: Routes = [
     children: [
       {
         path: "events", component: EventsComponent, children: [
-          { path: "subjects", component: SubjectsComponent, canActivate: [AdminGuard] },
+          { path: "subjects/:subjectId", component: SubjectDetailComponent },
+          { path: "subjects", component: SubjectsComponent },
           { path: "listing", component: EventListingComponent },
           { path: "listing/:eventId", component: EventDetailComponent },
           { path: "", pathMatch: "full", redirectTo: "listing" },
@@ -59,7 +61,7 @@ const routes: Routes = [
       },
       {
         path: "locations", component: LocationsComponent, children: [
-          { path: "resources/:resourceId", component: ResourceDetailComponent },
+          { path: "resources/:resourceId", component: ResourceDetailComponent, canActivate: [AdminGuard] },
           { path: "resources", component: ResourcesComponent, canActivate: [AdminGuard] },
           { path: "listing/:locationId", component: LocationDetailComponent },
           { path: "listing", component: LocationListingComponent },
@@ -109,6 +111,7 @@ export const ScreenComponents = [
   EventListingComponent,
   EventDetailComponent,
   SubjectsComponent,
+  SubjectDetailComponent,
 ];
 
 export const DialogComponents = [

@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-toolbar>
+      <button [routerLink]="['/events/subjects']" mat-icon-button aria-label="Back">
+          <mat-icon>arrow_back</mat-icon>
+      </button>
+  </mat-toolbar>
+  <div class="header">
+      <div class="subject-detail-container">
+          <div class="mat-display-2 compact"> {{ subject?.name }}</div>
+          <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
+              (click)="onEditSubject()">Edit</button>
+      </div>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="container">
+  <mat-card *ngIf="subject?.description" class="section">
+      <mat-card-title>Infomation</mat-card-title>
+      <div class="card-section-title subsection">Description</div>
+      <mat-card-content>
+          <p> {{subject?.description}} </p>
+      </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="isAdmin" class="section">
+      <mat-card-title>Manage</mat-card-title>
+      <div class="card-section-title subsection">Delete</div>
+      <mat-card-content>
+          <p>Remove subject from the system</p>
+          <button mat-flat-button color="warn" (click)="onDelete()">
+              DELETE
+          </button>
+      </mat-card-content>
+  </mat-card>
+</div>
