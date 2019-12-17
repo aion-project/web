@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule, MatToolbarModule, MatDrawerContainer, MatSidenavModule, MatListModule, MatTabsModule, MatTableModule, MatIconModule, MatChipsModule, MatDialogModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
-import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
@@ -18,7 +18,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
-    AngularDateTimePickerModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   exports: [
     MatInputModule,
@@ -35,7 +36,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
-    AngularDateTimePickerModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ]
 })
 export class MaterialModule { }
