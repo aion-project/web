@@ -33,6 +33,7 @@ import { SelectGroupComponent } from './components/main/users/user-detail/select
 import { SelectElementComponent } from './components/common/select-element/select-element.component';
 import { EventListingComponent } from './components/main/events/event-listing/event-listing.component';
 import { EventCreateEditComponent } from './components/main/events/event-create-edit/event-create-edit.component';
+import { EventDetailComponent } from './components/main/events/event-detail/event-detail.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -49,6 +50,7 @@ const routes: Routes = [
       {
         path: "events", component: EventsComponent, children: [
           { path: "listing", component: EventListingComponent },
+          { path: "listing/:eventId", component: EventDetailComponent },
           { path: "", pathMatch: "full", redirectTo: "listing" },
         ]
       },
@@ -102,6 +104,7 @@ export const ScreenComponents = [
   GroupDetailComponent,
   EventsComponent,
   EventListingComponent,
+  EventDetailComponent,
 ];
 
 export const DialogComponents = [
