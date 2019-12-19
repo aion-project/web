@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import { EventCreateEditComponent } from '../event-create-edit/event-create-edit.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { ChangeSubjectComponent } from './change-subject/change-subject.component';
+import { ChangeLocationComponent } from 'src/app/components/common/change-location/change-location.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -91,6 +92,35 @@ export class EventDetailComponent implements OnInit {
       if (result) {
         this.eventService.removeSubject(this.eventId, subject.id).toPromise().then(_ => {
           this.fetchEventInfo()
+        });
+      }
+    });
+  }
+
+  // Location
+  onLocationChange() {
+    const dialogRef = this.dialog.open(ChangeLocationComponent, {
+      width: '640px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.eventService.setLocation(this.eventId, result.id).toPromise().then(_ => {
+          this.fetchEventInfo();
+        })
+      }
+    });
+  }
+
+  onLocationRemove(location) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.eventService.removeLocation(this.eventId, location.id).toPromise().then(_ => {
+          this.fetchEventInfo();
         });
       }
     });

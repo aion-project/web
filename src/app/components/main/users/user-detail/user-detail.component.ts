@@ -9,7 +9,7 @@ import { UsersEditComponent } from '../users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
 import { GroupService } from 'src/app/services/group.service';
 import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
-import { ChangeLocationComponent } from './change-location/change-location.component';
+import { ChangeLocationComponent } from '../../../common/change-location/change-location.component';
 
 @Component({
   selector: 'app-user-detail',

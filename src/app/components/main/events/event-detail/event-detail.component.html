@@ -21,6 +21,30 @@
     <mat-card-content>
       <p> {{event?.description}} </p>
     </mat-card-content>
+    <div class="card-section-title subsection">Time</div>
+    <mat-card-content>
+      <p> {{event?.startDateTime | date : 'short'}} - {{event?.endDateTime | date : 'short'}} </p>
+    </mat-card-content>
+    <div class="card-section-title subsection">Location</div>
+    <mat-card-content>
+      <p *ngIf="!event?.location"> No location selected yet </p>
+      <mat-chip-list *ngIf="event?.location">
+        <mat-chip [removable]="isAdmin" (removed)="onLocationRemove(event.location)">
+          {{ event.location.name }}
+          <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAdmin" class="actions">
+      <button mat-flat-button *ngIf="event.location" (click)="onLocationChange()">
+        <mat-icon>refresh</mat-icon>
+        Change Location
+      </button>
+      <button mat-flat-button *ngIf="!event.location" (click)="onLocationChange()">
+        <mat-icon>add</mat-icon>
+        Add Location
+      </button>
+    </mat-card-actions>
   </mat-card>
   <mat-card *ngIf="event" class="section">
     <mat-card-title>Subject</mat-card-title>
