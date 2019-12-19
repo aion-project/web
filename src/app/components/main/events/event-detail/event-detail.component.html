@@ -1,41 +1,58 @@
 <div class="container">
   <mat-toolbar>
-      <button [routerLink]="['/events']" mat-icon-button aria-label="Back">
-          <mat-icon>arrow_back</mat-icon>
-      </button>
+    <button [routerLink]="['/events']" mat-icon-button aria-label="Back">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
   </mat-toolbar>
   <div class="header">
-      <div class="event-detail-container">
-          <div class="mat-display-2 compact"> {{ event?.name }}</div>
-          <!-- <h2 class="mat-display-1 compact">Level {{ location?.level }}</h2> -->
-          <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
-              (click)="onEditEvent()">Edit</button>
-      </div>
+    <div class="event-detail-container">
+      <div class="mat-display-2 compact"> {{ event?.name }}</div>
+      <!-- <h2 class="mat-display-1 compact">Level {{ location?.level }}</h2> -->
+      <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
+        (click)="onEditEvent()">Edit</button>
+    </div>
   </div>
 </div>
 <mat-divider></mat-divider>
 <div class="container">
   <mat-card *ngIf="event?.description" class="section">
-      <mat-card-title>Infomation</mat-card-title>
-      <div class="card-section-title subsection">Description</div>
-      <mat-card-content>
-          <p> {{event?.description}} </p>
-      </mat-card-content>
+    <mat-card-title>Infomation</mat-card-title>
+    <div class="card-section-title subsection">Description</div>
+    <mat-card-content>
+      <p> {{event?.description}} </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="event" class="section">
+    <mat-card-title>Subject</mat-card-title>
+    <mat-card-subtitle>Assigned event subject</mat-card-subtitle>
+    <mat-card-content>
+      <div *ngIf="!event.subject">Event doesn't have a subject yet.</div>
+      <mat-chip-list *ngIf="event.subject">
+        <mat-chip [removable]="isAdmin" (removed)="onSubjectRemove(event.subject)">
+          {{ event.subject.name }}
+          <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAdmin" class="actions">
+      <button mat-flat-button *ngIf="event.subject" (click)="onSubjectChange()">
+        <mat-icon>refresh</mat-icon>
+        Change
+      </button>
+      <button mat-flat-button *ngIf="!event.subject" (click)="onSubjectChange()">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </mat-card-actions>
   </mat-card>
   <mat-card *ngIf="isAdmin" class="section">
-      <mat-card-title>Subjects</mat-card-title>
-      <mat-card-content>
-          
-      </mat-card-content>
-  </mat-card>
-  <mat-card *ngIf="isAdmin" class="section">
-      <mat-card-title>Manage</mat-card-title>
-      <div class="card-section-title subsection">Delete</div>
-      <mat-card-content>
-          <p>Remove event from the system</p>
-          <button mat-flat-button color="warn" (click)="onDelete()">
-              DELETE
-          </button>
-      </mat-card-content>
+    <mat-card-title>Manage</mat-card-title>
+    <div class="card-section-title subsection">Delete</div>
+    <mat-card-content>
+      <p>Remove event from the system</p>
+      <button mat-flat-button color="warn" (click)="onDelete()">
+        DELETE
+      </button>
+    </mat-card-content>
   </mat-card>
 </div>

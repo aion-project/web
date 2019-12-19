@@ -7,6 +7,7 @@ import { EventService } from 'src/app/services/event.service';
 import { first } from 'rxjs/operators';
 import { EventCreateEditComponent } from '../event-create-edit/event-create-edit.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
+import { ChangeSubjectComponent } from './change-subject/change-subject.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -61,6 +62,36 @@ export class EventDetailComponent implements OnInit {
         this.eventService.delete(this.eventId).toPromise().then(_ => {
           this.router.navigateByUrl("/events")
         })
+      }
+    });
+  }
+
+  // Subject
+  onSubjectChange() {
+    const dialogRef = this.dialog.open(ChangeSubjectComponent, {
+      width: '640px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        this.eventService.setSubject(this.eventId, result.id).toPromise().then(_ => {
+          this.fetchEventInfo()
+        })
+      }
+    });
+  }
+
+  onSubjectRemove(subject) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.eventService.removeSubject(this.eventId, subject.id).toPromise().then(_ => {
+          this.fetchEventInfo()
+        });
       }
     });
   }

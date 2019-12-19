@@ -49,6 +49,20 @@ export class EventService {
   delete(eventId: String) {
     return this.http.delete(EventService.EVENT_URL + eventId)
   }
+    
+  setSubject(eventId: String, subjectId: String) {
+    let data = {
+      id: subjectId
+    }
+    return this.http.post(EventService.EVENT_URL + eventId + "/setSubject", data)
+  }
+
+  removeSubject(eventId: String, subjectId: String) {
+    let data = {
+      id: subjectId
+    }
+    return this.http.post(EventService.EVENT_URL + eventId + "/removeSubject", data)
+  }
 
   private toEvent = res => res as Event
 }

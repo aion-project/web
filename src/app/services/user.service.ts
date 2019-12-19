@@ -102,6 +102,20 @@ export class UserService {
   setEnable(userId: String, isEnabled: Boolean) {
     return this.http.post(UserService.USER_URL + userId + "/setEnable/" + isEnabled, null)
   }
+  
+  setLocation(userId: String, locationId: String) {
+    let data = {
+      id: locationId
+    }
+    return this.http.post(UserService.USER_URL + userId + "/setLocation", data)
+  }
+
+  removeLocation(userId: String, locationId: String) {
+    let data = {
+      id: locationId
+    }
+    return this.http.post(UserService.USER_URL + userId + "/removeLocation", data)
+  }
 
   uploadAvatar(ext, mime, data) {
     let image = {
@@ -118,20 +132,6 @@ export class UserService {
       newPassword: newPassword
     }
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_CHANGE_PASSWORD, data)
-  }
-  
-  setLocation(userId: String, locationId: String) {
-    let data = {
-      id: locationId
-    }
-    return this.http.post(UserService.USER_URL + userId + "/setLocation", data)
-  }
-
-  removeLocation(userId: String, locationId: String) {
-    let data = {
-      id: locationId
-    }
-    return this.http.post(UserService.USER_URL + userId + "/removeLocation", data)
   }
 
   private toUser = res => res as User
