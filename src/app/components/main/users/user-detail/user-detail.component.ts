@@ -114,7 +114,6 @@ export class UserDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
         this.userService.setLocation(this.userId, result.id).toPromise().then(_ => {
           this.fetchUserInfo()
         })

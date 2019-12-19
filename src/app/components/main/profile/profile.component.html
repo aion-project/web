@@ -52,6 +52,17 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  <mat-card *ngIf="user && user.location" class="section">
+    <mat-card-title>Location</mat-card-title>
+    <mat-card-subtitle>Assigned user location</mat-card-subtitle>
+    <mat-card-content>
+      <mat-chip-list *ngIf="user.location">
+        <mat-chip>
+          {{ user.location.name | titlecase }}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
   <mat-card class="section">
     <mat-card-title>Settings</mat-card-title>
     <div class="card-section-title">Account Password</div>
