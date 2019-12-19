@@ -119,6 +119,20 @@ export class UserService {
     }
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_CHANGE_PASSWORD, data)
   }
+  
+  setLocation(userId: String, locationId: String) {
+    let data = {
+      id: locationId
+    }
+    return this.http.post(UserService.USER_URL + userId + "/setLocation", data)
+  }
+
+  removeLocation(userId: String, locationId: String) {
+    let data = {
+      id: locationId
+    }
+    return this.http.post(UserService.USER_URL + userId + "/removeLocation", data)
+  }
 
   private toUser = res => res as User
 }

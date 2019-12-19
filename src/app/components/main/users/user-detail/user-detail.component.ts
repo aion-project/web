@@ -9,6 +9,7 @@ import { UsersEditComponent } from '../users-edit/users-edit.component';
 import { AppConfig } from 'src/app/config/app-config';
 import { GroupService } from 'src/app/services/group.service';
 import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
+import { ChangeLocationComponent } from './change-location/change-location.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -99,6 +100,36 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.groupService.removeUser(groupId, this.userId).toPromise().then(_ => {
+          this.fetchUserInfo()
+        });
+      }
+    });
+  }
+
+  // Location
+  onLocationChange() {
+    const dialogRef = this.dialog.open(ChangeLocationComponent, {
+      width: '640px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        this.userService.setLocation(this.userId, result.id).toPromise().then(_ => {
+          this.fetchUserInfo()
+        })
+      }
+    });
+  }
+
+  onLocationRemove(location) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.removeLocation(this.userId, location.id).toPromise().then(_ => {
           this.fetchUserInfo()
         });
       }

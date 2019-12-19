@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Select location</h1>
+<div mat-dialog-content class="content">
+  <mat-list role="list">
+    <mat-list-item class="location-item" *ngFor="let location of locations" (click)="onLocationSelected(location)" role="listitem">
+      {{ location.name }}</mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

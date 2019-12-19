@@ -46,6 +46,29 @@
         </mat-card-actions>
     </mat-card>
     <mat-card class="section">
+        <mat-card-title>Location</mat-card-title>
+        <mat-card-subtitle>Assigned user location</mat-card-subtitle>
+        <mat-card-content>
+            <div *ngIf="!user.location">User doesn't have a location yet.</div>
+            <mat-chip-list *ngIf="user.location">
+                <mat-chip [removable]="isAdmin" (removed)="onLocationRemove(user.location)">
+                    {{ user.location.name | titlecase }}
+                    <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+        <mat-card-actions *ngIf="isAdmin" class="actions">
+            <button mat-flat-button *ngIf="user.location" (click)="onLocationChange()">
+                <mat-icon>refresh</mat-icon>
+                Change
+            </button>
+            <button mat-flat-button *ngIf="!user.location" (click)="onLocationChange()">
+                <mat-icon>add</mat-icon>
+                Add
+            </button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="section">
         <mat-card-title>Groups</mat-card-title>
         <mat-card-subtitle>Groups user are in</mat-card-subtitle>
         <mat-card-content>
