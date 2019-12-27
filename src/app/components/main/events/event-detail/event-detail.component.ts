@@ -7,7 +7,7 @@ import { EventService } from 'src/app/services/event.service';
 import { first } from 'rxjs/operators';
 import { EventCreateEditComponent } from '../event-create-edit/event-create-edit.component';
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
-import { ChangeSubjectComponent } from './change-subject/change-subject.component';
+import { ChangeSubjectComponent } from '../../../common/change-subject/change-subject.component';
 import { ChangeLocationComponent } from 'src/app/components/common/change-location/change-location.component';
 
 @Component({

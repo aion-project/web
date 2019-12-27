@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { Group } from 'src/app/model/Group';
 import { GroupService } from 'src/app/services/group.service';
 import { GroupCreateEditComponent } from '../group-create-edit/group-create-edit.component';
+import { ChangeSubjectComponent } from 'src/app/components/common/change-subject/change-subject.component';
 
 @Component({
   selector: 'app-group-detail',
@@ -61,6 +62,35 @@ export class GroupDetailComponent implements OnInit {
         this.groupService.delete(this.groupId).toPromise().then(_ => {
           this.router.navigateByUrl("/users/groups")
         })
+      }
+    });
+  }
+
+  // Subject
+  onSubjectAdd() {
+    const dialogRef = this.dialog.open(ChangeSubjectComponent, {
+      width: '640px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.groupService.addSubject(this.groupId, result.id).toPromise().then(_ => {
+          this.fetchGroupInfo();
+        })
+      }
+    });
+  }
+
+  onSubjectRemove(subject) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.groupService.removeSubject(this.groupId, subject.id).toPromise().then(_ => {
+          this.fetchGroupInfo();
+        });
       }
     });
   }

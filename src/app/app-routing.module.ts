@@ -38,7 +38,7 @@ import { SubjectsComponent } from './components/main/events/subjects/subjects/su
 import { SubjectCreateEditComponent } from './components/main/events/subjects/subject-create-edit/subject-create-edit.component';
 import { SubjectDetailComponent } from './components/main/events/subjects/subject-detail/subject-detail.component';
 import { ChangeLocationComponent } from './components/common/change-location/change-location.component';
-import { ChangeSubjectComponent } from './components/main/events/event-detail/change-subject/change-subject.component';
+import { ChangeSubjectComponent } from './components/common/change-subject/change-subject.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
