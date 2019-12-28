@@ -29,7 +29,6 @@ import { GroupsComponent } from './components/main/users/groups/groups.component
 import { GroupCreateEditComponent } from './components/main/users/groups/group-create-edit/group-create-edit.component';
 import { GroupDetailComponent } from './components/main/users/groups/group-detail/group-detail.component';
 import { EventsComponent } from './components/main/events/events.component';
-import { SelectGroupComponent } from './components/main/users/user-detail/select-group/select-group.component';
 import { SelectElementComponent } from './components/common/select-element/select-element.component';
 import { EventListingComponent } from './components/main/events/event-listing/event-listing.component';
 import { EventCreateEditComponent } from './components/main/events/event-create-edit/event-create-edit.component';

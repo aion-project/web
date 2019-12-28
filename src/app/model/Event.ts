@@ -1,4 +1,6 @@
 import { User } from './User';
+import { Group } from './Group';
+import { Subject } from './Subject';
 
 export const EventType = {
     NONE: "NONE",
@@ -15,4 +17,6 @@ export interface Event {
     endDateTime?: Date,
     repeat: String,
     createdBy: User,
+    groups: Group[],
+    subject?: Subject
 }

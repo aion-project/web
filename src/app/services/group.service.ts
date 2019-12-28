@@ -58,19 +58,5 @@ export class GroupService {
     return this.http.post(GroupService.GROUP_URL + groupId + "/removeUser", data).pipe(first());
   }
 
-  addSubject(groupId: String, subjectId: String) {
-    const data = {
-      id: subjectId
-    }
-    return this.http.post(GroupService.GROUP_URL + groupId + "/addSubject", data).pipe(first());
-  }
-
-  removeSubject(groupId: String, subjectId: String) {
-    const data = {
-      id: subjectId
-    }
-    return this.http.post(GroupService.GROUP_URL + groupId + "/removeSubject", data).pipe(first());
-  }
-
   private toGroup = res => res as Group
 }

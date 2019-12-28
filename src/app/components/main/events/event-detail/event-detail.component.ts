@@ -9,6 +9,7 @@ import { EventCreateEditComponent } from '../event-create-edit/event-create-edit
 import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 import { ChangeSubjectComponent } from '../../../common/change-subject/change-subject.component';
 import { ChangeLocationComponent } from 'src/app/components/common/change-location/change-location.component';
+import { SelectElementType, SelectElementComponent } from 'src/app/components/common/select-element/select-element.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -17,7 +18,7 @@ import { ChangeLocationComponent } from 'src/app/components/common/change-locati
 })
 export class EventDetailComponent implements OnInit {
 
-  private eventId: String
+  private eventId: string
 
   event: Event
   isAdmin: boolean = false
@@ -97,6 +98,38 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  // Group
+  onGroupAdd() {
+    const dialogRef = this.dialog.open(SelectElementComponent, {
+      width: '640px',
+      data: { type: SelectElementType.GROUP, current: this.event.groups }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result)
+        this.eventService.addGroup(this.eventId, result).toPromise().then(_ => {
+          this.fetchEventInfo();
+        })
+      }
+    });
+  }
+
+  onGroupRemove(group) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(group)
+        this.eventService.removeGroup(this.eventId, group.id).toPromise().then(_ => {
+          this.fetchEventInfo();
+        });
+      }
+    });
+  }
+
   // Location
   onLocationChange() {
     const dialogRef = this.dialog.open(ChangeLocationComponent, {
@@ -129,6 +162,7 @@ export class EventDetailComponent implements OnInit {
   fetchEventInfo() {
     this.eventService.get(this.eventId).pipe(first()).subscribe(event => {
       this.event = event
+      console.log(event)
     })
   }
 }

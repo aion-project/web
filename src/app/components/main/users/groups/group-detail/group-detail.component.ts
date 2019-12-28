@@ -66,35 +66,6 @@ export class GroupDetailComponent implements OnInit {
     });
   }
 
-  // Subject
-  onSubjectAdd() {
-    const dialogRef = this.dialog.open(ChangeSubjectComponent, {
-      width: '640px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.groupService.addSubject(this.groupId, result.id).toPromise().then(_ => {
-          this.fetchGroupInfo();
-        })
-      }
-    });
-  }
-
-  onSubjectRemove(subject) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '320px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.groupService.removeSubject(this.groupId, subject.id).toPromise().then(_ => {
-          this.fetchGroupInfo();
-        });
-      }
-    });
-  }
-
   fetchGroupInfo() {
     this.groupService.get(this.groupId).subscribe(group => {
       this.group = group

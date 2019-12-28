@@ -49,6 +49,22 @@ export class EventService {
   delete(eventId: String) {
     return this.http.delete(EventService.EVENT_URL + eventId)
   }
+
+  addGroup(eventId: string, groupId: String) {
+    const data = {
+      id: groupId
+    }
+    console.log(data);
+    return this.http.post(EventService.EVENT_URL + eventId + "/addGroup", data).pipe(first());
+  }
+
+  removeGroup(eventId: String, groupId: String) {
+    const data = {
+      id: groupId
+    }
+    console.log(data);
+    return this.http.post(EventService.EVENT_URL + eventId + "/removeGroup", data).pipe(first());
+  }
     
   setSubject(eventId: String, subjectId: String) {
     let data = {
