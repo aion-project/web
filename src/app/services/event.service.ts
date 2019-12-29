@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 import { Event } from '../model/Event';
+import { Assignment } from '../model/Assignment';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,27 @@ export class EventService {
     console.log(data);
     return this.http.post(EventService.EVENT_URL + eventId + "/removeGroup", data).pipe(first());
   }
-    
+
+  getAssignments(eventId: string): Observable<Assignment[]> {
+    return this.http.get(EventService.EVENT_URL + eventId + "/getAssignments").pipe(first(), map((res: any[]) => res.map(this.toAssignment)))
+  }
+
+  addAssignment(eventId: string, email: string, role: string) {
+    const data = {
+      email: email,
+      role: role
+    }
+    console.log(data);
+    return this.http.post(EventService.EVENT_URL + eventId + "/addAssignment", data).pipe(first());
+  }
+
+  removeAssignment(eventId: String, assignmentId: String) {
+    const data = {
+      id: assignmentId
+    }
+    return this.http.post(EventService.EVENT_URL + eventId + "/removeAssignment", data).pipe(first());
+  }
+
   setSubject(eventId: String, subjectId: String) {
     let data = {
       id: subjectId
@@ -79,7 +100,7 @@ export class EventService {
     }
     return this.http.post(EventService.EVENT_URL + eventId + "/removeSubject", data)
   }
-    
+
   setLocation(eventId: String, locationId: String) {
     let data = {
       id: locationId
@@ -95,4 +116,5 @@ export class EventService {
   }
 
   private toEvent = res => res as Event
+  private toAssignment = res => res as Assignment
 }

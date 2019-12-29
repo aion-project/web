@@ -1,4 +1,5 @@
 import { User } from './User';
+import { Role } from './Role';
 import { Group } from './Group';
 import { Subject } from './Subject';
 

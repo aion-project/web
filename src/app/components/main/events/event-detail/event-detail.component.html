@@ -35,20 +35,7 @@
         </mat-chip>
       </mat-chip-list>
     </mat-card-content>
-    <mat-card-actions *ngIf="isAdmin" class="actions">
-      <button mat-flat-button *ngIf="event.location" (click)="onLocationChange()">
-        <mat-icon>refresh</mat-icon>
-        Change Location
-      </button>
-      <button mat-flat-button *ngIf="!event.location" (click)="onLocationChange()">
-        <mat-icon>add</mat-icon>
-        Add Location
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card *ngIf="event" class="section">
-    <mat-card-title>Subject</mat-card-title>
-    <mat-card-subtitle>Assigned event subject</mat-card-subtitle>
+    <div class="card-section-title subsection">Subject</div>
     <mat-card-content>
       <div *ngIf="!event.subject">Event doesn't have a subject yet.</div>
       <mat-chip-list *ngIf="event.subject">
@@ -59,13 +46,39 @@
       </mat-chip-list>
     </mat-card-content>
     <mat-card-actions *ngIf="isAdmin" class="actions">
+      <button mat-flat-button *ngIf="event.location" (click)="onLocationChange()">
+        <mat-icon>edit</mat-icon>
+        Change Location
+      </button>
+      <button mat-flat-button *ngIf="!event.location" (click)="onLocationChange()">
+        <mat-icon>add</mat-icon>
+        Add Location
+      </button>
       <button mat-flat-button *ngIf="event.subject" (click)="onSubjectChange()">
-        <mat-icon>refresh</mat-icon>
-        Change
+        <mat-icon>edit</mat-icon>
+        Change Subject
       </button>
       <button mat-flat-button *ngIf="!event.subject" (click)="onSubjectChange()">
         <mat-icon>add</mat-icon>
-        Add
+        Add Subject
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="event" class="section">
+    <mat-card-title>Assignments</mat-card-title>
+    <mat-card-subtitle>Set users to event</mat-card-subtitle>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip *ngFor="let assignment of assignments" [removable]="isAdmin" (removed)="onAssignmentRemove(assignment.id)">
+          {{ assignment.user.firstName }} {{ assignment.user.lastName }} {{ assignment.role | titlecase }}
+          <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAdmin" class="actions">
+      <button mat-flat-button (click)="onAssignmentAdd()">
+        <mat-icon>add</mat-icon>
+        ADD
       </button>
     </mat-card-actions>
   </mat-card>

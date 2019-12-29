@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Select {{ data.type }}</h1>
+<div mat-dialog-content class="content">
+  <mat-form-field class="form-full-width" floatLabel="never">
+    <input matInput placeholder="Search" [formControl]="search">
+  </mat-form-field>
+  <mat-chip-list>
+    <mat-chip *ngFor="let element of elements" (click)="onSelected(element.email)">
+      {{ element.firstName }} {{ element.lastName }}
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>
