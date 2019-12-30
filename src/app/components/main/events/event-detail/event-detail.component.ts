@@ -113,7 +113,7 @@ export class EventDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.eventService.addAssignment(this.eventId, result, "lecturer").toPromise().then(_ => {
+        this.eventService.addAssignment(this.eventId, result.email, result.roleId).toPromise().then(_ => {
           this.fetchAssignments()
         })
       }

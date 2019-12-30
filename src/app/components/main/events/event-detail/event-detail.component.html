@@ -69,8 +69,11 @@
     <mat-card-subtitle>Set users to event</mat-card-subtitle>
     <mat-card-content>
       <mat-chip-list>
-        <mat-chip *ngFor="let assignment of assignments" [removable]="isAdmin" (removed)="onAssignmentRemove(assignment.id)">
-          {{ assignment.user.firstName }} {{ assignment.user.lastName }} {{ assignment.role | titlecase }}
+        <mat-chip class="role-item" *ngFor="let assignment of assignments" [removable]="isAdmin" (removed)="onAssignmentRemove(assignment.id)">
+          <div class="role-item-role">
+            {{ assignment.role | titlecase }}
+          </div>
+          {{ assignment.user.firstName }} {{ assignment.user.lastName }}
           <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>

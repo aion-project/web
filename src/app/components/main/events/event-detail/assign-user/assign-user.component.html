@@ -1,13 +1,22 @@
-<h1 mat-dialog-title>Select {{ data.type }}</h1>
+<h1 mat-dialog-title>Search users</h1>
 <div mat-dialog-content class="content">
   <mat-form-field class="form-full-width" floatLabel="never">
     <input matInput placeholder="Search" [formControl]="search">
   </mat-form-field>
-  <mat-chip-list>
-    <mat-chip *ngFor="let element of elements" (click)="onSelected(element.email)">
+  <div class="user-list">
+    <div class="user-item" *ngFor="let element of elements">
       {{ element.firstName }} {{ element.lastName }}
-    </mat-chip>
-  </mat-chip-list>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item *ngFor="let role of element.roles" (click)="onSelected(element.email, role.name)">
+          {{ role.name | titlecase }}
+        </button>
+      </mat-menu>
+
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>

@@ -33,7 +33,7 @@ export class AssignUserComponent implements OnInit {
   ngOnInit() {
     this.fetchElements();
     this.searchSubscription = this.search.valueChanges.pipe(distinctUntilChanged()).subscribe(query => {
-      this.elements = this.unfilteredElements.filter(element => element.name.toLowerCase().includes(query.toLowerCase()))
+      this.elements = this.unfilteredElements.filter(element => element.firstName.toLowerCase().includes(query.toLowerCase()))
     });
   }
 
@@ -45,9 +45,13 @@ export class AssignUserComponent implements OnInit {
 
   fetchElements() {
     this.userService.getAll().pipe(map((elements: any[]) => {
-      console.log("users", elements)
-      return elements.filter((element: any) => {
-        return !(this.data.current != null && this.data.current.some(it => it.user.id == element.id))
+      return elements.map(element => {
+        const filteredRoles = element.roles.filter(role => role.name == "lecturer" || role.name == "instructor");
+
+        element.roles = filteredRoles;
+        return element;
+      }).filter((element: any) => {
+        return !(this.data.current != null && this.data.current.some(it => it.user.id == element.id)) && element.roles.length > 0;
       })
     })).subscribe((elements: any[]) => {
       this.unfilteredElements = elements
@@ -55,8 +59,11 @@ export class AssignUserComponent implements OnInit {
     })
   }
 
-  onSelected(email) {
-    this.dialogRef.close(email);
+  onSelected(email, roleId) {
+    this.dialogRef.close({
+      email: email,
+      roleId: roleId
+    });
   }
 
   onCancel() {
