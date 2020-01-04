@@ -25,6 +25,12 @@ export class EventService {
     return this.http.get(EventService.EVENT_URL).pipe(first(), map((res: any[]) => res.map(this.toEvent)))
   }
 
+  getMine(): Observable<Event[]> {
+    return this.http.get(EventService.EVENT_URL + "mine").pipe(first(), map((res: any[]) => {
+      return res.map(this.toEvent)
+    }))
+  }
+
   create(name: String, description: String, startDateTime: Date, endDateTime: Date, repeat?: String) {
     let data = {
       name: name,
