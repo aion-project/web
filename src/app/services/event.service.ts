@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 import { Event } from '../model/Event';
 import { Assignment } from '../model/Assignment';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -46,10 +47,11 @@ export class EventService {
     let data = {
       name: name,
       description: description,
-      startDateTime: startDateTime,
-      endDateTime: endDateTime,
+      startDateTime: moment(startDateTime).utc(true).toISOString(),
+      endDateTime: moment(endDateTime).utc(true).toISOString(),
       repeat: repeat
     }
+    console.log(data)
     return this.http.put(EventService.EVENT_URL + eventId, data)
   }
 

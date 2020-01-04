@@ -2,6 +2,14 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <h1 class="section-header">Home</h1>
+      <div *ngFor="let day of events">
+        <div>
+          <div>{{ day[0] }}</div>
+          <div *ngFor="let event of day[1]">
+            {{ event.name }}
+          </div>
+        </div>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
