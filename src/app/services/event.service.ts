@@ -36,8 +36,8 @@ export class EventService {
     let data = {
       name: name,
       description: description,
-      startDateTime: startDateTime,
-      endDateTime: endDateTime,
+      startDateTime: moment(startDateTime).utc(true).toISOString(),
+      endDateTime: moment(endDateTime).utc(true).toISOString(),
       repeat: repeat
     }
     return this.http.post(EventService.EVENT_URL, data)
