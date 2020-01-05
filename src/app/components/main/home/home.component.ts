@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { EventType } from 'src/app/model/Event';
 
 @Component({
   selector: 'app-home',
@@ -35,12 +37,30 @@ export class HomeComponent implements OnInit {
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
       this.gridEvents = events.map(event => {
-        return {
-          id: event.id,
-          title: event.name,
-          start: event.startDateTime,
-          end: event.endDateTime
+        if (event.repeat === EventType.NONE) {
+          return {
+            id: event.id,
+            title: event.name,
+            start: event.startDateTime,
+            end: event.endDateTime
+          }
+        } else if (event.repeat === EventType.DAILY) {
+          return {
+            id: event.id,
+            title: event.name,
+            startTime: moment(event.startDateTime).format("HH:mm"),
+            endTime: moment(event.endDateTime).format("HH:mm")
+          }
+        } else if (event.repeat === EventType.WEEKLY) {
+          return {
+            id: event.id,
+            title: event.name,
+            daysOfWeek: [moment(event.startDateTime).format("e")],
+            startTime: moment(event.startDateTime).format("HH:mm"),
+            endTime: moment(event.endDateTime).format("HH:mm")
+          }
         }
+       
       })
     });
   }

@@ -20,7 +20,7 @@ export class EventCreateEditComponent implements OnInit {
     endDateTime: new FormControl(''),
   })
   repeatMode: String = "NONE"
-  repeatModes = [EventType.NONE, EventType.DAILY, EventType.WEEKLY, EventType.MONTHLY]
+  repeatModes = [EventType.NONE, EventType.DAILY, EventType.WEEKLY]
 
   error: any
   isEditing: boolean = false
