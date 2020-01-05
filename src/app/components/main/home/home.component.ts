@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
-import { Event } from 'src/app/model/Event';
-import * as moment from 'moment';
-import { groupBy, mergeMap, toArray, bufferCount } from 'rxjs/operators';
-import { from, of, zip } from 'rxjs';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +10,21 @@ import { from, of, zip } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  events: any[];
+  calendarPlugins = [timeGridPlugin]; // important!
+  calendarHeaders = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'timeGridWeek,timeGridDay'
+  };
+  calendarButtons = {
+      today:    'Today',
+      week:     'Week',
+      day:      'Day',
+  }
+  gridEvents: any[];
 
   constructor(
+    private router: Router,
     private eventService: EventService
   ) { }
 
@@ -24,14 +34,21 @@ export class HomeComponent implements OnInit {
 
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
-      from(events).pipe(
-        groupBy(event => moment(event.startDateTime).format("dddd")),
-        mergeMap(group => zip(of(group.key), group.pipe(toArray()))),
-        bufferCount(7)
-      ).subscribe(groupedEvents => {
-        this.events = groupedEvents
+      this.gridEvents = events.map(event => {
+        return {
+          id: event.id,
+          title: event.name,
+          start: event.startDateTime,
+          end: event.endDateTime
+        }
       })
     });
+  }
+
+  handleEventClick(event) {
+    let eventId = event.event._def.publicId
+    console.log(eventId)
+    this.router.navigate(['events/listing', eventId])
   }
 
 }

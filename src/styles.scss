@@ -3,6 +3,9 @@
 @import "assets/scss/okta.scss";
 @import "assets/css/simple-grid.scss";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
 
 * {
   font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
@@ -26,4 +29,12 @@
 
 .form-full-width {
   width: 100%;
+}
+
+.primary-color {
+  background-color: #2196f3;
+}
+
+.background {
+  height: 300px;
 }

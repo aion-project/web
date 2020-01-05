@@ -1,15 +1,19 @@
-<div class="home-container">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <h1 class="section-header">Home</h1>
-      <div *ngFor="let day of events">
-        <div>
-          <div>{{ day[0] }}</div>
-          <div *ngFor="let event of day[1]">
-            {{ event.name }}
-          </div>
-        </div>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<div class="background primary-color">
+  <div class="home-container">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <h1 class="section-header">Home</h1>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container">
+      <mat-card class="section">
+        <mat-card-title>Time Table</mat-card-title>
+        <mat-card-subtitle>Events thats asigned to you</mat-card-subtitle>
+        <mat-card-content class="table-content">
+          <full-calendar defaultView="timeGridWeek" [header]="calendarHeaders" [buttonText]="calendarButtons" [plugins]="calendarPlugins" [events]="gridEvents"
+          [minTime]="'06:00:00'" [maxTime]="'21:00:00'" [nowIndicator]="true" [allDaySlot]="false" (eventClick)="handleEventClick($event)"></full-calendar>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>

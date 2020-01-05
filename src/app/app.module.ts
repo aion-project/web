@@ -8,7 +8,8 @@ import { MaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-4
+import { FullCalendarModule } from '@fullcalendar/angular'
+
 import { AppConfig } from './config/app-config';
 import { UnactiveGuard } from './auth/unactive.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -39,6 +40,7 @@ export const CommonComponents = [
     HttpClientModule,
     MaterialModule,
     OktaAuthModule.initAuth(AppConfig.OKTA_CLIENT_CONFIG),
+    FullCalendarModule,
   ],
   providers: [
     UnactiveGuard,
