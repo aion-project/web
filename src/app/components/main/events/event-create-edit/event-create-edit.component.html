@@ -29,6 +29,14 @@
       <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
     </mat-form-field>
   </form>
+  <div class="repeat-mode">
+    <label id="repeat-radio-group-label">Repeating</label>
+    <mat-radio-group aria-labelledby="repeat-radio-group-label" class="repeat-radio-group" [(ngModel)]="repeatMode">
+      <mat-radio-button class="repeat-radio-button" *ngFor="let mode of repeatModes" [value]="mode">
+        {{ mode | titlecase }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button color="primary" (click)="onSubmit()">Save</button>

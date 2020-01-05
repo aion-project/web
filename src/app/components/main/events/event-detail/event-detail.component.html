@@ -23,7 +23,8 @@
     </mat-card-content>
     <div class="card-section-title subsection">Time</div>
     <mat-card-content>
-      <p> {{event?.startDateTime | date : 'short'}} - {{event?.endDateTime | date : 'short'}} </p>
+      <p> {{event?.startDateTime | date : 'short'}} - {{event?.endDateTime | date : 'short'}} - <span class="repeat-mode"
+          *ngIf="event?.repeat != 'NONE'">Repeating {{ event?.repeat | titlecase }}</span> </p>
     </mat-card-content>
     <div class="card-section-title subsection">Location</div>
     <mat-card-content>
@@ -69,7 +70,8 @@
     <mat-card-subtitle>Set users to event</mat-card-subtitle>
     <mat-card-content>
       <mat-chip-list>
-        <mat-chip class="role-item" *ngFor="let assignment of assignments" [removable]="isAdmin" (removed)="onAssignmentRemove(assignment.id)">
+        <mat-chip class="role-item" *ngFor="let assignment of assignments" [removable]="isAdmin"
+          (removed)="onAssignmentRemove(assignment.id)">
           <div class="role-item-role">
             {{ assignment.role | titlecase }}
           </div>

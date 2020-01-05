@@ -19,6 +19,8 @@ export class EventCreateEditComponent implements OnInit {
     startDateTime:  new FormControl(''),
     endDateTime: new FormControl(''),
   })
+  repeatMode: String = "NONE"
+  repeatModes = [EventType.NONE, EventType.DAILY, EventType.WEEKLY, EventType.MONTHLY]
 
   error: any
   isEditing: boolean = false
@@ -46,6 +48,7 @@ export class EventCreateEditComponent implements OnInit {
           startDateTime: this.event.startDateTime,
           endDateTime: this.event.endDateTime,
         })
+        this.repeatMode = this.event.repeat
       })
     }
   }
@@ -55,13 +58,14 @@ export class EventCreateEditComponent implements OnInit {
     let description = this.eventForm.controls['description'].value as string;
     let startDateTime = this.eventForm.controls['startDateTime'].value as string;
     let endDateTime = this.eventForm.controls['endDateTime'].value as string;
+    let repeat = this.repeatMode;
 
     this.isLoading = true
     var submitObservable: Observable<any>
     if (this.isEditing) {
-      submitObservable = this.eventService.update(this.eventId, name, description, new Date(startDateTime), new Date(endDateTime), EventType.NONE);
+      submitObservable = this.eventService.update(this.eventId, name, description, new Date(startDateTime), new Date(endDateTime), repeat);
     } else {
-      submitObservable = this.eventService.create(name, description, new Date(startDateTime), new Date(endDateTime), EventType.NONE);
+      submitObservable = this.eventService.create(name, description, new Date(startDateTime), new Date(endDateTime), repeat);
 
     }
     submitObservable.subscribe(() => {
