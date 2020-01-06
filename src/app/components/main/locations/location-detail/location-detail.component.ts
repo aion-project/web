@@ -8,6 +8,9 @@ import { LocationService } from 'src/app/services/location.service';
 import { LocationCreateEditComponent } from '../location-create-edit/location-create-edit.component';
 import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
 import { Location } from "../../../../model/Location";
+import { Event } from 'src/app/model/Event';
+import * as moment from 'moment';
+import * as DateUtil from 'src/app/utils/date-util';
 
 @Component({
   selector: 'app-location-detail',
@@ -19,6 +22,7 @@ export class LocationDetailComponent implements OnInit {
   private locationId: String
 
   location: Location
+  currentEvents: Event[]
   isAdmin: boolean = false
 
   constructor(
@@ -36,6 +40,7 @@ export class LocationDetailComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
       this.locationId = map.get("locationId")
       this.fetchLocationInfo()
+      this.fetchEvents()
     })
   }
 
@@ -100,4 +105,12 @@ export class LocationDetailComponent implements OnInit {
       this.location = location
     })
   }
+
+  fetchEvents() {
+    this.locationService.getEvents(this.locationId).pipe(first()).subscribe(events => {
+      this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString());
+      console.log(this.currentEvents)
+    })
+  }
+
 }

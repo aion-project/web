@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 import { Location } from "../model/Location";
+import { Event } from '../model/Event';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class LocationService {
 
   getAll(): Observable<Location[]> {
     return this.http.get(LocationService.LOCATION_URL).pipe(map((res: any[]) => res.map(this.toLocation)))
+  }
+
+  getEvents(locationId: String): Observable<Event[]> {
+    return this.http.get(LocationService.LOCATION_URL + locationId + "/events").pipe(map((res: any[]) => res.map(this.toEvent)))
   }
 
   create(name: String, level: String, description: String, ac: Boolean) {
@@ -64,4 +69,5 @@ export class LocationService {
   }
 
   private toLocation = res => res as Location
+  private toEvent = res => res as Event
 }
