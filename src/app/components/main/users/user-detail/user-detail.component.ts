@@ -10,6 +10,9 @@ import { AppConfig } from 'src/app/config/app-config';
 import { GroupService } from 'src/app/services/group.service';
 import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
 import { ChangeLocationComponent } from '../../../common/change-location/change-location.component';
+import * as moment from 'moment';
+import * as DateUtil from 'src/app/utils/date-util';
+import { Event } from 'src/app/model/Event';
 
 @Component({
   selector: 'app-user-detail',
@@ -21,6 +24,7 @@ export class UserDetailComponent implements OnInit {
   private userId: String
 
   user: any = []
+  currentEvents: Event[]
   isAdmin: boolean = false
 
   constructor(
@@ -38,6 +42,7 @@ export class UserDetailComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
       this.userId = map.get("userId")
       this.fetchUserInfo()
+      this.fetchEvents()
     })
   }
 
@@ -170,6 +175,12 @@ export class UserDetailComponent implements OnInit {
       if (this.user.avatarUrl != null) {
         this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
       }
+    })
+  }
+
+  fetchEvents() {
+    this.userService.getEvents(this.userId).pipe(first()).subscribe(events => {
+      this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString());
     })
   }
 }

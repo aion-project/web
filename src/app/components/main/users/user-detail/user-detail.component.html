@@ -19,6 +19,23 @@
 </div>
 <mat-divider></mat-divider>
 <div class="container">
+    <mat-card *ngIf="currentEvents" class="section">
+        <mat-card-title>Availability</mat-card-title>
+        <mat-card-content>
+            <div *ngIf="currentEvents.length == 0">
+                User doesn't have any event currently
+            </div>
+            <div *ngFor="let event of currentEvents">
+                {{ event.name }}
+                <div>
+                    {{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }}
+                </div>
+                <div *ngFor="let group of event.groups">
+                    {{ group.name }}
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
     <mat-card *ngIf="user?.bio" class="section">
         <mat-card-title>Bio</mat-card-title>
         <mat-card-content>
@@ -32,7 +49,8 @@
         <mat-card-subtitle>Assigned user roles</mat-card-subtitle>
         <mat-card-content>
             <mat-chip-list>
-                <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin" (removed)="onRoleRemove(userRole.id)">
+                <mat-chip *ngFor="let userRole of user?.roles" [removable]="isAdmin"
+                    (removed)="onRoleRemove(userRole.id)">
                     {{ userRole.name | titlecase }}
                     <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
                 </mat-chip>
