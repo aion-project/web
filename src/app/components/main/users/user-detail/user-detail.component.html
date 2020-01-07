@@ -15,6 +15,29 @@
             <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
                 (click)="onEditProfile()">Edit</button>
         </div>
+        <div class="availability" *ngIf="currentEvents">
+            <div *ngIf="currentEvents.length == 0" class="current-event">
+                <div class="avail-icon avail-yes"></div>
+                <div>
+                    Location doesn't have any event currently
+                </div>
+            </div>
+            <div *ngFor="let event of currentEvents" class="current-event">
+                <div class="avail-icon avail-not"></div>
+                <div class="avail-tag">Currently -</div>
+                <div>{{ event.name }}</div>
+                <div>
+                    ({{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }})
+                </div>
+                <div *ngFor="let group of event.groups">
+                    {{ group.name }}
+                </div>
+            </div>
+            <button mat-flat-button color="primary" (click)="onCheckAvailability()">
+                <mat-icon>access_time</mat-icon>
+                Check availability
+            </button>
+        </div>
     </div>
 </div>
 <mat-divider></mat-divider>

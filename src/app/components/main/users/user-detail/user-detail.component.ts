@@ -13,6 +13,7 @@ import { ChangeLocationComponent } from '../../../common/change-location/change-
 import * as moment from 'moment';
 import * as DateUtil from 'src/app/utils/date-util';
 import { Event } from 'src/app/model/Event';
+import { CheckAvailabilityComponent } from 'src/app/components/common/check-availability/check-availability.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -24,6 +25,7 @@ export class UserDetailComponent implements OnInit {
   private userId: String
 
   user: any = []
+  events: Event[]
   currentEvents: Event[]
   isAdmin: boolean = false
 
@@ -168,6 +170,13 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  onCheckAvailability() {
+    this.dialog.open(CheckAvailabilityComponent, {
+      width: '640px',
+      data: { events: this.events }
+    });
+  }
+
   fetchUserInfo() {
     this.userService.get(this.userId).pipe(first()).subscribe(user => {
       this.user = user
@@ -180,6 +189,7 @@ export class UserDetailComponent implements OnInit {
 
   fetchEvents() {
     this.userService.getEvents(this.userId).pipe(first()).subscribe(events => {
+      this.events = events
       this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString());
     })
   }
