@@ -11,6 +11,7 @@ import { Location } from "../../../../model/Location";
 import { Event } from 'src/app/model/Event';
 import * as moment from 'moment';
 import * as DateUtil from 'src/app/utils/date-util';
+import { CheckAvailabilityComponent } from 'src/app/components/common/check-availability/check-availability.component';
 
 @Component({
   selector: 'app-location-detail',
@@ -22,6 +23,7 @@ export class LocationDetailComponent implements OnInit {
   private locationId: String
 
   location: Location
+  events: Event[]
   currentEvents: Event[]
   isAdmin: boolean = false
 
@@ -100,6 +102,13 @@ export class LocationDetailComponent implements OnInit {
     });
   }
 
+  onCheckAvailability() {
+    this.dialog.open(CheckAvailabilityComponent, {
+      width: '640px',
+      data: { events: this.events }
+    });
+  }
+
   fetchLocationInfo() {
     this.locationService.get(this.locationId).pipe(first()).subscribe(location => {
       this.location = location
@@ -108,8 +117,8 @@ export class LocationDetailComponent implements OnInit {
 
   fetchEvents() {
     this.locationService.getEvents(this.locationId).pipe(first()).subscribe(events => {
+      this.events = events
       this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString(true));
-      this.currentEvents = [];
       console.log(this.currentEvents)
     })
   }

@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Check availability</h1>
+<div mat-dialog-content class="content">
+  <mat-form-field class="form-full-width">
+    <input matInput [owlDateTime]="dateTime" [owlDateTimeTrigger]="dateTime" [formControl]="date"
+      placeholder="Date/Time" autocomplete="off">
+    <owl-date-time #dateTime></owl-date-time>
+    <mat-icon matSuffix [owlDateTimeTrigger]="dateTime">calendar_today</mat-icon>
+  </mat-form-field>
+  <div>
+    <div *ngIf="currentEvents.length == 0" class="current-event">
+      <div>
+        Location doesn't have any event at the given time.
+      </div>
+    </div>
+    <div *ngFor="let event of currentEvents" class="current-event">
+      <div>{{ event.name }}</div>
+      <div>
+        ({{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }})
+      </div>
+      <div *ngFor="let group of event.groups">
+        {{ group.name }}
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

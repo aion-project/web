@@ -39,6 +39,7 @@ import { SubjectDetailComponent } from './components/main/events/subjects/subjec
 import { ChangeLocationComponent } from './components/common/change-location/change-location.component';
 import { ChangeSubjectComponent } from './components/common/change-subject/change-subject.component';
 import { AssignUserComponent } from './components/main/events/event-detail/assign-user/assign-user.component';
+import { CheckAvailabilityComponent } from './components/common/check-availability/check-availability.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -132,4 +133,5 @@ export const DialogComponents = [
   ChangeLocationComponent,
   ChangeSubjectComponent,
   AssignUserComponent,
+  CheckAvailabilityComponent,
 ];
