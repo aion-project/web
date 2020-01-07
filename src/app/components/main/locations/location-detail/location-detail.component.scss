@@ -18,10 +18,9 @@
 }
 
 .location-detail-container {
-    display: inline-block;
-    position: relative;
-    top: -32px;
-    left: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .compact {
@@ -29,7 +28,36 @@
 }
 
 .edit-button {
-    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.current-event {
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+}
+
+.avail-icon {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+}
+
+.avail-yes {
+    background-color: lightgreen;
+}
+
+.avail-not {
+    background-color: crimson;
+}
+
+.avail-tag {
+    color: grey;
+}
+
+.current-event div {
+    margin-right: 8px;
+    font-size: 16px;
 }
 
 .section {

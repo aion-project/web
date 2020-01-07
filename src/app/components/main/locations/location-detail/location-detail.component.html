@@ -5,38 +5,47 @@
         </button>
     </mat-toolbar>
     <div class="header">
-        <div class="user-detail-container">
+        <div class="location-detail-container">
             <div class="mat-display-2 compact"> {{ location?.name }}</div>
-            <h2 class="mat-display-1 compact">Level {{ location?.level }}</h2>
             <button class="edit-button" *ngIf="isAdmin" color="primary" mat-stroked-button
                 (click)="onEditLocation()">Edit</button>
         </div>
-    </div>
-</div>
-<mat-divider></mat-divider>
-<div class="container">
-    <mat-card *ngIf="currentEvents" class="section">
-        <mat-card-title>Availability</mat-card-title>
-        <mat-card-content>
-            <div *ngIf="currentEvents.length == 0">
-                Location doesn't have any event currently
-            </div>
-            <div *ngFor="let event of currentEvents">
-                {{ event.name }}
+        <div class="availability" *ngIf="currentEvents">
+            <div *ngIf="currentEvents.length == 0" class="current-event">
+                <div class="avail-icon avail-yes"></div>
                 <div>
-                    {{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }}
+                    Location doesn't have any event currently
+                </div>
+            </div>
+            <div *ngFor="let event of currentEvents" class="current-event">
+                <div class="avail-icon avail-not"></div>
+                <div class="avail-tag">Currently -</div>
+                <div>{{ event.name }}</div>
+                <div>
+                    ({{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }})
                 </div>
                 <div *ngFor="let group of event.groups">
                     {{ group.name }}
                 </div>
             </div>
-        </mat-card-content>
-    </mat-card>
+            <button mat-flat-button color="primary">
+                <mat-icon>access_time</mat-icon>
+                Check availability
+            </button>
+        </div>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div class="container">
     <mat-card *ngIf="location?.description" class="section">
         <mat-card-title>Infomation</mat-card-title>
         <div class="card-section-title subsection">Description</div>
         <mat-card-content>
             <p> {{location?.description}} </p>
+        </mat-card-content>
+        <div class="card-section-title subsection">Level</div>
+        <mat-card-content>
+            <p> {{location?.level}} </p>
         </mat-card-content>
         <div class="card-section-title subsection">Air Condition</div>
         <mat-card-content>

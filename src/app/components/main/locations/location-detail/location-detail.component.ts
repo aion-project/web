@@ -109,6 +109,7 @@ export class LocationDetailComponent implements OnInit {
   fetchEvents() {
     this.locationService.getEvents(this.locationId).pipe(first()).subscribe(events => {
       this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString(true));
+      this.currentEvents = [];
       console.log(this.currentEvents)
     })
   }
