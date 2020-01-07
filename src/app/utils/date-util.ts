@@ -18,8 +18,8 @@ export function getEventAt(events: Event[], time: string): Event[] {
                 return false;
 
             let currentTime = moment(time).format("YYYY-MM-DD");
-            let eventStartTime = currentTime + " " + moment(event.startDateTime).format("hh:mm:ss")
-            let eventEndTime = currentTime + " " + moment(event.endDateTime).format("hh:mm:ss")
+            let eventStartTime = currentTime + " " + moment(event.startDateTime).format("HH:mm:ss")
+            let eventEndTime = currentTime + " " + moment(event.endDateTime).format("HH:mm:ss")
             return moment(time).isBetween(eventStartTime, eventEndTime, null, "[]")
         } else return false;
     })
