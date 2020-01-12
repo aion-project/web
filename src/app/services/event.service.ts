@@ -123,6 +123,14 @@ export class EventService {
     return this.http.post(EventService.EVENT_URL + eventId + "/removeLocation", data)
   }
 
+  reschedule(eventId: String, oldDate: Date, newDate: Date) {
+    let data = {
+      oldDateTime: oldDate,
+      newDateTime: newDate
+    }
+    return this.http.post(EventService.EVENT_URL + eventId + "/reschedule", data)
+  }
+
   private toEvent = res => res as Event
   private toAssignment = res => res as Assignment
 }
