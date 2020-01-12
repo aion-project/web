@@ -125,8 +125,8 @@ export class EventService {
 
   reschedule(eventId: String, oldDate: Date, newDate: Date) {
     let data = {
-      oldDateTime: oldDate,
-      newDateTime: newDate
+      oldDateTime: moment(oldDate).utc(true).toISOString(),
+      newDateTime: moment(newDate).utc(true).toISOString()
     }
     return this.http.post(EventService.EVENT_URL + eventId + "/reschedule", data)
   }

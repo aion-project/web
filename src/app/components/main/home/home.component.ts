@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
       this.gridEvents = events.map(event => {
+        console.log(event)
         let startMoment = moment(event.startDateTime)
         let endMoment = moment(event.endDateTime)
         let duration = moment.utc(endMoment.diff(startMoment)).format("HH:mm")
@@ -66,7 +67,12 @@ export class HomeComponent implements OnInit {
             dtstart: startMoment.utc(true).toDate()
           }))
         }
-        ruleSet.exdate(startMoment.add(1, 'week').utc(true).toDate())
+        event.reschedules.forEach(reschedule => {
+          if (reschedule.status === "ACCEPTED") {
+            ruleSet.exdate(moment(reschedule.oldDateTime).utc(true).toDate())
+            ruleSet.rdate(moment(reschedule.newDateTime).utc(true).toDate())
+          }
+        })
         console.log(duration)
         return {
           id: event.id,
@@ -92,7 +98,7 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // TODO - Implement
+        this.fetchMyEvents();
       } else {
         event.revert();
       }
