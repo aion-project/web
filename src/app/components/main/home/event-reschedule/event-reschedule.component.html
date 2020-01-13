@@ -4,8 +4,16 @@
 </div>
 <div mat-dialog-content class="content">
   <div>{{ event.oldEvent.title }}</div>
-  <div>{{ event.oldEvent.start | date: 'medium' }} - {{ event.oldEvent.end | date: 'medium' }}</div>
-  <div>{{ event.event.start | date: 'medium' }} - {{ event.event.end | date: 'medium' }}</div>
+  <div>From: {{ event.oldEvent.start | date: 'medium' }} - {{ event.oldEvent.end | date: 'medium' }}</div>
+  <div>To: {{ event.event.start | date: 'medium' }} - {{ event.event.end | date: 'medium' }}</div>
+  <div class="reschedule-type">
+    <label id="radio-group-label">Reschedule</label>
+    <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" [(ngModel)]="changeMode">
+      <mat-radio-button class="radio-button" *ngFor="let mode of rescheduleModes" [value]="mode.key">
+        {{ mode.value | titlecase }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button color="primary" (click)="onSubmit()">Save</button>
