@@ -32,24 +32,18 @@ export class EventService {
     }))
   }
 
-  create(name: String, description: String, startDateTime: Date, endDateTime: Date, repeat?: String) {
+  create(name: String, description: String) {
     let data = {
       name: name,
-      description: description,
-      startDateTime: moment(startDateTime).utc(true).toISOString(),
-      endDateTime: moment(endDateTime).utc(true).toISOString(),
-      repeat: repeat
+      description: description
     }
     return this.http.post(EventService.EVENT_URL, data)
   }
 
-  update(eventId: String, name: String, description: String, startDateTime: Date, endDateTime: Date, repeat?: String) {
+  update(eventId: String, name: String, description: String) {
     let data = {
       name: name,
-      description: description,
-      startDateTime: moment(startDateTime).utc(true).toISOString(),
-      endDateTime: moment(endDateTime).utc(true).toISOString(),
-      repeat: repeat
+      description: description
     }
     console.log(data)
     return this.http.put(EventService.EVENT_URL + eventId, data)

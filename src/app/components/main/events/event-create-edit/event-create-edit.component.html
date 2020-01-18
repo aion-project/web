@@ -14,29 +14,7 @@
     <mat-form-field class="form-full-width">
       <input matInput type="text" formControlName="description" placeholder="Description">
     </mat-form-field>
-
-    <mat-form-field class="form-full-width">
-      <input matInput [owlDateTime]="timeStart" [owlDateTimeTrigger]="timeStart" formControlName="startDateTime"
-        placeholder="Start Date/Time" autocomplete="off">
-      <owl-date-time #timeStart></owl-date-time>
-      <mat-icon matSuffix [owlDateTimeTrigger]="timeStart">calendar_today</mat-icon>
-    </mat-form-field>
-
-    <mat-form-field class="form-full-width">
-      <input matInput [owlDateTime]="timeEnd" [owlDateTimeTrigger]="timeEnd" formControlName="endDateTime"
-        placeholder="End Date/Time" autocomplete="off">
-      <owl-date-time #timeEnd></owl-date-time>
-      <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
-    </mat-form-field>
   </form>
-  <div class="repeat-mode">
-    <label id="repeat-radio-group-label">Repeating</label>
-    <mat-radio-group aria-labelledby="repeat-radio-group-label" class="repeat-radio-group" [(ngModel)]="repeatMode">
-      <mat-radio-button class="repeat-radio-button" *ngFor="let mode of repeatModes" [value]="mode">
-        {{ mode | titlecase }}
-      </mat-radio-button>
-    </mat-radio-group>
-  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button color="primary" (click)="onSubmit()">Save</button>

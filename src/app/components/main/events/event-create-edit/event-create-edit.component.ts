@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EventService } from 'src/app/services/event.service';
-import { Event, EventType } from "../../../../model/Event";
+import { Event } from "../../../../model/Event";
 
 @Component({
   selector: 'app-event-edit',
@@ -16,11 +16,7 @@ export class EventCreateEditComponent implements OnInit {
   eventForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-    startDateTime:  new FormControl(''),
-    endDateTime: new FormControl(''),
   })
-  repeatMode: String = "NONE"
-  repeatModes = [EventType.NONE, EventType.DAILY, EventType.WEEKLY]
 
   error: any
   isEditing: boolean = false
@@ -44,11 +40,8 @@ export class EventCreateEditComponent implements OnInit {
         this.event = res as Event
         this.eventForm.setValue({
           name: this.event.name,
-          description: this.event.description,
-          startDateTime: this.event.startDateTime,
-          endDateTime: this.event.endDateTime,
+          description: this.event.description
         })
-        this.repeatMode = this.event.repeat
       })
     }
   }
@@ -56,17 +49,13 @@ export class EventCreateEditComponent implements OnInit {
   onSubmit() {
     let name = this.eventForm.controls['name'].value as string;
     let description = this.eventForm.controls['description'].value as string;
-    let startDateTime = this.eventForm.controls['startDateTime'].value as string;
-    let endDateTime = this.eventForm.controls['endDateTime'].value as string;
-    let repeat = this.repeatMode;
 
     this.isLoading = true
     var submitObservable: Observable<any>
     if (this.isEditing) {
-      submitObservable = this.eventService.update(this.eventId, name, description, new Date(startDateTime), new Date(endDateTime), repeat);
+      submitObservable = this.eventService.update(this.eventId, name, description);
     } else {
-      submitObservable = this.eventService.create(name, description, new Date(startDateTime), new Date(endDateTime), repeat);
-
+      submitObservable = this.eventService.create(name, description);
     }
     submitObservable.subscribe(() => {
       this.isLoading = false
