@@ -29,21 +29,23 @@ export class LocationService {
     return this.http.get(LocationService.LOCATION_URL + locationId + "/events").pipe(map((res: any[]) => res.map(this.toEvent)))
   }
 
-  create(name: String, level: String, description: String, ac: Boolean) {
+  create(name: String, level: String, description: String, quantity: number, ac: Boolean) {
     let data = {
       name: name,
       level: level,
       description: description,
+      quantity: quantity,
       ac: ac
     }
     return this.http.post(LocationService.LOCATION_URL, data)
   }
 
-  update(locationId: String, name: String, level: String, description: String, ac: Boolean) {
+  update(locationId: String, name: String, level: String, description: String, quantity: number, ac: Boolean) {
     let data = {
       name: name,
       level: level,
       description: description,
+      quantity: quantity,
       ac: ac
     }
     return this.http.put(LocationService.LOCATION_URL + locationId, data)

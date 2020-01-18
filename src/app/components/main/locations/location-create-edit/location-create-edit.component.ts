@@ -17,6 +17,7 @@ export class LocationCreateEditComponent implements OnInit {
     name: new FormControl(''),
     level: new FormControl(''),
     description: new FormControl(''),
+    quantity: new FormControl(0),
     ac: new FormControl(false),
   })
 
@@ -40,6 +41,7 @@ export class LocationCreateEditComponent implements OnInit {
           name: this.location.name,
           level: this.location.level,
           description: this.location.description,
+          quantity: this.location.quantity,
           ac: this.location.ac
         })
       })
@@ -50,13 +52,14 @@ export class LocationCreateEditComponent implements OnInit {
     let name = this.locationForm.controls['name'].value as string;
     let level = this.locationForm.controls['level'].value as string;
     let description = this.locationForm.controls['description'].value as string;
+    let quantity = this.locationForm.controls['quantity'].value as number;
     let ac = this.locationForm.controls['ac'].value as boolean;
     this.isLoading = true
     var submitObservable: Observable<any>
     if (this.isEditing) {
-      submitObservable = this.locationService.update(this.locationId, name, level, description, ac)
+      submitObservable = this.locationService.update(this.locationId, name, level, description, quantity, ac)
     } else {
-      submitObservable = this.locationService.create(name, level, description, ac)
+      submitObservable = this.locationService.create(name, level, description, quantity, ac)
 
     }
     submitObservable.subscribe(() => {

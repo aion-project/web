@@ -5,6 +5,7 @@ export interface Location {
     name: String,
     level: String,
     description?: String,
+    quantity: number,
     ac: Boolean,
     resources: Resource[]
 }
