@@ -6,6 +6,7 @@ import { map, first } from 'rxjs/operators';
 import { Event } from '../model/Event';
 import { Assignment } from '../model/Assignment';
 import * as moment from 'moment';
+import { ScheduledEvent } from '../model/ScheduledEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,9 @@ export class EventService {
     return this.http.get(EventService.EVENT_URL).pipe(first(), map((res: any[]) => res.map(this.toEvent)))
   }
 
-  getMine(): Observable<Event[]> {
+  getMine(): Observable<ScheduledEvent[]> {
     return this.http.get(EventService.EVENT_URL + "mine").pipe(first(), map((res: any[]) => {
-      return res.map(this.toEvent)
+      return res.map(this.toScheduledEvent)
     }))
   }
 
@@ -127,5 +128,6 @@ export class EventService {
   }
 
   private toEvent = res => res as Event
+  private toScheduledEvent = res => res as ScheduledEvent
   private toAssignment = res => res as Assignment
 }
