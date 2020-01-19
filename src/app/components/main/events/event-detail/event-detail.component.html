@@ -25,7 +25,7 @@
     <mat-card-content>
       <div *ngIf="event?.schedules.length == 0">
         <div>Event doesn't have a schedule yet.</div>
-        <button mat-button (click)="onCreateSchedule()">
+        <button *ngIf="isAdmin" mat-button (click)="onCreateSchedule()">
           <mat-icon>add</mat-icon>
           Add Schedule
         </button>
@@ -33,10 +33,11 @@
       <div *ngIf="event?.schedules.length > 0">
         <div *ngFor="let schedule of event.schedules" class="schedule-row">
           <div>
-            {{ schedule.startDateTime }} {{ schedule.endDateTime }} {{ schedule.repeatType }}
-            {{ schedule.location.name }}
+            {{ schedule.startDateTime | date: 'short' }} - {{ schedule.endDateTime | date: 'short' }}
           </div>
-          <button mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
+          <span class="schedule-repeat" *ngIf="schedule.repeatType != 'NONE'">&nbsp;{{ schedule.repeatType }}</span>
+          <div class="schedule-location" [routerLink]="['/locations/listing/', schedule.location.id]">{{ schedule.location.name }}</div>
+          <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
             <mat-icon>close</mat-icon>
           </button>
         </div>

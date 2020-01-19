@@ -1,23 +1,24 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { ScheduleType } from 'src/app/model/Schedule';
 import { LocationService } from 'src/app/services/location.service';
-import { first } from 'rxjs/operators';
+import { first, distinctUntilChanged } from 'rxjs/operators';
 import { Location } from 'src/app/model/Location';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-schedule',
   templateUrl: './create-schedule.component.html',
   styleUrls: ['./create-schedule.component.scss']
 })
-export class CreateScheduleComponent implements OnInit {
+export class CreateScheduleComponent implements OnInit, OnDestroy {
 
   scheduleForm = new FormGroup({
-    startDateTime: new FormControl(''),
-    endDateTime: new FormControl(''),
+    startDateTime: new FormControl('', Validators.required),
+    endDateTime: new FormControl('', Validators.required),
   })
   repeatMode: String = "NONE"
   repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY]
@@ -31,6 +32,8 @@ export class CreateScheduleComponent implements OnInit {
     timePicker: true
   }
 
+  formStatusSubscription: Subscription
+
   constructor(
     public dialogRef: MatDialogRef<CreateScheduleComponent>,
     @Inject(MAT_DIALOG_DATA) public eventId: String,
@@ -39,6 +42,18 @@ export class CreateScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.formStatusSubscription = this.scheduleForm.statusChanges.pipe(distinctUntilChanged()).subscribe(status => {
+      if (status === "INVALID") {
+        this.selectedLocation = null
+        this.locations = []
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.formStatusSubscription && !this.formStatusSubscription.closed) {
+      this.formStatusSubscription.unsubscribe()
+    } 
   }
 
   onSubmit() {
@@ -81,6 +96,10 @@ export class CreateScheduleComponent implements OnInit {
 
   onLocationSelected(location) {
     this.selectedLocation = location
+  }
+
+  onLocationRemoved() {
+    this.selectedLocation = null
   }
 
 }
