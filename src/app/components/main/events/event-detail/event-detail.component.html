@@ -23,18 +23,24 @@
     </mat-card-content>
     <div class="card-section-title subsection">Time</div>
     <mat-card-content>
-      <p> {{event?.startDateTime | date : 'short'}} - {{event?.endDateTime | date : 'short'}} - <span class="repeat-mode"
-          *ngIf="event?.repeat != 'NONE'">Repeating {{ event?.repeat | titlecase }}</span> </p>
-    </mat-card-content>
-    <div class="card-section-title subsection">Location</div>
-    <mat-card-content>
-      <p *ngIf="!event?.location"> No location selected yet </p>
-      <mat-chip-list *ngIf="event?.location">
-        <mat-chip [removable]="isAdmin" (removed)="onLocationRemove(event.location)">
-          {{ event.location.name }}
-          <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+      <div *ngIf="event?.schedules.length == 0">
+        <div>Event doesn't have a schedule yet.</div>
+        <button mat-button (click)="onCreateSchedule()">
+          <mat-icon>add</mat-icon>
+          Add Schedule
+        </button>
+      </div>
+      <div *ngIf="event?.schedules.length > 0">
+        <div *ngFor="let schedule of event.schedules" class="schedule-row">
+          <div>
+            {{ schedule.startDateTime }} {{ schedule.endDateTime }} {{ schedule.repeatType }}
+            {{ schedule.location.name }}
+          </div>
+          <button mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-card-content>
     <div class="card-section-title subsection">Subject</div>
     <mat-card-content>
@@ -45,25 +51,17 @@
           <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>
+      <div *ngIf="isAdmin" class="actions">
+        <button mat-flat-button *ngIf="event.subject" (click)="onSubjectChange()">
+          <mat-icon>edit</mat-icon>
+          Change Subject
+        </button>
+        <button mat-flat-button *ngIf="!event.subject" (click)="onSubjectChange()">
+          <mat-icon>add</mat-icon>
+          Add Subject
+        </button>
+      </div>
     </mat-card-content>
-    <mat-card-actions *ngIf="isAdmin" class="actions">
-      <button mat-flat-button *ngIf="event.location" (click)="onLocationChange()">
-        <mat-icon>edit</mat-icon>
-        Change Location
-      </button>
-      <button mat-flat-button *ngIf="!event.location" (click)="onLocationChange()">
-        <mat-icon>add</mat-icon>
-        Add Location
-      </button>
-      <button mat-flat-button *ngIf="event.subject" (click)="onSubjectChange()">
-        <mat-icon>edit</mat-icon>
-        Change Subject
-      </button>
-      <button mat-flat-button *ngIf="!event.subject" (click)="onSubjectChange()">
-        <mat-icon>add</mat-icon>
-        Add Subject
-      </button>
-    </mat-card-actions>
   </mat-card>
   <mat-card *ngIf="event" class="section">
     <mat-card-title>Assignments</mat-card-title>

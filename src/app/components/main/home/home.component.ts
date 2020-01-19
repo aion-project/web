@@ -41,13 +41,13 @@ export class HomeComponent implements OnInit {
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
       this.gridEvents = events.map(event => {
-        let startMoment = moment(event.startDateTime).toDate()
-        let endMoment = moment(event.endDateTime).toDate()
+        // let startMoment = moment(event.startDateTime).toDate()
+        // let endMoment = moment(event.endDateTime).toDate()
         return {
           id: event.id,
           title: event.name,
-          start: startMoment,
-          end: endMoment
+          // start: startMoment,
+          // end: endMoment
         }
       })
     });

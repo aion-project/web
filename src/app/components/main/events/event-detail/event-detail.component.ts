@@ -12,6 +12,9 @@ import { ChangeLocationComponent } from 'src/app/components/common/change-locati
 import { SelectElementType, SelectElementComponent } from 'src/app/components/common/select-element/select-element.component';
 import { Assignment } from 'src/app/model/Assignment';
 import { AssignUserComponent, AssignUserData } from './assign-user/assign-user.component';
+import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { Schedule } from 'src/app/model/Schedule';
 
 @Component({
   selector: 'app-event-detail',
@@ -32,6 +35,7 @@ export class EventDetailComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private eventService: EventService,
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit() {
@@ -67,6 +71,34 @@ export class EventDetailComponent implements OnInit {
       if (result) {
         this.eventService.delete(this.eventId).toPromise().then(_ => {
           this.router.navigateByUrl("/events")
+        })
+      }
+    });
+  }
+
+  // Schedule
+  onCreateSchedule() {
+    const dialogRef = this.dialog.open(CreateScheduleComponent, {
+      width: '640px',
+      data: this.eventId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.fetchEventInfo();
+      }
+    });
+  }
+
+  onRemoveSchedule(schedule: Schedule) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.scheduleService.delete(schedule.id).toPromise().then(_ => {
+          this.fetchEventInfo()
         })
       }
     });
