@@ -37,5 +37,35 @@ export class ScheduleService {
     return this.http.delete(ScheduleService.SCHEDULE_URL + id)
   }
 
+  setLocation(scheduleId: string, locationId: string) {
+    const data = {
+      id: locationId
+    }
+    console.log(data);
+    return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + "/setLocation", data).pipe(first());
+  }
+
+  removeLocation(scheduleId: String, locationId: String) {
+    const data = {
+      id: locationId
+    }
+    return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + "/removeLocation", data).pipe(first());
+  }
+
+  addUser(scheduleId: String, email: string) {
+    const data = {
+      email: email
+    }
+    console.log(data);
+    return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + "/addUser", data).pipe(first());
+  }
+
+  removeUser(scheduleId: String, email: String) {
+    const data = {
+      email: email
+    }
+    return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + "/removeUser", data).pipe(first());
+  }
+
   private toSchedule = res => res as Schedule
 }

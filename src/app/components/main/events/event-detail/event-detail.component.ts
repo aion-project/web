@@ -10,11 +10,11 @@ import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog
 import { ChangeSubjectComponent } from '../../../common/change-subject/change-subject.component';
 import { ChangeLocationComponent } from 'src/app/components/common/change-location/change-location.component';
 import { SelectElementType, SelectElementComponent } from 'src/app/components/common/select-element/select-element.component';
-import { Assignment } from 'src/app/model/Assignment';
 import { AssignUserComponent, AssignUserData } from './assign-user/assign-user.component';
 import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/app/model/Schedule';
+import { User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-event-detail',
@@ -26,7 +26,6 @@ export class EventDetailComponent implements OnInit {
   private eventId: string
 
   event: Event
-  assignments: Assignment[]
   isAdmin: boolean = false
 
   constructor(
@@ -45,7 +44,6 @@ export class EventDetailComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
       this.eventId = map.get("eventId")
       this.fetchEventInfo()
-      this.fetchAssignments()
     })
   }
 
@@ -104,6 +102,38 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  onAddUser(schedule: Schedule) {
+    const dialogRef = this.dialog.open(AssignUserComponent, {
+      width: '640px',
+      data: {
+        current: schedule.users
+      } as AssignUserData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.scheduleService.addUser(schedule.id, result.email).toPromise().then(_ => {
+          this.fetchEventInfo()
+        })
+      }
+    });
+  }
+
+  onRemoveUser(schedule: Schedule, user: User) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.scheduleService.removeUser(schedule.id, user.email).toPromise().then(_ => {
+          this.fetchEventInfo()
+        });
+      }
+    });
+  }
+
+
   // Subject
   onSubjectChange() {
     const dialogRef = this.dialog.open(ChangeSubjectComponent, {
@@ -129,38 +159,6 @@ export class EventDetailComponent implements OnInit {
       if (result) {
         this.eventService.removeSubject(this.eventId, subject.id).toPromise().then(_ => {
           this.fetchEventInfo()
-        });
-      }
-    });
-  }
-
-  // Assignments
-  onAssignmentAdd() {
-    const dialogRef = this.dialog.open(AssignUserComponent, {
-      width: '640px',
-      data: {
-        current: this.assignments
-      } as AssignUserData
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.eventService.addAssignment(this.eventId, result.email, result.roleId).toPromise().then(_ => {
-          this.fetchAssignments()
-        })
-      }
-    });
-  }
-
-  onAssignmentRemove(assignment) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '320px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.eventService.removeAssignment(this.eventId, assignment).toPromise().then(_ => {
-          this.fetchAssignments()
         });
       }
     });
@@ -231,13 +229,6 @@ export class EventDetailComponent implements OnInit {
     this.eventService.get(this.eventId).pipe(first()).subscribe(event => {
       this.event = event
       console.log(event)
-    })
-  }
-
-  fetchAssignments() {
-    this.eventService.getAssignments(this.eventId).pipe(first()).subscribe(assignments => {
-      this.assignments = assignments
-      console.log(assignments)
     })
   }
 }

@@ -1,3 +1,5 @@
+import { User } from './User';
+
 export const ScheduleType = {
     NONE: "NONE",
     DAILY: "DAILY",
@@ -9,4 +11,6 @@ export interface Schedule {
     startDateTime: Date,
     endDateTime: Date,
     repeat: String,
+    event?: Event,
+    users?: User[]
 }

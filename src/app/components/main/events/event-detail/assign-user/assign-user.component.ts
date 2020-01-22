@@ -5,10 +5,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SelectElementComponent } from 'src/app/components/common/select-element/select-element.component';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { Assignment } from 'src/app/model/Assignment';
+import { User } from 'src/app/model/User';
 
 export interface AssignUserData {
-  current: Assignment[]
+  current: User[]
 }
 
 @Component({
@@ -51,7 +51,7 @@ export class AssignUserComponent implements OnInit {
         element.roles = filteredRoles;
         return element;
       }).filter((element: any) => {
-        return !(this.data.current != null && this.data.current.some(it => it.user.id == element.id)) && element.roles.length > 0;
+        return !(this.data.current != null && this.data.current.some(it => it.id == element.id)) && element.roles.length > 0;
       })
     })).subscribe((elements: any[]) => {
       this.unfilteredElements = elements
@@ -59,10 +59,9 @@ export class AssignUserComponent implements OnInit {
     })
   }
 
-  onSelected(email, roleId) {
+  onSelected(email) {
     this.dialogRef.close({
       email: email,
-      roleId: roleId
     });
   }
 

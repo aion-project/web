@@ -7,7 +7,7 @@
     <div class="user-item" *ngFor="let element of elements">
       {{ element.firstName }} {{ element.lastName }}
       <mat-menu #appMenu="matMenu">
-        <button mat-menu-item *ngFor="let role of element.roles" (click)="onSelected(element.email, role.name)">
+        <button mat-menu-item *ngFor="let role of element.roles" (click)="onSelected(element.email)">
           {{ role.name | titlecase }}
         </button>
       </mat-menu>

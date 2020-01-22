@@ -36,9 +36,23 @@
             {{ schedule.startDateTime | date: 'short' }} - {{ schedule.endDateTime | date: 'short' }}
           </div>
           <span class="schedule-repeat" *ngIf="schedule.repeatType != 'NONE'">&nbsp;{{ schedule.repeatType }}</span>
-          <div class="schedule-location" [routerLink]="['/locations/listing/', schedule.location.id]">{{ schedule.location.name }}</div>
-          <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
+          <div class="schedule-location" [routerLink]="['/locations/listing/', schedule.location.id]">
+            {{ schedule.location.name }}</div>
+          <div class="schedule-users">
+            <mat-chip-list *ngIf="schedule.users">
+              <mat-chip [removable]="isAdmin" *ngFor="let user of schedule.users" (removed)="onRemoveUser(schedule, user)">
+                {{ user.firstName }} {{ user.lastName }}
+                <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+            <button *ngIf="isAdmin" mat-stroked-button color="primary" (click)="onAddUser(schedule)">
+              <mat-icon>add</mat-icon>
+              User
+            </button>
+          </div>
+          <button *ngIf="isAdmin" mat-stroked-button color="warn" (click)="onRemoveSchedule(schedule)">
             <mat-icon>close</mat-icon>
+            Schedule
           </button>
         </div>
       </div>
@@ -63,28 +77,6 @@
         </button>
       </div>
     </mat-card-content>
-  </mat-card>
-  <mat-card *ngIf="event" class="section">
-    <mat-card-title>Assignments</mat-card-title>
-    <mat-card-subtitle>Set users to event</mat-card-subtitle>
-    <mat-card-content>
-      <mat-chip-list>
-        <mat-chip class="role-item" *ngFor="let assignment of assignments" [removable]="isAdmin"
-          (removed)="onAssignmentRemove(assignment.id)">
-          <div class="role-item-role">
-            {{ assignment.role | titlecase }}
-          </div>
-          {{ assignment.user.firstName }} {{ assignment.user.lastName }}
-          <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
-    </mat-card-content>
-    <mat-card-actions *ngIf="isAdmin" class="actions">
-      <button mat-flat-button (click)="onAssignmentAdd()">
-        <mat-icon>add</mat-icon>
-        ADD
-      </button>
-    </mat-card-actions>
   </mat-card>
   <mat-card *ngIf="event" class="section">
     <mat-card-title>Groups</mat-card-title>
