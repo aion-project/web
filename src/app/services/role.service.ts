@@ -10,15 +10,15 @@ import { Role } from '../model/Role';
 })
 export class RoleService {
 
-  static ROLE_URL = AppConfig.BASE_URL + "/roles"
+  static ROLE_URL = AppConfig.BASE_URL + '/roles';
 
   constructor(
     private http: HttpClient
   ) { }
 
   getAll(): Observable<Role[]> {
-    return this.http.get(RoleService.ROLE_URL).pipe(map((res: any[]) => res.map(this.toRole)))
+    return this.http.get(RoleService.ROLE_URL).pipe(map((res: any[]) => res.map(this.toRole)));
   }
 
-  private toRole = res => res as Role
+  private toRole = res => res as Role;
 }

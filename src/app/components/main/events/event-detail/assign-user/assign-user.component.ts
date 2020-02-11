@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/User';
 
 export interface AssignUserData {
-  current: User[]
+  current: User[];
 }
 
 @Component({
@@ -16,10 +16,10 @@ export interface AssignUserData {
   templateUrl: './assign-user.component.html',
   styleUrls: ['./assign-user.component.scss']
 })
-export class AssignUserComponent implements OnInit {
+export class AssignUserComponent implements OnInit, OnDestroy {
 
   search = new FormControl('');
-  searchSubscription: Subscription
+  searchSubscription: Subscription;
 
   unfilteredElements: any[];
   elements: any[];
@@ -33,7 +33,7 @@ export class AssignUserComponent implements OnInit {
   ngOnInit() {
     this.fetchElements();
     this.searchSubscription = this.search.valueChanges.pipe(distinctUntilChanged()).subscribe(query => {
-      this.elements = this.unfilteredElements.filter(element => element.firstName.toLowerCase().includes(query.toLowerCase()))
+      this.elements = this.unfilteredElements.filter(element => element.firstName.toLowerCase().includes(query.toLowerCase()));
     });
   }
 
@@ -46,22 +46,22 @@ export class AssignUserComponent implements OnInit {
   fetchElements() {
     this.userService.getAll().pipe(map((elements: any[]) => {
       return elements.map(element => {
-        const filteredRoles = element.roles.filter(role => role.name == "lecturer" || role.name == "instructor");
+        const filteredRoles = element.roles.filter(role => role.name === 'lecturer' || role.name === 'instructor');
 
         element.roles = filteredRoles;
         return element;
       }).filter((element: any) => {
-        return !(this.data.current != null && this.data.current.some(it => it.id == element.id)) && element.roles.length > 0;
-      })
+        return !(this.data.current != null && this.data.current.some(it => it.id === element.id)) && element.roles.length > 0;
+      });
     })).subscribe((elements: any[]) => {
-      this.unfilteredElements = elements
-      this.elements = elements
-    })
+      this.unfilteredElements = elements;
+      this.elements = elements;
+    });
   }
 
   onSelected(email) {
     this.dialogRef.close({
-      email: email,
+      email,
     });
   }
 

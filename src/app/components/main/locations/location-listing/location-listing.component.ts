@@ -12,9 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LocationListingComponent implements OnInit {
 
-  isAdmin: Boolean
-  displayedColumns: string[] = ['name', 'level', 'description']
-  displayedData: any
+  isAdmin: boolean;
+  displayedColumns: string[] = ['name', 'level', 'description'];
+  displayedData: any;
 
   constructor(
     private dialog: MatDialog,
@@ -23,10 +23,10 @@ export class LocationListingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin) => {
-      this.isAdmin = isAdmin
-    })
-    this.fetchLocations()
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+    this.fetchLocations();
   }
 
   create() {
@@ -43,8 +43,8 @@ export class LocationListingComponent implements OnInit {
 
   fetchLocations() {
     this.locationService.getAll().pipe(first()).subscribe(locations => {
-      this.displayedData = locations
-    })
+      this.displayedData = locations;
+    });
   }
 
 }

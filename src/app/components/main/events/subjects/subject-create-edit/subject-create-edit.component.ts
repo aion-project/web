@@ -17,57 +17,57 @@ export class SubjectCreateEditComponent implements OnInit {
   subjectForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-  })
+  });
 
-  error: any
-  isEditing: boolean = false
-  isLoading: boolean = false
-  subject: Subject
+  error: any;
+  isEditing = false;
+  isLoading = false;
+  subject: Subject;
 
   constructor(
     public dialogRef: MatDialogRef<ResourceCreateEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public subjectId: String,
+    @Inject(MAT_DIALOG_DATA) public subjectId: string,
     private subjectService: SubjectService,
   ) { }
 
   ngOnInit() {
-    this.isEditing = this.subjectId != null
+    this.isEditing = this.subjectId != null;
     if (this.isEditing) {
       this.subjectService.get(this.subjectId).subscribe((res: any) => {
-        this.subject = res as Subject
+        this.subject = res as Subject;
         this.subjectForm.setValue({
           name: this.subject.name,
           description: this.subject.description,
-        })
-      })
+        });
+      });
     }
   }
 
   onSubmit() {
-    let name = this.subjectForm.controls['name'].value as string;
-    let description = this.subjectForm.controls['description'].value as string;
-    this.isLoading = true
-    var submitObservable: Observable<any>
+    const name = this.subjectForm.controls.name.value as string;
+    const description = this.subjectForm.controls.description.value as string;
+    this.isLoading = true;
+    let submitObservable: Observable<any>;
     if (this.isEditing) {
-      submitObservable = this.subjectService.update(this.subjectId, name, description)
+      submitObservable = this.subjectService.update(this.subjectId, name, description);
     } else {
-      submitObservable = this.subjectService.create(name, description)
+      submitObservable = this.subjectService.create(name, description);
     }
     submitObservable.subscribe(() => {
-      this.isLoading = false
-      this.dialogRef.close(true)
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
+        this.error = err.toString();
       }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

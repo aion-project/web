@@ -11,11 +11,12 @@ export class AdminGuard implements CanActivate {
   constructor(public userService: UserService, public router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.userService.isRole("admin").pipe(map((isAdmin: boolean) => {
-      if (isAdmin)
-        return true
+    return this.userService.isRole('admin').pipe(map((isAdmin: boolean) => {
+      if (isAdmin) {
+        return true;
+      }
 
       this.router.navigate(['/home']);
-    }))
+    }));
   }
 }

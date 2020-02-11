@@ -14,9 +14,9 @@ import { EventCreateEditComponent } from '../event-create-edit/event-create-edit
 })
 export class EventListingComponent implements OnInit {
 
-  isAdmin: Boolean
-  displayedColumns: string[] = ['name', 'description', 'time']
-  displayedData: any
+  isAdmin: boolean;
+  displayedColumns: string[] = ['name', 'description', 'time'];
+  displayedData: any;
 
   constructor(
     private dialog: MatDialog,
@@ -25,10 +25,10 @@ export class EventListingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin) => {
-      this.isAdmin = isAdmin
-    })
-    this.fetchEvents()
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+    this.fetchEvents();
   }
 
   create() {
@@ -45,8 +45,8 @@ export class EventListingComponent implements OnInit {
 
   fetchEvents() {
     this.eventService.getAll().pipe(first()).subscribe(events => {
-      this.displayedData = events
-    })
+      this.displayedData = events;
+    });
   }
 
 }

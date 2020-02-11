@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog
 import { LocationService } from 'src/app/services/location.service';
 import { LocationCreateEditComponent } from '../location-create-edit/location-create-edit.component';
 import { SelectElementComponent, SelectElementType } from 'src/app/components/common/select-element/select-element.component';
-import { Location } from "../../../../model/Location";
+import { Location } from '../../../../model/Location';
 import { Event } from 'src/app/model/Event';
 import * as moment from 'moment';
 import * as DateUtil from 'src/app/utils/date-util';
@@ -20,12 +20,12 @@ import { CheckAvailabilityComponent } from 'src/app/components/common/check-avai
 })
 export class LocationDetailComponent implements OnInit {
 
-  private locationId: String
+  private locationId: string;
 
-  location: Location
-  events: Event[]
-  currentEvents: Event[]
-  isAdmin: boolean = false
+  location: Location;
+  events: Event[];
+  currentEvents: Event[];
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -36,14 +36,14 @@ export class LocationDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.locationId = map.get("locationId")
-      this.fetchLocationInfo()
-      this.fetchEvents()
-    })
+      this.locationId = map.get('locationId');
+      this.fetchLocationInfo();
+      this.fetchEvents();
+    });
   }
 
   onEditLocation() {
@@ -67,8 +67,8 @@ export class LocationDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.locationService.delete(this.locationId).toPromise().then(_ => {
-          this.router.navigateByUrl("/locations")
-        })
+          this.router.navigateByUrl('/locations');
+        });
       }
     });
   }
@@ -82,8 +82,8 @@ export class LocationDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.locationService.addResource(this.locationId, result).toPromise().then(_ => {
-          this.fetchLocationInfo()
-        })
+          this.fetchLocationInfo();
+        });
       }
     });
   }
@@ -96,7 +96,7 @@ export class LocationDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.locationService.removeUser(this.locationId, resourceId).toPromise().then(_ => {
-          this.fetchLocationInfo()
+          this.fetchLocationInfo();
         });
       }
     });
@@ -111,16 +111,16 @@ export class LocationDetailComponent implements OnInit {
 
   fetchLocationInfo() {
     this.locationService.get(this.locationId).pipe(first()).subscribe(location => {
-      this.location = location
-    })
+      this.location = location;
+    });
   }
 
   fetchEvents() {
     this.locationService.getEvents(this.locationId).pipe(first()).subscribe(events => {
-      this.events = events
+      this.events = events;
       this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString(true));
-      console.log(this.currentEvents)
-    })
+      console.log(this.currentEvents);
+    });
   }
 
 }

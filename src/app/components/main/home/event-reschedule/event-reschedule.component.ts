@@ -12,11 +12,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class EventRescheduleComponent implements OnInit {
 
-  changeMode: String = "TEMP"
+  changeMode = 'TEMP';
 
-  error: any
-  isLoading: boolean = false
-  rescheduleModes = [ {key: "TEMP", value: "Temporary"}, {key: "PERM", value: "Permanant"} ]
+  error: any;
+  isLoading = false;
+  rescheduleModes = [ {key: 'TEMP', value: 'Temporary'}, {key: 'PERM', value: 'Permanant'} ];
 
   constructor(
     public dialogRef: MatDialogRef<EventCreateEditComponent>,
@@ -25,31 +25,31 @@ export class EventRescheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("Event", this.event)
+    console.log('Event', this.event);
   }
 
   onSubmit() {
-    let oldDate = this.event.oldEvent.start
-    let newDate = this.event.event.start
-    let type = this.changeMode
+    const oldDate = this.event.oldEvent.start;
+    const newDate = this.event.event.start;
+    const type = this.changeMode;
 
-    this.isLoading = true
+    this.isLoading = true;
     this.eventService.reschedule(this.event.event.id, oldDate, newDate, type).subscribe(() => {
-      this.isLoading = false
-      this.dialogRef.close(true)
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
-      } 
+        this.error = err.toString();
+      }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
 }

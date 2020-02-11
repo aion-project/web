@@ -2,15 +2,15 @@ import { Role } from './Role';
 import { Group } from './Group';
 
 export interface User {
-    id: String,
-    firstName: String,
-    lastName: String,
-    email: String,
-    enabled: Boolean,
-    active?: Boolean,
-    roles?: Role[]
-    avatarUrl?: String,
-    thumbnailUrl?: String,
-    bio?: String,
-    groups: Group[],
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    enabled: boolean;
+    active?: boolean;
+    roles?: Role[];
+    avatarUrl?: string;
+    thumbnailUrl?: string;
+    bio?: string;
+    groups: Group[];
 }

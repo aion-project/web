@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 interface ConfirmDialogData {
-  title: String,
-  des: String
+  title: string;
+  des: string;
 }
 
 @Component({
@@ -21,9 +21,9 @@ export class ConfirmDialogComponent implements OnInit {
   ngOnInit() {
     if (this.data == null) {
       this.data = {
-        title: "Confirm",
-        des: "Are you sure?"
-      }
+        title: 'Confirm',
+        des: 'Are you sure?'
+      };
     }
   }
 

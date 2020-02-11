@@ -12,18 +12,18 @@ export class AuthInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>,
-        next: HttpHandler): Observable<HttpEvent<any>> {
+              next: HttpHandler): Observable<HttpEvent<any>> {
 
         return from(this.oktaService.getAccessToken()).pipe(flatMap(token => {
             if (token) {
                 const cloned = req.clone({
-                    headers: req.headers.set('Authorization', "Bearer " + token)
+                    headers: req.headers.set('Authorization', 'Bearer ' + token)
                 });
 
                 return next.handle(cloned);
             } else {
                 return next.handle(req);
             }
-        }))
+        }));
     }
 }

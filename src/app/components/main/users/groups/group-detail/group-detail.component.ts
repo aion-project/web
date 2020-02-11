@@ -16,10 +16,10 @@ import { ChangeSubjectComponent } from 'src/app/components/common/change-subject
 })
 export class GroupDetailComponent implements OnInit {
 
-  private groupId: String
+  private groupId: string;
 
-  group: Group
-  isAdmin: boolean = false
+  group: Group;
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -30,13 +30,13 @@ export class GroupDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.groupId = map.get("groupId")
-      this.fetchGroupInfo()
-    })
+      this.groupId = map.get('groupId');
+      this.fetchGroupInfo();
+    });
   }
 
   onEdit() {
@@ -60,16 +60,16 @@ export class GroupDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.groupService.delete(this.groupId).toPromise().then(_ => {
-          this.router.navigateByUrl("/users/groups")
-        })
+          this.router.navigateByUrl('/users/groups');
+        });
       }
     });
   }
 
   fetchGroupInfo() {
     this.groupService.get(this.groupId).subscribe(group => {
-      this.group = group
-    })
+      this.group = group;
+    });
   }
 
 }

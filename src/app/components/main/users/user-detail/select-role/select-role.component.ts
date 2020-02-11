@@ -4,8 +4,8 @@ import { first, filter, map } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface SelectRoleData {
-  roleName: String,
-  currentRoles: any[]
+  roleName: string;
+  currentRoles: any[];
 }
 
 @Component({
@@ -24,18 +24,18 @@ export class SelectRoleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchRoles()
+    this.fetchRoles();
   }
 
   fetchRoles() {
-    console.log(this.data.currentRoles)
+    console.log(this.data.currentRoles);
     this.roleService.getAll().pipe(first(), map((roles: any[]) => {
       return roles.filter((role: any) => {
-        return !(this.data.currentRoles != null && this.data.currentRoles.some(it => it.name == role.name))
-      })
+        return !(this.data.currentRoles != null && this.data.currentRoles.some(it => it.name === role.name));
+      });
     })).subscribe((roles: any[]) => {
-      this.roles = roles
-    })
+      this.roles = roles;
+    });
   }
 
   onRoleSelected(roleName) {

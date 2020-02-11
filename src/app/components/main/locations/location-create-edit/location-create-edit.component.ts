@@ -19,65 +19,65 @@ export class LocationCreateEditComponent implements OnInit {
     description: new FormControl(''),
     quantity: new FormControl(0),
     ac: new FormControl(false),
-  })
+  });
 
-  error: any
-  isEditing: boolean = false
-  isLoading: boolean = false
-  location: Location
+  error: any;
+  isEditing = false;
+  isLoading = false;
+  location: Location;
 
   constructor(
     public dialogRef: MatDialogRef<LocationCreateEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public locationId: String,
+    @Inject(MAT_DIALOG_DATA) public locationId: string,
     private locationService: LocationService,
   ) { }
 
   ngOnInit() {
-    this.isEditing = this.locationId != null
+    this.isEditing = this.locationId != null;
     if (this.isEditing) {
       this.locationService.get(this.locationId).subscribe((res: any) => {
-        this.location = res as Location
+        this.location = res as Location;
         this.locationForm.setValue({
           name: this.location.name,
           level: this.location.level,
           description: this.location.description,
           quantity: this.location.quantity,
           ac: this.location.ac
-        })
-      })
+        });
+      });
     }
   }
 
   onSubmit() {
-    let name = this.locationForm.controls['name'].value as string;
-    let level = this.locationForm.controls['level'].value as string;
-    let description = this.locationForm.controls['description'].value as string;
-    let quantity = this.locationForm.controls['quantity'].value as number;
-    let ac = this.locationForm.controls['ac'].value as boolean;
-    this.isLoading = true
-    var submitObservable: Observable<any>
+    const name = this.locationForm.controls.name.value as string;
+    const level = this.locationForm.controls.level.value as string;
+    const description = this.locationForm.controls.description.value as string;
+    const quantity = this.locationForm.controls.quantity.value as number;
+    const ac = this.locationForm.controls.ac.value as boolean;
+    this.isLoading = true;
+    let submitObservable: Observable<any>;
     if (this.isEditing) {
-      submitObservable = this.locationService.update(this.locationId, name, level, description, quantity, ac)
+      submitObservable = this.locationService.update(this.locationId, name, level, description, quantity, ac);
     } else {
-      submitObservable = this.locationService.create(name, level, description, quantity, ac)
+      submitObservable = this.locationService.create(name, level, description, quantity, ac);
 
     }
     submitObservable.subscribe(() => {
-      this.isLoading = false
-      this.dialogRef.close(true)
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
+        this.error = err.toString();
       }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
 }

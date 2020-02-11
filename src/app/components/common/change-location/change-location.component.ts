@@ -21,13 +21,13 @@ export class ChangeLocationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchRoles()
+    this.fetchRoles();
   }
 
   fetchRoles() {
     this.locationService.getAll().pipe(first()).subscribe((locations) => {
-      this.locations = locations
-    })
+      this.locations = locations;
+    });
   }
 
   onLocationSelected(location) {

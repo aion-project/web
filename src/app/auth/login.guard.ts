@@ -10,10 +10,11 @@ export class LoginGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return this.oktaService.isAuthenticated().then((isAuthenticated: boolean) => {
-      if (!isAuthenticated)
+      if (!isAuthenticated) {
         return true;
+      }
 
       this.router.navigate(['/home']);
-    })
+    });
   }
 }

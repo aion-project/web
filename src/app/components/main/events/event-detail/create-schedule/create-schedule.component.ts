@@ -19,87 +19,87 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   scheduleForm = new FormGroup({
     startDateTime: new FormControl('', Validators.required),
     endDateTime: new FormControl('', Validators.required),
-  })
-  repeatMode: String = "NONE"
-  repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY]
-  selectedLocation: Location = null
+  });
+  repeatMode = 'NONE';
+  repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY];
+  selectedLocation: Location = null;
   locations: Location[] = [];
 
-  error: any
-  isLoading: boolean = false
+  error: any;
+  isLoading = false;
   dateTimePickerSettings = {
     bigBanner: true,
     timePicker: true
-  }
+  };
 
-  formStatusSubscription: Subscription
+  formStatusSubscription: Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<CreateScheduleComponent>,
-    @Inject(MAT_DIALOG_DATA) public eventId: String,
+    @Inject(MAT_DIALOG_DATA) public eventId: tring,
     private scheduleService: ScheduleService,
     private locationService: LocationService,
   ) { }
 
   ngOnInit() {
     this.formStatusSubscription = this.scheduleForm.statusChanges.pipe(distinctUntilChanged()).subscribe(status => {
-      if (status === "INVALID") {
-        this.selectedLocation = null
-        this.locations = []
+      if (status === 'INVALID') {
+        this.selectedLocation = null;
+        this.locations = [];
       }
-    })
+    });
   }
 
   ngOnDestroy() {
     if (this.formStatusSubscription && !this.formStatusSubscription.closed) {
-      this.formStatusSubscription.unsubscribe()
-    } 
+      this.formStatusSubscription.unsubscribe();
+    }
   }
 
   onSubmit() {
-    console.log("Submit")
-    let startDateTime = this.scheduleForm.controls['startDateTime'].value as string;
-    let endDateTime = this.scheduleForm.controls['endDateTime'].value as string;
-    let repeat = this.repeatMode;
-    var location = null
+    console.log('Submit');
+    const startDateTime = this.scheduleForm.controls.startDateTime.value as string;
+    const endDateTime = this.scheduleForm.controls.endDateTime.value as string;
+    const repeat = this.repeatMode;
+    let location = null;
     if (this.selectedLocation != null) {
-      location = this.selectedLocation.id
-    } else return;
-    console.log("sending")
+      location = this.selectedLocation.id;
+    } else { return; }
+    console.log('sending');
 
-    this.isLoading = true
+    this.isLoading = true;
     this.scheduleService.create(new Date(startDateTime), new Date(endDateTime), repeat, location, this.eventId).subscribe(() => {
-      console.log("Success")
-      this.isLoading = false
-      this.dialogRef.close(true)
+      console.log('Success');
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
+        this.error = err.toString();
       }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   onCheckLocations() {
     this.locations = [];
     this.locationService.getAll().pipe(first()).subscribe(locations => {
-      this.locations = locations
+      this.locations = locations;
     });
   }
 
   onLocationSelected(location) {
-    this.selectedLocation = location
+    this.selectedLocation = location;
   }
 
   onLocationRemoved() {
-    this.selectedLocation = null
+    this.selectedLocation = null;
   }
 
 }

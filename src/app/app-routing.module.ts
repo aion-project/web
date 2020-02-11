@@ -48,44 +48,44 @@ export function onAuthRequired({ oktaAuth, router }) {
 }
 
 const routes: Routes = [
-  { path: "implicit/callback", component: OktaCallbackComponent },
-  { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
-  { path: "activate", component: ActivateComponent, canActivate: [UnactiveGuard] },
+  { path: 'implicit/callback', component: OktaCallbackComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'activate', component: ActivateComponent, canActivate: [UnactiveGuard] },
   {
-    path: "", component: MainComponent, canActivate: [OktaAuthGuard],
+    path: '', component: MainComponent, canActivate: [OktaAuthGuard],
     data: { onAuthRequired },
     children: [
       {
-        path: "events", component: EventsComponent, children: [
-          { path: "subjects/:subjectId", component: SubjectDetailComponent },
-          { path: "subjects", component: SubjectsComponent },
-          { path: "listing", component: EventListingComponent },
-          { path: "listing/:eventId", component: EventDetailComponent },
-          { path: "", pathMatch: "full", redirectTo: "listing" },
+        path: 'events', component: EventsComponent, children: [
+          { path: 'subjects/:subjectId', component: SubjectDetailComponent },
+          { path: 'subjects', component: SubjectsComponent },
+          { path: 'listing', component: EventListingComponent },
+          { path: 'listing/:eventId', component: EventDetailComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'listing' },
         ]
       },
       {
-        path: "locations", component: LocationsComponent, children: [
-          { path: "resources/:resourceId", component: ResourceDetailComponent, canActivate: [AdminGuard] },
-          { path: "resources", component: ResourcesComponent, canActivate: [AdminGuard] },
-          { path: "listing/:locationId", component: LocationDetailComponent },
-          { path: "listing", component: LocationListingComponent },
-          { path: "", pathMatch: "full", redirectTo: "listing" },
+        path: 'locations', component: LocationsComponent, children: [
+          { path: 'resources/:resourceId', component: ResourceDetailComponent, canActivate: [AdminGuard] },
+          { path: 'resources', component: ResourcesComponent, canActivate: [AdminGuard] },
+          { path: 'listing/:locationId', component: LocationDetailComponent },
+          { path: 'listing', component: LocationListingComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'listing' },
         ]
       },
       {
-        path: "users", component: UsersComponent, children: [
-          { path: "groups/:groupId", component: GroupDetailComponent },
-          { path: "groups", component: GroupsComponent },
-          { path: "listing/:userId", component: UserDetailComponent },
-          { path: "listing", component: UserListingComponent },
-          { path: "", pathMatch: "full", redirectTo: "listing" },
+        path: 'users', component: UsersComponent, children: [
+          { path: 'groups/:groupId', component: GroupDetailComponent },
+          { path: 'groups', component: GroupsComponent },
+          { path: 'listing/:userId', component: UserDetailComponent },
+          { path: 'listing', component: UserListingComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'listing' },
         ]
       },
-      { path: "resources", component: ResourcesComponent },
-      { path: "profile", component: ProfileComponent },
-      { path: "home", component: HomeComponent },
-      { path: "", redirectTo: "/home", pathMatch: "full" }
+      { path: 'resources', component: ResourcesComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'home', component: HomeComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full' }
     ]
   }
 ];

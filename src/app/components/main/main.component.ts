@@ -14,7 +14,7 @@ import { User } from 'src/app/model/User';
 })
 export class MainComponent implements OnInit {
 
-  user: User
+  user: User;
 
   constructor(
     private userService: UserService,
@@ -26,21 +26,21 @@ export class MainComponent implements OnInit {
     this.userService.me(true).pipe(
       filter(user => user != null),
     ).subscribe(res => {
-      this.user = res
+      this.user = res;
       if (this.user.thumbnailUrl != null) {
-        let url = AppConfig.BASE_URL + this.user.thumbnailUrl + '?random+\=' + Math.random()
+        const url = AppConfig.BASE_URL + this.user.thumbnailUrl + '?random+\=' + Math.random();
         this.user.thumbnailUrl = url;
       }
       if (!this.user.active) {
-        this.router.navigate(['/activate'])
+        this.router.navigate(['/activate']);
       }
-    })
+    });
   }
 
   logout() {
     this.oktaService.logout().then(_ => {
-      this.router.navigate(['/login'])
-    })
+      this.router.navigate(['/login']);
+    });
   }
 
 }

@@ -14,11 +14,12 @@ export class UnactiveGuard implements CanActivate {
     return this.userService.me().pipe(
       first(),
       map((user: any) => {
-        if (!user.active)
+        if (!user.active) {
           return true;
+        }
 
         this.router.navigate(['/']);
       })
-    )
+    );
   }
 }

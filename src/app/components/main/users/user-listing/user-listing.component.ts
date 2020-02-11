@@ -11,10 +11,10 @@ import { MatDialog } from '@angular/material';
 })
 export class UserListingComponent implements OnInit {
 
-  isAdmin: boolean
-  currentUser: any
-  displayedColumns: string[] = ['firstName', 'lastName', 'email']
-  displayedData: any
+  isAdmin: boolean;
+  currentUser: any;
+  displayedColumns: string[] = ['firstName', 'lastName', 'email'];
+  displayedData: any;
 
   constructor(
     private dialog: MatDialog,
@@ -26,11 +26,12 @@ export class UserListingComponent implements OnInit {
       filter(user => user != null),
       first(),
     ).subscribe(user => {
-      this.currentUser = user
-      if (this.currentUser.roles.some(role => role.name == "admin"))
-        this.isAdmin = true
-    })
-    this.fetchUsers()
+      this.currentUser = user;
+      if (this.currentUser.roles.some(role => role.name === 'admin')) {
+        this.isAdmin = true;
+      }
+    });
+    this.fetchUsers();
   }
 
   create() {
@@ -47,7 +48,7 @@ export class UserListingComponent implements OnInit {
 
   fetchUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      this.displayedData = users
-    })
+      this.displayedData = users;
+    });
   }
 }

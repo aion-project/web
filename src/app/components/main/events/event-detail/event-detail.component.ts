@@ -23,10 +23,10 @@ import { User } from 'src/app/model/User';
 })
 export class EventDetailComponent implements OnInit {
 
-  private eventId: string
+  private eventId: string;
 
-  event: Event
-  isAdmin: boolean = false
+  event: Event;
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -38,13 +38,13 @@ export class EventDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.eventId = map.get("eventId")
-      this.fetchEventInfo()
-    })
+      this.eventId = map.get('eventId');
+      this.fetchEventInfo();
+    });
   }
 
   onEditEvent() {
@@ -68,8 +68,8 @@ export class EventDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.eventService.delete(this.eventId).toPromise().then(_ => {
-          this.router.navigateByUrl("/events")
-        })
+          this.router.navigateByUrl('/events');
+        });
       }
     });
   }
@@ -96,8 +96,8 @@ export class EventDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.scheduleService.delete(schedule.id).toPromise().then(_ => {
-          this.fetchEventInfo()
-        })
+          this.fetchEventInfo();
+        });
       }
     });
   }
@@ -113,8 +113,8 @@ export class EventDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.scheduleService.addUser(schedule.id, result.email).toPromise().then(_ => {
-          this.fetchEventInfo()
-        })
+          this.fetchEventInfo();
+        });
       }
     });
   }
@@ -127,7 +127,7 @@ export class EventDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.scheduleService.removeUser(schedule.id, user.email).toPromise().then(_ => {
-          this.fetchEventInfo()
+          this.fetchEventInfo();
         });
       }
     });
@@ -144,8 +144,8 @@ export class EventDetailComponent implements OnInit {
       if (result) {
         console.log(result);
         this.eventService.setSubject(this.eventId, result.id).toPromise().then(_ => {
-          this.fetchEventInfo()
-        })
+          this.fetchEventInfo();
+        });
       }
     });
   }
@@ -158,7 +158,7 @@ export class EventDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.eventService.removeSubject(this.eventId, subject.id).toPromise().then(_ => {
-          this.fetchEventInfo()
+          this.fetchEventInfo();
         });
       }
     });
@@ -173,10 +173,10 @@ export class EventDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result)
+        console.log(result);
         this.eventService.addGroup(this.eventId, result).toPromise().then(_ => {
           this.fetchEventInfo();
-        })
+        });
       }
     });
   }
@@ -188,7 +188,7 @@ export class EventDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(group)
+        console.log(group);
         this.eventService.removeGroup(this.eventId, group.id).toPromise().then(_ => {
           this.fetchEventInfo();
         });
@@ -206,7 +206,7 @@ export class EventDetailComponent implements OnInit {
       if (result) {
         this.eventService.setLocation(this.eventId, result.id).toPromise().then(_ => {
           this.fetchEventInfo();
-        })
+        });
       }
     });
   }
@@ -227,8 +227,8 @@ export class EventDetailComponent implements OnInit {
 
   fetchEventInfo() {
     this.eventService.get(this.eventId).pipe(first()).subscribe(event => {
-      this.event = event
-      console.log(event)
-    })
+      this.event = event;
+      console.log(event);
+    });
   }
 }

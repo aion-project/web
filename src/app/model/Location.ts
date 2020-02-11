@@ -1,11 +1,11 @@
 import { Resource } from './Resource';
 
 export interface Location {
-    id: String,
-    name: String,
-    level: String,
-    description?: String,
-    quantity: number,
-    ac: Boolean,
-    resources: Resource[]
+    id: string;
+    name: string;
+    level: string;
+    description?: string;
+    quantity: number;
+    ac: boolean;
+    resources: Resource[];
 }

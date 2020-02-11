@@ -12,10 +12,10 @@ import { ResourceCreateEditComponent } from './resource-create-edit/resource-cre
 })
 export class ResourcesComponent implements OnInit {
 
-  isAdmin: boolean
-  currentUser: any
-  displayedColumns: string[] = ['name', 'description']
-  displayedData: any
+  isAdmin: boolean;
+  currentUser: any;
+  displayedColumns: string[] = ['name', 'description'];
+  displayedData: any;
 
   constructor(
     private dialog: MatDialog,
@@ -24,10 +24,10 @@ export class ResourcesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
-    this.fetchResources()
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
+    this.fetchResources();
   }
 
   create() {
@@ -44,8 +44,8 @@ export class ResourcesComponent implements OnInit {
 
   fetchResources() {
     this.resourceService.getAll().pipe(first()).subscribe(resource => {
-      this.displayedData = resource
-    })
+      this.displayedData = resource;
+    });
   }
 }
 

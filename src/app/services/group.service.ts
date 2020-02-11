@@ -10,53 +10,53 @@ import { Group } from '../model/Group';
 })
 export class GroupService {
 
-  static GROUP_URL = AppConfig.BASE_URL + "/groups/"
+  static GROUP_URL = AppConfig.BASE_URL + '/groups/';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  get(groupId: String): Observable<Group> {
-    return this.http.get(GroupService.GROUP_URL + groupId).pipe(first(), map(this.toGroup))
+  get(groupId: string): Observable<Group> {
+    return this.http.get(GroupService.GROUP_URL + groupId).pipe(first(), map(this.toGroup));
   }
 
   getAll(): Observable<Group[]> {
-    return this.http.get(GroupService.GROUP_URL).pipe(first(), map((res: any[]) => res.map(this.toGroup)))
+    return this.http.get(GroupService.GROUP_URL).pipe(first(), map((res: any[]) => res.map(this.toGroup)));
   }
 
-  create(name: String, description: String) {
-    let data = {
-      name: name,
-      description: description,
-    }
-    return this.http.post(GroupService.GROUP_URL, data)
+  create(name: string, description: string) {
+    const data = {
+      name,
+      description,
+    };
+    return this.http.post(GroupService.GROUP_URL, data);
   }
 
-  update(groupId: String, name: String, description: String) {
-    let data = {
-      name: name,
-      description: description,
-    }
-    return this.http.put(GroupService.GROUP_URL + groupId, data)
+  update(groupId: string, name: string, description: string) {
+    const data = {
+      name,
+      description,
+    };
+    return this.http.put(GroupService.GROUP_URL + groupId, data);
   }
 
-  delete(groupId: String) {
-    return this.http.delete(GroupService.GROUP_URL + groupId)
+  delete(groupId: string) {
+    return this.http.delete(GroupService.GROUP_URL + groupId);
   }
 
-  addUser(groupId: String, userId: String) {
+  addUser(groupId: string, userId: string) {
     const data = {
       user: userId
-    }
-    return this.http.post(GroupService.GROUP_URL + groupId + "/addUser", data).pipe(first());
+    };
+    return this.http.post(GroupService.GROUP_URL + groupId + '/addUser', data).pipe(first());
   }
 
-  removeUser(groupId: String, userId: String) {
+  removeUser(groupId: string, userId: string) {
     const data = {
       user: userId
-    }
-    return this.http.post(GroupService.GROUP_URL + groupId + "/removeUser", data).pipe(first());
+    };
+    return this.http.post(GroupService.GROUP_URL + groupId + '/removeUser', data).pipe(first());
   }
 
-  private toGroup = res => res as Group
+  private toGroup = res => res as Group;
 }

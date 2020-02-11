@@ -7,13 +7,13 @@ import { Subscription } from 'rxjs';
 import { ResourceService } from 'src/app/services/resource.service';
 
 export const SelectElementType = {
-  GROUP: "group",
-  RESOURCE: "resource",
-}
+  GROUP: 'group',
+  RESOURCE: 'resource',
+};
 
 export interface SelectElementData {
-  type: String,
-  current: any[]
+  type: string;
+  current: any[];
 }
 
 @Component({
@@ -24,7 +24,7 @@ export interface SelectElementData {
 export class SelectElementComponent implements OnInit, OnDestroy {
 
   search = new FormControl('');
-  searchSubscription: Subscription
+  searchSubscription: Subscription;
 
   unfilteredElements: any[];
   elements: any[];
@@ -39,7 +39,7 @@ export class SelectElementComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchElements();
     this.searchSubscription = this.search.valueChanges.pipe(distinctUntilChanged()).subscribe(query => {
-      this.elements = this.unfilteredElements.filter(element => element.name.toLowerCase().includes(query.toLowerCase()))
+      this.elements = this.unfilteredElements.filter(element => element.name.toLowerCase().includes(query.toLowerCase()));
     });
   }
 
@@ -50,20 +50,20 @@ export class SelectElementComponent implements OnInit, OnDestroy {
   }
 
   fetchElements() {
-    var observable;
-    if (this.data.type == SelectElementType.GROUP) {
-      observable = this.groupService.getAll()
-    } else if (this.data.type == SelectElementType.RESOURCE) {
-      observable = this.resourceService.getAll()
+    let observable;
+    if (this.data.type === SelectElementType.GROUP) {
+      observable = this.groupService.getAll();
+    } else if (this.data.type === SelectElementType.RESOURCE) {
+      observable = this.resourceService.getAll();
     }
     observable.pipe(map((elements: any[]) => {
       return elements.filter((element: any) => {
-        return !(this.data.current != null && this.data.current.some(it => it.id == element.id))
-      })
+        return !(this.data.current != null && this.data.current.some(it => it.id === element.id));
+      });
     })).subscribe((elements: any[]) => {
-      this.unfilteredElements = elements
-      this.elements = elements
-    })
+      this.unfilteredElements = elements;
+      this.elements = elements;
+    });
   }
 
   onSelected(id) {

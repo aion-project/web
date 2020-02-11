@@ -22,12 +22,12 @@ import { CheckAvailabilityComponent } from 'src/app/components/common/check-avai
 })
 export class UserDetailComponent implements OnInit {
 
-  private userId: String
+  private userId: string;
 
-  user: any = []
-  events: Event[]
-  currentEvents: Event[]
-  isAdmin: boolean = false
+  user: any = [];
+  events: Event[];
+  currentEvents: Event[];
+  isAdmin = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,14 +38,14 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.userId = map.get("userId")
-      this.fetchUserInfo()
-      this.fetchEvents()
-    })
+      this.userId = map.get('userId');
+      this.fetchUserInfo();
+      this.fetchEvents();
+    });
   }
 
   onEditProfile() {
@@ -71,16 +71,16 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.addRole(this.userId, result).toPromise().then(_ => {
-          this.fetchUserInfo()
-        })
+          this.fetchUserInfo();
+        });
       }
     });
   }
 
   onRoleRemove(roleId) {
     this.userService.removeRole(this.userId, roleId).toPromise().then(_ => {
-      this.fetchUserInfo()
-    })
+      this.fetchUserInfo();
+    });
   }
 
   // Groups
@@ -93,8 +93,8 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.groupService.addUser(result, this.userId).toPromise().then(_ => {
-          this.fetchUserInfo()
-        })
+          this.fetchUserInfo();
+        });
       }
     });
   }
@@ -107,7 +107,7 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.groupService.removeUser(groupId, this.userId).toPromise().then(_ => {
-          this.fetchUserInfo()
+          this.fetchUserInfo();
         });
       }
     });
@@ -122,8 +122,8 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.setLocation(this.userId, result.id).toPromise().then(_ => {
-          this.fetchUserInfo()
-        })
+          this.fetchUserInfo();
+        });
       }
     });
   }
@@ -136,7 +136,7 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.removeLocation(this.userId, location.id).toPromise().then(_ => {
-          this.fetchUserInfo()
+          this.fetchUserInfo();
         });
       }
     });
@@ -150,8 +150,8 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.setEnable(this.userId, isEnable).toPromise().then(_ => {
-          this.fetchUserInfo()
-        })
+          this.fetchUserInfo();
+        });
       }
     });
   }
@@ -164,8 +164,8 @@ export class UserDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService.delete(this.userId).toPromise().then(_ => {
-          this.router.navigateByUrl("/users")
-        })
+          this.router.navigateByUrl('/users');
+        });
       }
     });
   }
@@ -179,18 +179,18 @@ export class UserDetailComponent implements OnInit {
 
   fetchUserInfo() {
     this.userService.get(this.userId).pipe(first()).subscribe(user => {
-      this.user = user
+      this.user = user;
       console.log(user);
       if (this.user.avatarUrl != null) {
         this.user.avatarUrl = AppConfig.BASE_URL + this.user.avatarUrl;
       }
-    })
+    });
   }
 
   fetchEvents() {
     this.userService.getEvents(this.userId).pipe(first()).subscribe(events => {
-      this.events = events
+      this.events = events;
       this.currentEvents = DateUtil.getEventAt(events, moment(Date.now()).toISOString());
-    })
+    });
   }
 }

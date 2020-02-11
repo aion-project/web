@@ -15,10 +15,10 @@ import { Resource } from 'src/app/model/Resource';
 })
 export class ResourceDetailComponent implements OnInit {
 
-  private resourceId: String
+  private resourceId: string;
 
-  resource: Resource
-  isAdmin: boolean = false
+  resource: Resource;
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -29,13 +29,13 @@ export class ResourceDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.resourceId = map.get("resourceId")
-      this.fetchResourceInfo()
-    })
+      this.resourceId = map.get('resourceId');
+      this.fetchResourceInfo();
+    });
   }
 
   onEditResource() {
@@ -59,16 +59,16 @@ export class ResourceDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.resourceService.delete(this.resourceId).toPromise().then(_ => {
-          this.router.navigateByUrl("/locations/resources")
-        })
+          this.router.navigateByUrl('/locations/resources');
+        });
       }
     });
   }
 
   fetchResourceInfo() {
     this.resourceService.get(this.resourceId).pipe(first()).subscribe(resource => {
-      this.resource = resource
-    })
+      this.resource = resource;
+    });
   }
 
 }

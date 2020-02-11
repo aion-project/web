@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     today: 'Today',
     week: 'Week',
     day: 'Day',
-  }
+  };
   gridEvents: any[];
 
   constructor(
@@ -41,22 +41,22 @@ export class HomeComponent implements OnInit {
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
       this.gridEvents = events.map(schedule => {
-        let startMoment = moment(schedule.startDateTime).toDate()
-        let endMoment = moment(schedule.endDateTime).toDate()
+        const startMoment = moment(schedule.startDateTime).toDate();
+        const endMoment = moment(schedule.endDateTime).toDate();
         return {
           id: schedule.eventId,
           title: schedule.name,
           start: startMoment,
           end: endMoment
-        }
-      })
+        };
+      });
     });
   }
 
   handleEventClick(event) {
-    let eventId = event.event._def.publicId
-    console.log(eventId)
-    this.router.navigate(['events/listing', eventId])
+    const eventId = event.event._def.publicId;
+    console.log(eventId);
+    this.router.navigate(['events/listing', eventId]);
   }
 
   handleEventDrop(event) {

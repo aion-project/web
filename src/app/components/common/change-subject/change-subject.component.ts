@@ -22,13 +22,13 @@ export class ChangeSubjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchRoles()
+    this.fetchRoles();
   }
 
   fetchRoles() {
     this.subjectService.getAll().pipe(first()).subscribe((subjects) => {
-      this.subjects = subjects
-    })
+      this.subjects = subjects;
+    });
   }
 
   onSubjectSelected(subject) {

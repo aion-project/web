@@ -1,4 +1,4 @@
-import { Event } from "../model/Event";
+import { Event } from '../model/Event';
 import * as moment from 'moment';
 
 export function getEventAt(events: Event[], time: string): Event[] {
@@ -23,5 +23,5 @@ export function getEventAt(events: Event[], time: string): Event[] {
         //     let eventEndTime = currentTime + " " + moment(event.endDateTime).format("HH:mm:ss")
         //     return moment(time).isBetween(eventStartTime, eventEndTime, null, "[]")
         // } else return false;
-    })
+    });
 }

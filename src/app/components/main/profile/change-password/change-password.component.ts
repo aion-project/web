@@ -15,46 +15,46 @@ export class ChangePasswordComponent implements OnInit {
     currentPassword: new FormControl(''),
     newPassword: new FormControl(''),
     confirmPassword: new FormControl('')
-  })
+  });
 
-  error: any
-  isLoading: boolean = false
+  error: any;
+  isLoading = false;
 
   constructor(
     public dialogRef: MatDialogRef<ChangePasswordComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String,
+    @Inject(MAT_DIALOG_DATA) public data: string,
     private userService: UserService,
   ) { }
 
   ngOnInit() { }
 
   onSubmit() {
-    let currentPassword = this.passwordForm.controls['currentPassword'].value as string;
-    let newPassword = this.passwordForm.controls['newPassword'].value as string;
-    let confirmPassword = this.passwordForm.controls['confirmPassword'].value as string;
+    const currentPassword = this.passwordForm.controls.currentPassword.value as string;
+    const newPassword = this.passwordForm.controls.newPassword.value as string;
+    const confirmPassword = this.passwordForm.controls.confirmPassword.value as string;
 
-    if (newPassword != confirmPassword) {
-      this.error = "Password needs to match"
+    if (newPassword !== confirmPassword) {
+      this.error = 'Password needs to match';
       return;
     }
 
-    this.isLoading = true
+    this.isLoading = true;
     this.userService.changePassword(currentPassword, newPassword).subscribe((res: any) => {
-      this.isLoading = false
-      this.dialogRef.close(true)
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
+        this.error = err.toString();
       }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
 }

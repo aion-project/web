@@ -5,12 +5,12 @@ import { Reschedule } from './Reschedule';
 import { Schedule } from './Schedule';
 
 export interface Event {
-    id: String,
-    name: String,
-    description?: String,
-    createdBy: User,
-    groups: Group[],
-    subject?: Subject,
-    schedules?: Schedule[],
-    reschedules?: Reschedule[]
+    id: string;
+    name: string;
+    description?: string;
+    createdBy: User;
+    groups: Group[];
+    subject?: Subject;
+    schedules?: Schedule[];
+    reschedules?: Reschedule[];
 }

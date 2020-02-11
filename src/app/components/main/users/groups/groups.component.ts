@@ -12,10 +12,10 @@ import { GroupCreateEditComponent } from './group-create-edit/group-create-edit.
 export class GroupsComponent implements OnInit {
 
   isFetching: boolean;
-  isAdmin: boolean
-  currentUser: any
-  displayedColumns: string[] = ['name', 'description']
-  displayedData: any
+  isAdmin: boolean;
+  currentUser: any;
+  displayedColumns: string[] = ['name', 'description'];
+  displayedData: any;
 
   constructor(
     private dialog: MatDialog,
@@ -24,10 +24,10 @@ export class GroupsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
-    this.fetchResources()
+    this.userService.isRole('admin').subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
+    this.fetchResources();
   }
 
   create() {
@@ -44,11 +44,14 @@ export class GroupsComponent implements OnInit {
 
   fetchResources() {
     this.isFetching = true;
-    this.groupService.getAll().subscribe(groups => {
-      this.displayedData = groups
-    }, null, () => {
-      this.isFetching = false;
-    })
+    this.groupService.getAll().subscribe({
+      next: (groups => {
+        this.displayedData = groups;
+      }),
+      error: () => {
+        this.isFetching = false;
+      }
+    });
   }
 }
 

@@ -16,41 +16,41 @@ export class UsersCreateComponent implements OnInit {
     lastName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl('')
-  })
+  });
 
-  error: any
-  isLoading: boolean = false
+  error: any;
+  isLoading = false;
 
   constructor(
     public dialogRef: MatDialogRef<UsersCreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String,
+    @Inject(MAT_DIALOG_DATA) public data: string,
     private userService: UserService,
   ) { }
 
   ngOnInit() { }
 
   onSubmit() {
-    let firstname = this.createForm.controls['firstName'].value as string;
-    let lastname = this.createForm.controls['lastName'].value as string;
-    let email = this.createForm.controls['email'].value as string;
-    let password = this.createForm.controls['password'].value as string;
-    this.isLoading = true
+    const firstname = this.createForm.controls.firstName.value as string;
+    const lastname = this.createForm.controls.lastName.value as string;
+    const email = this.createForm.controls.email.value as string;
+    const password = this.createForm.controls.password.value as string;
+    this.isLoading = true;
     this.userService.create(firstname, lastname, email, password).subscribe((res: any) => {
-      this.isLoading = false
-      this.dialogRef.close(true)
+      this.isLoading = false;
+      this.dialogRef.close(true);
     }, (err) => {
       if (err instanceof HttpErrorResponse && err.error.msg) {
-        this.error = err.error.msg
+        this.error = err.error.msg;
       } else {
-        this.error = err.toString()
+        this.error = err.toString();
       }
       console.log(err);
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
 }

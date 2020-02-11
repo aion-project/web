@@ -9,16 +9,16 @@ import { first } from 'rxjs/operators';
 })
 export class LocationsComponent implements OnInit {
 
-  isAdmin: boolean
+  isAdmin: boolean;
 
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
   }
 
 }

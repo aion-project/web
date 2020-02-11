@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ActivateComponent implements OnInit {
 
-  isLoading: boolean = false
+  isLoading = false;
 
   constructor(
     private userService: UserService,
@@ -19,12 +19,12 @@ export class ActivateComponent implements OnInit {
   ngOnInit() { }
 
   onActivateAccount() {
-    this.isLoading = true
+    this.isLoading = true;
     this.userService.activate().toPromise().then(_ => {
-      this.router.navigateByUrl("/")
+      this.router.navigateByUrl('/');
     }).catch( _ => {
-      this.isLoading = false
-    })
+      this.isLoading = false;
+    });
   }
 
 }

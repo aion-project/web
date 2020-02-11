@@ -15,7 +15,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 })
 export class ProfileComponent implements OnInit {
 
-  user: any
+  user: any;
 
   constructor(
     private dialog: MatDialog,
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchMe()
+    this.fetchMe();
   }
 
   onEditProfile() {
@@ -61,12 +61,12 @@ export class ProfileComponent implements OnInit {
       filter(user => user != null),
       first(),
     ).subscribe(user => {
-      this.user = user
+      this.user = user;
       if (this.user.avatarUrl != null) {
-        let url = AppConfig.BASE_URL + this.user.avatarUrl + '?random+\=' + Math.random()
+        const url = AppConfig.BASE_URL + this.user.avatarUrl + '?random+\=' + Math.random();
         this.user.avatarUrl = url;
       }
-    })
+    });
   }
 
 }

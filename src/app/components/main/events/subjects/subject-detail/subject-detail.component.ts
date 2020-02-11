@@ -15,10 +15,10 @@ import { Subject } from 'src/app/model/Subject';
 })
 export class SubjectDetailComponent implements OnInit {
 
-  private subjectId: String
+  private subjectId: string;
 
-  subject: Subject
-  isAdmin: boolean = false
+  subject: Subject;
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -29,13 +29,13 @@ export class SubjectDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin
-    })
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
+      this.isAdmin = isAdmin;
+    });
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.subjectId = map.get("subjectId")
-      this.fetchSubjectInfo()
-    })
+      this.subjectId = map.get('subjectId');
+      this.fetchSubjectInfo();
+    });
   }
 
   onEditEvent() {
@@ -59,15 +59,15 @@ export class SubjectDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.subjectService.delete(this.subjectId).toPromise().then(_ => {
-          this.router.navigateByUrl("/events/subjects")
-        })
+          this.router.navigateByUrl('/events/subjects');
+        });
       }
     });
   }
 
   fetchSubjectInfo() {
     this.subjectService.get(this.subjectId).pipe(first()).subscribe(subject => {
-      this.subject = subject
-    })
+      this.subject = subject;
+    });
   }
 }

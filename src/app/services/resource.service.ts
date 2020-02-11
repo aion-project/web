@@ -10,39 +10,39 @@ import { Resource } from '../model/Resource';
 })
 export class ResourceService {
 
-  static RESOURCE_URL = AppConfig.BASE_URL + "/resources/"
+  static RESOURCE_URL = AppConfig.BASE_URL + '/resources/';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  get(resourceId: String): Observable<Resource> {
-    return this.http.get(ResourceService.RESOURCE_URL + resourceId).pipe(map(this.toResource))
+  get(resourceId: string): Observable<Resource> {
+    return this.http.get(ResourceService.RESOURCE_URL + resourceId).pipe(map(this.toResource));
   }
 
   getAll(): Observable<Resource[]> {
-    return this.http.get(ResourceService.RESOURCE_URL).pipe(map((res: any[]) => res.map(this.toResource)))
+    return this.http.get(ResourceService.RESOURCE_URL).pipe(map((res: any[]) => res.map(this.toResource)));
   }
 
-  create(name: String, description: String) {
-    let data = {
-      name: name,
-      description: description,
-    }
-    return this.http.post(ResourceService.RESOURCE_URL, data)
+  create(name: string, description: string) {
+    const data = {
+      name,
+      description,
+    };
+    return this.http.post(ResourceService.RESOURCE_URL, data);
   }
 
-  update(resourceId: String, name: String,description: String) {
-    let data = {
-      name: name,
-      description: description,
-    }
-    return this.http.put(ResourceService.RESOURCE_URL + resourceId, data)
+  update(resourceId: string, name: string, description: string) {
+    const data = {
+      name,
+      description,
+    };
+    return this.http.put(ResourceService.RESOURCE_URL + resourceId, data);
   }
 
-  delete(resourceId: String) {
-    return this.http.delete(ResourceService.RESOURCE_URL + resourceId)
+  delete(resourceId: string) {
+    return this.http.delete(ResourceService.RESOURCE_URL + resourceId);
   }
 
-  private toResource = res => res as Resource
+  private toResource = res => res as Resource;
 }

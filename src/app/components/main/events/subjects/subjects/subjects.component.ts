@@ -13,7 +13,7 @@ import { SubjectCreateEditComponent } from '../subject-create-edit/subject-creat
 })
 export class SubjectsComponent implements OnInit {
 
-  isAdmin: Boolean;
+  isAdmin: boolean;
   displayedColumns: string[] = ['name', 'description'];
   displayedData: any;
 
@@ -24,10 +24,10 @@ export class SubjectsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.isRole("admin").pipe(first()).subscribe((isAdmin) => {
-      this.isAdmin = isAdmin
-    })
-    this.fetchSubjects()
+    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+    this.fetchSubjects();
   }
 
   create() {
@@ -44,8 +44,8 @@ export class SubjectsComponent implements OnInit {
 
   fetchSubjects() {
     this.subjectService.getAll().pipe(first()).subscribe(subjects => {
-      this.displayedData = subjects
-    })
+      this.displayedData = subjects;
+    });
   }
 
 }
