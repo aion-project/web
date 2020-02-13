@@ -10,6 +10,7 @@ export interface Schedule {
     id: string;
     startDateTime: Date;
     endDateTime: Date;
+    until: Date;
     repeat: string;
     event?: Event;
     users?: User[];

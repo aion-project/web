@@ -11,7 +11,7 @@ import { ChangeSubjectComponent } from '../../../common/change-subject/change-su
 import { ChangeLocationComponent } from 'src/app/components/common/change-location/change-location.component';
 import { SelectElementType, SelectElementComponent } from 'src/app/components/common/select-element/select-element.component';
 import { AssignUserComponent, AssignUserData } from './assign-user/assign-user.component';
-import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
+import { CreateScheduleData, CreateScheduleComponent } from './create-schedule/create-schedule.component';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/app/model/Schedule';
 import { User } from 'src/app/model/User';
@@ -78,7 +78,10 @@ export class EventDetailComponent implements OnInit {
   onCreateSchedule() {
     const dialogRef = this.dialog.open(CreateScheduleComponent, {
       width: '640px',
-      data: this.eventId
+      data: {
+        eventId: this.eventId,
+        schedules: this.event.schedules
+      } as CreateScheduleData
     });
 
     dialogRef.afterClosed().subscribe(result => {

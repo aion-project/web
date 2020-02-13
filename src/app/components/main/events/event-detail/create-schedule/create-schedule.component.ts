@@ -3,11 +3,17 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ScheduleService } from 'src/app/services/schedule.service';
-import { ScheduleType } from 'src/app/model/Schedule';
+import { ScheduleType, Schedule } from 'src/app/model/Schedule';
 import { LocationService } from 'src/app/services/location.service';
 import { first, distinctUntilChanged } from 'rxjs/operators';
 import { Location } from 'src/app/model/Location';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
+
+export interface CreateScheduleData {
+  eventId: string;
+  schedules: Schedule[];
+}
 
 @Component({
   selector: 'app-create-schedule',
@@ -27,17 +33,19 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   locations: Location[] = [];
 
   error: any;
+  warning: any;
   isLoading = false;
   dateTimePickerSettings = {
     bigBanner: true,
     timePicker: true
   };
 
+  startDateSubscription: Subscription;
   formStatusSubscription: Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<CreateScheduleComponent>,
-    @Inject(MAT_DIALOG_DATA) public eventId: string,
+    @Inject(MAT_DIALOG_DATA) public data: CreateScheduleData,
     private scheduleService: ScheduleService,
     private locationService: LocationService,
   ) { }
@@ -49,11 +57,24 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
         this.locations = [];
       }
     });
+    this.startDateSubscription = this.scheduleForm.controls.startDateTime.valueChanges.subscribe(event => {
+      const confilct = this.data.schedules.find((schedule: Schedule) => {
+        return moment(event).isBetween(moment(schedule.startDateTime), moment(schedule.until));
+      });
+      if (confilct) {
+        this.warning = "There are confilcts with current schedules. Procede with caution."
+      }
+      console.log(confilct);
+      console.log(event);
+    });
   }
 
   ngOnDestroy() {
     if (this.formStatusSubscription && !this.formStatusSubscription.closed) {
       this.formStatusSubscription.unsubscribe();
+    }
+    if (this.startDateSubscription && !this.startDateSubscription.closed) {
+      this.startDateSubscription.unsubscribe();
     }
   }
 
@@ -70,7 +91,14 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     console.log('sending');
 
     this.isLoading = true;
-    this.scheduleService.create(new Date(startDateTime), new Date(endDateTime), new Date(until), repeat, location, this.eventId).subscribe(() => {
+    this.scheduleService.create(
+      new Date(startDateTime),
+      new Date(endDateTime),
+      new Date(until),
+      repeat,
+      location,
+      this.data.eventId
+    ).subscribe(() => {
       console.log('Success');
       this.isLoading = false;
       this.dialogRef.close(true);
