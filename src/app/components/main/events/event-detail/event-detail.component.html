@@ -25,10 +25,6 @@
     <mat-card-content>
       <div *ngIf="event?.schedules.length == 0">
         <div>Event doesn't have a schedule yet.</div>
-        <button *ngIf="isAdmin" mat-button (click)="onCreateSchedule()">
-          <mat-icon>add</mat-icon>
-          Add Schedule
-        </button>
       </div>
       <div *ngIf="event?.schedules.length > 0">
         <div *ngFor="let schedule of event.schedules" class="schedule-row">
@@ -40,22 +36,26 @@
             {{ schedule.location.name }}</div>
           <div class="schedule-users">
             <mat-chip-list *ngIf="schedule.users">
-              <mat-chip [removable]="isAdmin" *ngFor="let user of schedule.users" (removed)="onRemoveUser(schedule, user)">
+              <mat-chip [removable]="isAdmin" *ngFor="let user of schedule.users"
+                (removed)="onRemoveUser(schedule, user)">
                 {{ user.firstName }} {{ user.lastName }}
                 <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <button *ngIf="isAdmin" mat-stroked-button color="primary" (click)="onAddUser(schedule)">
-              <mat-icon>add</mat-icon>
-              User
-            </button>
+            <mat-chip class="schedule-assign-user" [removable]="true" (click)="onAddUser(schedule)">
+              Assign
+              <mat-icon matChipRemove *ngIf="true">add</mat-icon>
+            </mat-chip>
           </div>
-          <button *ngIf="isAdmin" mat-stroked-button color="warn" (click)="onRemoveSchedule(schedule)">
+          <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
             <mat-icon>close</mat-icon>
-            Schedule
           </button>
         </div>
       </div>
+      <button *ngIf="isAdmin" mat-button (click)="onCreateSchedule()">
+        <mat-icon>add</mat-icon>
+        Add Schedule
+      </button>
     </mat-card-content>
     <div class="card-section-title subsection">Subject</div>
     <mat-card-content>
