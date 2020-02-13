@@ -12,6 +12,7 @@ import { Event } from 'src/app/model/Event';
 import * as moment from 'moment';
 import * as DateUtil from 'src/app/utils/date-util';
 import { CheckAvailabilityComponent } from 'src/app/components/common/check-availability/check-availability.component';
+import { ScheduledEvent } from 'src/app/model/ScheduledEvent';
 
 @Component({
   selector: 'app-location-detail',
@@ -23,8 +24,8 @@ export class LocationDetailComponent implements OnInit {
   private locationId: string;
 
   location: Location;
-  events: Event[];
-  currentEvents: Event[];
+  events: ScheduledEvent[];
+  currentEvents: ScheduledEvent[];
   isAdmin = false;
 
   constructor(

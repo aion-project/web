@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import * as DateUtil from 'src/app/utils/date-util';
 import { Event } from 'src/app/model/Event';
 import { CheckAvailabilityComponent } from 'src/app/components/common/check-availability/check-availability.component';
+import { ScheduledEvent } from 'src/app/model/ScheduledEvent';
 
 @Component({
   selector: 'app-user-detail',
@@ -25,8 +26,8 @@ export class UserDetailComponent implements OnInit {
   private userId: string;
 
   user: any = [];
-  events: Event[];
-  currentEvents: Event[];
+  events: ScheduledEvent[];
+  currentEvents: ScheduledEvent[];
   isAdmin = false;
 
   constructor(

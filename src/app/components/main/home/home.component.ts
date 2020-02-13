@@ -68,9 +68,8 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.fetchMyEvents();
-      } else {
-        event.revert();
       }
+      event.revert();
     });
   }
 }

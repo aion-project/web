@@ -5,9 +5,10 @@ import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { distinctUntilChanged } from 'rxjs/operators';
 import * as DateUtil from 'src/app/utils/date-util';
+import { ScheduledEvent } from 'src/app/model/ScheduledEvent';
 
 export interface CheckAvailabilityData {
-  events: Event[];
+  events: ScheduledEvent[];
 }
 
 @Component({
@@ -18,7 +19,7 @@ export interface CheckAvailabilityData {
 export class CheckAvailabilityComponent implements OnInit {
 
   date = new FormControl(moment(Date.now()).toISOString(true));
-  currentEvents: Event[];
+  currentEvents: ScheduledEvent[];
 
   constructor(
     public dialogRef: MatDialogRef<CheckAvailabilityComponent>,

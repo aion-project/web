@@ -5,6 +5,7 @@ import { map, first, flatMap, tap } from 'rxjs/operators';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../model/User';
 import { Event } from '../model/Event';
+import { ScheduledEvent } from '../model/ScheduledEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +61,8 @@ export class UserService {
     return this.http.get(UserService.USER_URL).pipe(map((res: any[]) => res.map(this.toUser)));
   }
 
-  getEvents(userId: string): Observable<Event[]> {
-    return this.http.get(UserService.USER_URL + userId + '/events').pipe(map((res: any[]) => res.map(this.toEvent)));
+  getEvents(userId: string): Observable<ScheduledEvent[]> {
+    return this.http.get(UserService.USER_URL + userId + '/events').pipe(map((res: any[]) => res.map(this.toScheduledEvent)));
   }
 
   create(firstName: string, lastName: string, email: string, password: string) {
@@ -140,4 +141,5 @@ export class UserService {
 
   private toUser = res => res as User;
   private toEvent = res => res as Event;
+  private toScheduledEvent = res => res as ScheduledEvent;
 }

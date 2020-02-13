@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 import { Location } from '../model/Location';
 import { Event } from '../model/Event';
+import { ScheduledEvent } from '../model/ScheduledEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class LocationService {
     return this.http.get(LocationService.LOCATION_URL).pipe(map((res: any[]) => res.map(this.toLocation)));
   }
 
-  getEvents(locationId: string): Observable<Event[]> {
-    return this.http.get(LocationService.LOCATION_URL + locationId + '/events').pipe(map((res: any[]) => res.map(this.toEvent)));
+  getEvents(locationId: string): Observable<ScheduledEvent[]> {
+    return this.http.get(LocationService.LOCATION_URL + locationId + '/events').pipe(map((res: any[]) => res.map(this.toScheduledEvent)));
   }
 
   create(name: string, level: string, description: string, quantity: number, ac: boolean) {
@@ -72,4 +73,5 @@ export class LocationService {
 
   private toLocation = res => res as Location;
   private toEvent = res => res as Event;
+  private toScheduledEvent = res => res as ScheduledEvent;
 }
