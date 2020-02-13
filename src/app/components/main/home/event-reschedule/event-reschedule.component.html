@@ -5,7 +5,24 @@
 <div mat-dialog-content class="content">
   <div>{{ event.oldEvent.title }}</div>
   <div>From: {{ event.oldEvent.start | date: 'medium' }} - {{ event.oldEvent.end | date: 'medium' }}</div>
-  <div>To: {{ event.event.start | date: 'medium' }} - {{ event.event.end | date: 'medium' }}</div>
+
+  <label>To: </label>
+  <form class="new-date-form" [formGroup]="newDateForm">
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeStart" [owlDateTimeTrigger]="timeStart" formControlName="startDateTime"
+        placeholder="Start Date/Time" autocomplete="off">
+      <owl-date-time #timeStart></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeStart">calendar_today</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeEnd" [owlDateTimeTrigger]="timeEnd" formControlName="endDateTime"
+        placeholder="End Date/Time" autocomplete="off">
+      <owl-date-time #timeEnd></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
+    </mat-form-field>
+  </form>
+
   <div class="reschedule-type">
     <label id="radio-group-label">Reschedule</label>
     <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" [(ngModel)]="changeMode">

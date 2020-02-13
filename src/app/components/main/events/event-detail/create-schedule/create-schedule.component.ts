@@ -62,7 +62,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
         return moment(event).isBetween(moment(schedule.startDateTime), moment(schedule.until));
       });
       if (confilct) {
-        this.warning = "There are confilcts with current schedules. Procede with caution."
+        this.warning = 'There are confilcts with current schedules. Procede with caution.';
       }
       console.log(confilct);
       console.log(event);

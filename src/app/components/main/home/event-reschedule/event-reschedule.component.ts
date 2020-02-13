@@ -14,6 +14,11 @@ export class EventRescheduleComponent implements OnInit {
 
   changeMode = 'TEMP';
 
+  newDateForm = new FormGroup({
+    startDateTime: new FormControl(''),
+    endDateTime: new FormControl(''),
+  });
+
   error: any;
   isLoading = false;
   rescheduleModes = [ {key: 'TEMP', value: 'Temporary'}, {key: 'PERM', value: 'Permanant'} ];
@@ -26,6 +31,10 @@ export class EventRescheduleComponent implements OnInit {
 
   ngOnInit() {
     console.log('Event', this.event);
+    this.newDateForm.setValue({
+      startDateTime: this.event.event.start,
+      endDateTime: this.event.event.end
+    });
   }
 
   onSubmit() {
