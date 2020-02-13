@@ -36,7 +36,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<CreateScheduleComponent>,
-    @Inject(MAT_DIALOG_DATA) public eventId: tring,
+    @Inject(MAT_DIALOG_DATA) public eventId: string,
     private scheduleService: ScheduleService,
     private locationService: LocationService,
   ) { }
