@@ -19,6 +19,13 @@
       <owl-date-time #timeEnd></owl-date-time>
       <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
     </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="until" [owlDateTimeTrigger]="until" formControlName="until"
+        placeholder="Until Date/Time" autocomplete="off">
+      <owl-date-time #until></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="until">calendar_today</mat-icon>
+    </mat-form-field>
   </form>
   <div class="repeat-mode">
     <label id="repeat-radio-group-label">Repeating</label>

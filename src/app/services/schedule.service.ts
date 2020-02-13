@@ -21,10 +21,11 @@ export class ScheduleService {
     return this.http.get(ScheduleService.SCHEDULE_URL).pipe(first(), map((res: any[]) => res.map(this.toSchedule)));
   }
 
-  create(startDateTime: Date, endDateTime: Date, repeat: string, location: string, event: string) {
+  create(startDateTime: Date, endDateTime: Date, until: Date, repeat: string, location: string, event: string) {
     const data = {
       startDateTime: moment(startDateTime).utc(true).toISOString(),
       endDateTime: moment(endDateTime).utc(true).toISOString(),
+      until: moment(until).utc(true).toISOString(),
       repeat,
       location,
       event

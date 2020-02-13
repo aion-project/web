@@ -19,6 +19,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   scheduleForm = new FormGroup({
     startDateTime: new FormControl('', Validators.required),
     endDateTime: new FormControl('', Validators.required),
+    until: new FormControl(''),
   });
   repeatMode = 'NONE';
   repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY];
@@ -60,6 +61,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     console.log('Submit');
     const startDateTime = this.scheduleForm.controls.startDateTime.value as string;
     const endDateTime = this.scheduleForm.controls.endDateTime.value as string;
+    const until = this.scheduleForm.controls.until.value as string;
     const repeat = this.repeatMode;
     let location = null;
     if (this.selectedLocation != null) {
@@ -68,7 +70,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     console.log('sending');
 
     this.isLoading = true;
-    this.scheduleService.create(new Date(startDateTime), new Date(endDateTime), repeat, location, this.eventId).subscribe(() => {
+    this.scheduleService.create(new Date(startDateTime), new Date(endDateTime), new Date(until), repeat, location, this.eventId).subscribe(() => {
       console.log('Success');
       this.isLoading = false;
       this.dialogRef.close(true);
