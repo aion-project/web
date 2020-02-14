@@ -119,7 +119,9 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
 
   onCheckLocations() {
     this.locations = [];
-    this.locationService.getAll().pipe(first()).subscribe(locations => {
+    const startDateTime = this.scheduleForm.controls.startDateTime.value as string;
+
+    this.locationService.getAvailable(new Date(startDateTime)).pipe(first()).subscribe(locations => {
       this.locations = locations;
     });
   }

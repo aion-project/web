@@ -6,6 +6,7 @@ import { map, first } from 'rxjs/operators';
 import { Location } from '../model/Location';
 import { Event } from '../model/Event';
 import { ScheduledEvent } from '../model/ScheduledEvent';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ export class LocationService {
 
   getEvents(locationId: string): Observable<ScheduledEvent[]> {
     return this.http.get(LocationService.LOCATION_URL + locationId + '/events').pipe(map((res: any[]) => res.map(this.toScheduledEvent)));
+  }
+
+  getAvailable(time: Date): Observable<Location[]> {
+    return this.http.get(LocationService.LOCATION_URL + 'available', {
+      params: { time: moment(time).utc(true).toISOString()}
+    }).pipe(map((res: any[]) => { 
+      console.log(res)
+      return res.map(this.toLocation) 
+    }));
   }
 
   create(name: string, level: string, description: string, quantity: number, ac: boolean) {
@@ -55,7 +65,6 @@ export class LocationService {
   delete(locationId: string) {
     return this.http.delete(LocationService.LOCATION_URL + locationId);
   }
-
 
   addResource(locationId: string, resourceId: string) {
     const data = {
