@@ -45,6 +45,7 @@ import { CreateScheduleComponent } from './components/main/events/event-detail/c
 import { RescheduleComponent } from './components/main/reschedule/reschedule.component';
 import { MyRescheduleRequestsComponent } from './components/main/reschedule/my-reschedule-requests/my-reschedule-requests.component';
 import { RescheduleRequestsComponent } from './components/main/reschedule/reschedule-requests/reschedule-requests.component';
+import { AcademicGuard } from './auth/academic.guard';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -88,7 +89,7 @@ const routes: Routes = [
       {
         path: 'reschedule', component: RescheduleComponent, children: [
           { path: 'my', component: MyRescheduleRequestsComponent },
-          { path: 'requests', component: RescheduleRequestsComponent },
+          { path: 'requests', component: RescheduleRequestsComponent, canActivate: [AcademicGuard] },
           { path: '', pathMatch: 'full', redirectTo: 'my' },
         ]
       },

@@ -109,7 +109,7 @@ export class EventDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignUserComponent, {
       width: '640px',
       data: {
-        schedule: schedule,
+        schedule,
         current: schedule.users
       } as AssignUserData
     });

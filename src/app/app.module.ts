@@ -16,6 +16,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { LoginGuard } from './auth/login.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { LoaderComponent } from './components/common/loader/loader.component';
+import { AcademicGuard } from './auth/academic.guard';
 
 export const CommonComponents = [
   LoaderComponent,
@@ -46,6 +47,7 @@ export const CommonComponents = [
     UnactiveGuard,
     LoginGuard,
     AdminGuard,
+    AcademicGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

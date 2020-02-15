@@ -9,16 +9,17 @@ import { first } from 'rxjs/operators';
 })
 export class RescheduleComponent implements OnInit {
 
-  isAdmin: boolean;
+  isAcademic: boolean;
 
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userService.isRole('admin').pipe(first()).subscribe((isAdmin: boolean) => {
-      this.isAdmin = isAdmin;
+    this.userService.isRole('academic').pipe(first()).subscribe((isAcademic: boolean) => {
+      console.log(isAcademic);
+      this.isAcademic = isAcademic;
     });
   }
-  
+
 }

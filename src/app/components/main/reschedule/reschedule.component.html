@@ -9,7 +9,7 @@
       [active]="my_rla.isActive">
       My Requests
     </a>
-    <a mat-tab-link [routerLink]="['/reschedule/requests']" routerLinkActive #requests_rla="routerLinkActive"
+    <a mat-tab-link *ngIf="isAcademic" [routerLink]="['/reschedule/requests']" routerLinkActive #requests_rla="routerLinkActive"
       [active]="requests_rla.isActive">
       Requests
     </a>

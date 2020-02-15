@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Reschedule } from 'src/app/model/Reschedule';
+import { RescheduleService } from 'src/app/services/reschedule.service';
+import { first } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-reschedule-requests',
@@ -7,9 +13,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RescheduleRequestsComponent implements OnInit {
 
-  constructor() { }
+  isAcademic: boolean;
+  reschedules: Reschedule[];
+
+  constructor(
+    private dialog: MatDialog,
+    private rescheduleService: RescheduleService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.userService.isRole('academic').pipe(first()).subscribe((isAcademic: boolean) => {
+      this.isAcademic = isAcademic;
+    });
+    this.fetchMyReschedules();
   }
 
+  onApprove(id: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.rescheduleService.accept(id).subscribe((res) => {
+          console.log(res);
+          this.fetchMyReschedules();
+        });
+      }
+    });
+  }
+
+  onDecline(id: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.rescheduleService.decline(id).subscribe((res) => {
+          console.log(res);
+          this.fetchMyReschedules();
+        });
+      }
+    });
+  }
+
+  fetchMyReschedules() {
+    this.rescheduleService.getPending().pipe(first()).subscribe(reschedules => {
+      console.log(reschedules);
+      this.reschedules = reschedules;
+    });
+  }
 }
