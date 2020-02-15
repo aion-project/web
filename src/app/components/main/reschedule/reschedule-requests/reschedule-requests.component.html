@@ -1,6 +1,6 @@
 <div class="container">
   <mat-card class="section">
-    <mat-card-subtitle>Reschedule requests you have done</mat-card-subtitle>
+    <mat-card-subtitle>Pending reschedule requests</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!reschedules"></app-loader>
@@ -34,6 +34,42 @@
           <div>
             <button mat-raised-button (click)="onApprove(reschedule.id)" color="primary">Approve</button>
             <button mat-raised-button (click)="onDecline(reschedule.id)" color="warn">Decline</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="section">
+    <mat-card-subtitle>Closed reschedule requests</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content class="listing-content">
+      <app-loader *ngIf="!doneReschedules"></app-loader>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let reschedule of doneReschedules">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ reschedule.event.name }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ reschedule.id }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div>
+            <label>From:</label>
+            {{ reschedule.oldDateTime }}
+          </div>
+          <div>
+            <label>To:</label>
+            {{ reschedule.newDateTime }}
+          </div>
+          <div>
+            <label>Status:</label>
+            {{ reschedule.status }}
+          </div>
+          <div>
+            <label>Type:</label>
+            {{ reschedule.type }}
           </div>
         </mat-expansion-panel>
       </mat-accordion>

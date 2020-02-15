@@ -15,6 +15,7 @@ export class RescheduleRequestsComponent implements OnInit {
 
   isAcademic: boolean;
   reschedules: Reschedule[];
+  doneReschedules: Reschedule[];
 
   constructor(
     private dialog: MatDialog,
@@ -26,7 +27,8 @@ export class RescheduleRequestsComponent implements OnInit {
     this.userService.isRole('academic').pipe(first()).subscribe((isAcademic: boolean) => {
       this.isAcademic = isAcademic;
     });
-    this.fetchMyReschedules();
+    this.fetchReschedules();
+    this.fetchDoneReschedules();
   }
 
   onApprove(id: string) {
@@ -38,7 +40,7 @@ export class RescheduleRequestsComponent implements OnInit {
       if (result) {
         this.rescheduleService.accept(id).subscribe((res) => {
           console.log(res);
-          this.fetchMyReschedules();
+          this.fetchReschedules();
         });
       }
     });
@@ -53,16 +55,23 @@ export class RescheduleRequestsComponent implements OnInit {
       if (result) {
         this.rescheduleService.decline(id).subscribe((res) => {
           console.log(res);
-          this.fetchMyReschedules();
+          this.fetchReschedules();
         });
       }
     });
   }
 
-  fetchMyReschedules() {
+  fetchReschedules() {
     this.rescheduleService.getPending().pipe(first()).subscribe(reschedules => {
       console.log(reschedules);
       this.reschedules = reschedules;
+    });
+  }
+
+  fetchDoneReschedules() {
+    this.rescheduleService.getReviewed().pipe(first()).subscribe(reschedules => {
+      console.log(reschedules);
+      this.doneReschedules = reschedules;
     });
   }
 }

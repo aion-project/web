@@ -24,6 +24,10 @@ export class RescheduleService {
     return this.http.get(RescheduleService.RESCHEDULE_URL + 'pending').pipe(map((res: any[]) => res.map(this.toRechedule)));
   }
 
+  getReviewed(): Observable<Reschedule[]> {
+    return this.http.get(RescheduleService.RESCHEDULE_URL + 'reviewed').pipe(map((res: any[]) => res.map(this.toRechedule)));
+  }
+
   accept(id: string) {
     return this.http.post(RescheduleService.RESCHEDULE_URL + id + '/accept', null).pipe(first());
   }
