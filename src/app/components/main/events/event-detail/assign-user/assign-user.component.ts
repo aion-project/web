@@ -6,8 +6,10 @@ import { SelectElementComponent } from 'src/app/components/common/select-element
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/User';
+import { Schedule } from 'src/app/model/Schedule';
 
 export interface AssignUserData {
+  schedule: Schedule;
   current: User[];
 }
 
@@ -44,7 +46,7 @@ export class AssignUserComponent implements OnInit, OnDestroy {
   }
 
   fetchElements() {
-    this.userService.getAll().pipe(map((elements: any[]) => {
+    this.userService.getAvailable(this.data.schedule.startDateTime).pipe(map((elements: any[]) => {
       return elements.map(element => {
         const filteredRoles = element.roles.filter(role => role.name === 'lecturer' || role.name === 'instructor');
 

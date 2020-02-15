@@ -6,6 +6,7 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../model/User';
 import { Event } from '../model/Event';
 import { ScheduledEvent } from '../model/ScheduledEvent';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,15 @@ export class UserService {
 
   getEvents(userId: string): Observable<ScheduledEvent[]> {
     return this.http.get(UserService.USER_URL + userId + '/events').pipe(map((res: any[]) => res.map(this.toScheduledEvent)));
+  }
+
+  getAvailable(time: Date): Observable<User[]> {
+    return this.http.get(UserService.USER_URL + 'available', {
+      params: { time: moment(time).utc(true).toISOString() }
+    }).pipe(map((res: any[]) => {
+      console.log(res);
+      return res.map(this.toUser);
+    }));
   }
 
   create(firstName: string, lastName: string, email: string, password: string) {
