@@ -50,6 +50,7 @@ import { ReservationsComponent } from './components/main/reservations/reservatio
 import { MyReservationsComponent } from './components/main/reservations/my-reservations/my-reservations.component';
 import { ReservationRequestsComponent } from './components/main/reservations/reservation-requests/reservation-requests.component';
 import { ManagerialGuard } from './auth/managerial.guard';
+import { CreateReservationComponent } from './components/main/reservations/my-reservations/create-reservation/create-reservation.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -165,5 +166,6 @@ export const DialogComponents = [
   AssignUserComponent,
   CheckAvailabilityComponent,
   EventRescheduleComponent,
-  CreateScheduleComponent
+  CreateScheduleComponent,
+  CreateReservationComponent,
 ];

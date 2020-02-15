@@ -1,0 +1,32 @@
+.mat-dialog-content {
+    overflow: visible !important;
+}
+
+.repeat-mode {
+    display: flex;
+    flex-direction: column;
+}
+
+.repeat-radio-group {
+    margin-top: 8px;
+}
+
+.repeat-radio-button {
+    margin-right: 16px;
+}
+
+.location {
+    margin-top: 16px;
+}
+
+.location-title {
+    margin-bottom: 4px;
+}
+
+.avail-locations {
+    margin-top: 8px;
+}
+
+.warning {
+    color: #EEA202;
+}

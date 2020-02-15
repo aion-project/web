@@ -1,0 +1,55 @@
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title>Create Reservation</h1>
+</div>
+<div mat-dialog-content class="content">
+  <form class="event-form" [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <span class="error" *ngIf="error">{{error}}</span>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="event" placeholder="Event Name">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput type="text" formControlName="description" placeholder="Description">
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeStart" [owlDateTimeTrigger]="timeStart" formControlName="startDateTime"
+        placeholder="Start Date/Time" autocomplete="off">
+      <owl-date-time #timeStart></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeStart">calendar_today</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="form-full-width">
+      <input matInput [owlDateTime]="timeEnd" [owlDateTimeTrigger]="timeEnd" formControlName="endDateTime"
+        placeholder="End Date/Time" autocomplete="off">
+      <owl-date-time #timeEnd></owl-date-time>
+      <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
+    </mat-form-field>
+  </form>
+  <div class="location">
+    <div class="location-title">Location</div>
+    <div *ngIf="!selectedLocation">Haven't selected an location yet.</div>
+    <button mat-flat-button color="primary" (click)="onCheckLocations()" [disabled]="!reservationForm.valid">Check
+      available locations</button>
+    <mat-chip-list>
+      <mat-chip *ngIf="selectedLocation" removable (removed)="onLocationRemoved()">
+        {{ selectedLocation.name }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <div *ngIf="locations.length > 0" class="avail-locations">
+      <div>Available locations</div>
+      <mat-chip-list>
+        <mat-chip *ngFor="let location of locations" (click)="onLocationSelected(location)">
+          {{ location.name }}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!selectedLocation">Save</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>
