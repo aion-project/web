@@ -50,6 +50,13 @@ export class UserService {
     );
   }
 
+  isRoleIn(roles: String[]): Observable<boolean> {
+    return this.me().pipe(
+      first(),
+      map((user: any) => user.roles.some(it => roles.includes(it.name)))
+    );
+  }
+
   activate() {
     return this.http.post(UserService.USER_URL + UserService.ENDPOINT_ACTIVATE, null);
   }

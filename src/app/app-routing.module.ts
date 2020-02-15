@@ -46,6 +46,10 @@ import { RescheduleComponent } from './components/main/reschedule/reschedule.com
 import { MyRescheduleRequestsComponent } from './components/main/reschedule/my-reschedule-requests/my-reschedule-requests.component';
 import { RescheduleRequestsComponent } from './components/main/reschedule/reschedule-requests/reschedule-requests.component';
 import { AcademicGuard } from './auth/academic.guard';
+import { ReservationsComponent } from './components/main/reservations/reservations.component';
+import { MyReservationsComponent } from './components/main/reservations/my-reservations/my-reservations.component';
+import { ReservationRequestsComponent } from './components/main/reservations/reservation-requests/reservation-requests.component';
+import { ManagerialGuard } from './auth/managerial.guard';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -93,6 +97,13 @@ const routes: Routes = [
           { path: '', pathMatch: 'full', redirectTo: 'my' },
         ]
       },
+      {
+        path: 'reservations', component: ReservationsComponent, children: [
+          { path: 'my', component: MyReservationsComponent },
+          { path: 'requests', component: ReservationRequestsComponent, canActivate: [ManagerialGuard] },
+          { path: '', pathMatch: 'full', redirectTo: 'my' },
+        ]
+      },
       { path: 'resources', component: ResourcesComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'home', component: HomeComponent },
@@ -131,6 +142,9 @@ export const ScreenComponents = [
   RescheduleComponent,
   MyRescheduleRequestsComponent,
   RescheduleRequestsComponent,
+  ReservationsComponent,
+  MyReservationsComponent,
+  ReservationRequestsComponent,
 ];
 
 export const DialogComponents = [

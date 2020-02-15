@@ -1,0 +1,18 @@
+<div class="reschedule-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="section-header">Reservations</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <nav class="reschedule-nav" mat-tab-nav-bar backgroundColor="primary">
+    <a mat-tab-link [routerLink]="['/reservations/my']" routerLinkActive #my_rla="routerLinkActive"
+      [active]="my_rla.isActive">
+      My Requests
+    </a>
+    <a mat-tab-link *ngIf="isManagerial" [routerLink]="['/reservations/requests']" routerLinkActive
+      #requests_rla="routerLinkActive" [active]="requests_rla.isActive">
+      Requests
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
