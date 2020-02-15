@@ -30,6 +30,20 @@
     </mat-nav-list>
     <mat-divider></mat-divider>
     <div class="title">
+      Requests
+    </div>
+    <mat-nav-list class="side-top-nav">
+      <a mat-list-item [routerLink]="['/reschedule']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>access_time</mat-icon>
+        <h4 mat-line> Rescheduling </h4>
+      </a>
+      <a mat-list-item [routerLink]="['/reservations']" routerLinkActive="selected">
+        <mat-icon mat-list-icon>local_offer</mat-icon>
+        <h4 mat-line> Reservations </h4>
+      </a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <div class="title">
       Personal
     </div>
     <mat-nav-list class="side-bottom-nav">

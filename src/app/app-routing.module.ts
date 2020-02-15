@@ -42,6 +42,9 @@ import { AssignUserComponent } from './components/main/events/event-detail/assig
 import { CheckAvailabilityComponent } from './components/common/check-availability/check-availability.component';
 import { EventRescheduleComponent } from './components/main/home/event-reschedule/event-reschedule.component';
 import { CreateScheduleComponent } from './components/main/events/event-detail/create-schedule/create-schedule.component';
+import { RescheduleComponent } from './components/main/reschedule/reschedule.component';
+import { MyRescheduleRequestsComponent } from './components/main/reschedule/my-reschedule-requests/my-reschedule-requests.component';
+import { RescheduleRequestsComponent } from './components/main/reschedule/reschedule-requests/reschedule-requests.component';
 
 export function onAuthRequired({ oktaAuth, router }) {
   router.navigate(['/login']);
@@ -82,6 +85,13 @@ const routes: Routes = [
           { path: '', pathMatch: 'full', redirectTo: 'listing' },
         ]
       },
+      {
+        path: 'reschedule', component: RescheduleComponent, children: [
+          { path: 'my', component: MyRescheduleRequestsComponent },
+          { path: 'requests', component: RescheduleRequestsComponent },
+          { path: '', pathMatch: 'full', redirectTo: 'my' },
+        ]
+      },
       { path: 'resources', component: ResourcesComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'home', component: HomeComponent },
@@ -117,6 +127,9 @@ export const ScreenComponents = [
   EventDetailComponent,
   SubjectsComponent,
   SubjectDetailComponent,
+  RescheduleComponent,
+  MyRescheduleRequestsComponent,
+  RescheduleRequestsComponent,
 ];
 
 export const DialogComponents = [
