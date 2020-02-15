@@ -34,9 +34,9 @@ export class LocationService {
   getAvailable(time: Date): Observable<Location[]> {
     return this.http.get(LocationService.LOCATION_URL + 'available', {
       params: { time: moment(time).utc(true).toISOString()}
-    }).pipe(map((res: any[]) => { 
-      console.log(res)
-      return res.map(this.toLocation) 
+    }).pipe(map((res: any[]) => {
+      console.log(res);
+      return res.map(this.toLocation);
     }));
   }
 
