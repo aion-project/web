@@ -4,6 +4,7 @@ import { ReservationService } from 'src/app/services/reservation.service';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { CreateReservationComponent } from './create-reservation/create-reservation.component';
+import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-my-reservations',
@@ -20,22 +21,37 @@ export class MyReservationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchMyReschedules();
+    this.fetchMyReservations();
   }
 
-  create() {
+  onCreate() {
     const dialogRef = this.dialog.open(CreateReservationComponent, {
       width: '640px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.fetchMyReschedules();
+        this.fetchMyReservations();
       }
     });
   }
 
-  fetchMyReschedules() {
+  onDelete(id: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '320px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reservationService.delete(id).subscribe((res) => {
+          console.log(res);
+          this.fetchMyReservations();
+        });
+      }
+    });
+  }
+
+  fetchMyReservations() {
     this.reservationService.getMine().pipe(first()).subscribe(reservations => {
       console.log(reservations);
       this.reservations = reservations;

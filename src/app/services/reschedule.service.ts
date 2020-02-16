@@ -28,6 +28,10 @@ export class RescheduleService {
     return this.http.get(RescheduleService.RESCHEDULE_URL + 'reviewed').pipe(map((res: any[]) => res.map(this.toRechedule)));
   }
 
+  delete(id: string) {
+    return this.http.delete(RescheduleService.RESCHEDULE_URL + id);
+  }
+
   accept(id: string) {
     return this.http.post(RescheduleService.RESCHEDULE_URL + id + '/accept', null).pipe(first());
   }

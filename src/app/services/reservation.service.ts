@@ -42,6 +42,10 @@ export class ReservationService {
     return this.http.post(ReservationService.RESERVATION_URL, data);
   }
 
+  delete(id: string) {
+    return this.http.delete(ReservationService.RESERVATION_URL + id);
+  }
+
   accept(id: string) {
     return this.http.post(ReservationService.RESERVATION_URL + id + '/accept', null).pipe(first());
   }

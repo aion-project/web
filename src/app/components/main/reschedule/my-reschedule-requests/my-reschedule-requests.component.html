@@ -31,6 +31,10 @@
             <label>Type:</label>
             {{ reschedule.type }}
           </div>
+          <div>
+            <button mat-raised-button *ngIf="reschedule.status === 'PENDING' || reschedule.status === 'DECLINED'"
+              (click)="onDelete(reschedule.id)" color="primary">Delete</button>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>
