@@ -22,12 +22,8 @@ export class ReservationService {
     return this.http.get(ReservationService.RESERVATION_URL + 'mine').pipe(map((res: any[]) => res.map(this.toReservation)));
   }
 
-  getPending(): Observable<Reservation[]> {
-    return this.http.get(ReservationService.RESERVATION_URL + 'pending').pipe(map((res: any[]) => res.map(this.toReservation)));
-  }
-
-  getReviewed(): Observable<Reservation[]> {
-    return this.http.get(ReservationService.RESERVATION_URL + 'reviewed').pipe(map((res: any[]) => res.map(this.toReservation)));
+  getOpen(): Observable<Reservation[]> {
+    return this.http.get(ReservationService.RESERVATION_URL + 'open').pipe(map((res: any[]) => res.map(this.toReservation)));
   }
 
   getClosed(): Observable<Reservation[]> {

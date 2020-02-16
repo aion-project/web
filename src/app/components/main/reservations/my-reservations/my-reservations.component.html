@@ -33,6 +33,11 @@
           <div>
             <label>Status:</label>
             {{ reservation.status }}
+            <div>
+              <div *ngIf="reservation.status === 'REVIEWED'">Waiting to be accepted by managerial staff
+              </div>
+              <div *ngIf="reservation.status === 'PENDING'">Waiting to be reviewed by academic staff</div>
+            </div>
           </div>
           <div>
             <label>Location:</label>

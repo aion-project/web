@@ -28,7 +28,6 @@ export class RescheduleRequestsComponent implements OnInit {
       this.isAcademic = isAcademic;
     });
     this.fetchReschedules();
-    this.fetchDoneReschedules();
   }
 
   onApprove(id: string) {
@@ -66,12 +65,10 @@ export class RescheduleRequestsComponent implements OnInit {
       console.log(reschedules);
       this.reschedules = reschedules;
     });
-  }
-
-  fetchDoneReschedules() {
     this.rescheduleService.getReviewed().pipe(first()).subscribe(reschedules => {
       console.log(reschedules);
       this.doneReschedules = reschedules;
     });
   }
+  
 }

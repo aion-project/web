@@ -1,1 +1,85 @@
-<p>reservation-requests works!</p>
+<div class="container">
+  <mat-card class="section">
+    <mat-card-subtitle>Open reservation requests</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content class="listing-content">
+      <app-loader *ngIf="!reservations"></app-loader>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let reservation of reservations">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ reservation.event }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ reservation.id }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div>
+            <label>Start Date Time:</label>
+            {{ reservation.startDateTime }}
+          </div>
+          <div>
+            <label>End Date Time:</label>
+            {{ reservation.endDateTime }}
+          </div>
+          <div>
+            <label>Status:</label>
+            {{ reservation.status }}
+          </div>
+          <div>
+            <label>Location:</label>
+            {{ reservation.location.name }}
+          </div>
+          <div>
+            <div *ngIf="isAcademic && reservation.status === 'REVIEWED'">Waiting to be accepted by managerial staff</div>
+            <div *ngIf="isManagerial && reservation.status === 'PENDING'">Waiting to be reviewed by academic staff</div>
+          </div>
+          <div>
+            <button mat-raised-button *ngIf="isAcademic && reservation.status === 'PENDING'"
+              (click)="onReview(reservation.id)" color="primary">Review</button>
+            <button mat-raised-button *ngIf="isManagerial && reservation.status === 'REVIEWED'"
+              (click)="onApprove(reservation.id)" color="primary">Approve</button>
+            <button mat-raised-button (click)="onDecline(reschedule.id)" color="warn">Decline</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="section">
+    <mat-card-subtitle>Closed reservation requests</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content class="listing-content">
+      <app-loader *ngIf="!closedReservations"></app-loader>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let reservation of closedReservations">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ reservation.event }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ reservation.id }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div>
+            <label>Start Date Time:</label>
+            {{ reservation.startDateTime }}
+          </div>
+          <div>
+            <label>End Date Time:</label>
+            {{ reservation.endDateTime }}
+          </div>
+          <div>
+            <label>Status:</label>
+            {{ reservation.status }}
+          </div>
+          <div>
+            <label>Location:</label>
+            {{ reservation.location.name }}
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>
