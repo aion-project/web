@@ -38,6 +38,10 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     border-radius: 6px !important;
 }
 
+.mat-drawer-container {
+    background-color: #f5f5f5 !important;
+}
+
 // Section
 .section-header {
     font-size: 24px !important;

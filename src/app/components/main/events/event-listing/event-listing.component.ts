@@ -17,7 +17,7 @@ import { Event } from 'src/app/model/Event';
 export class EventListingComponent implements OnInit {
 
   isAdmin: boolean;
-  displayedColumns: string[] = ['name', 'description', 'time'];
+  displayedColumns: string[] = ['name', 'description'];
   displayedData = new MatTableDataSource<Event>([]);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
