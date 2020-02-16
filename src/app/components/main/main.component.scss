@@ -1,3 +1,26 @@
+.console-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.console-is-mobile .console-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.console-sidenav-container {
+  flex: 1;
+}
+
+.console-is-mobile .console-sidenav-container {
+  flex: 1 0 auto;
+}
+
 .side-nav-header {
   display: flex;
   padding: 16px 16px;
@@ -9,6 +32,10 @@
   margin: auto 0;
 }
 
+.menu-button {
+  color: white;
+}
+
 .side-nav-header .logo-text {
   margin-left: 6px;
   font-size: 24px;
@@ -17,6 +44,10 @@
 
 .main-container {
   height: 100%;
+}
+
+.content {
+  min-height: 100%;
 }
 
 .content-container .content {

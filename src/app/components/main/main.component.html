@@ -1,74 +1,85 @@
-<mat-sidenav-container class="main-container">
-  <mat-sidenav class="side-nav mat-elevation-z2" mode="side" opened>
-    <div class="side-nav-header">
-      <img class="logo-icon" src="assets/images/logo.png" />
-      <h1 class="logo-text">aion</h1>
-    </div>
-    <mat-nav-list class="side-top-nav">
-      <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>home</mat-icon>
-        <h4 mat-line> Home </h4>
-      </a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-    <div class="title">
-      Sections
-    </div>
-    <mat-nav-list class="side-top-nav">
-      <a mat-list-item [routerLink]="['/events']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>event</mat-icon>
-        <h4 mat-line> Events </h4>
-      </a>
-      <a mat-list-item [routerLink]="['/locations']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>room</mat-icon>
-        <h4 mat-line> Locations </h4>
-      </a>
-      <a mat-list-item [routerLink]="['/users']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>people</mat-icon>
-        <h4 mat-line> Users </h4>
-      </a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-    <div class="title">
-      Requests
-    </div>
-    <mat-nav-list class="side-top-nav">
-      <a mat-list-item [routerLink]="['/reschedule']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>access_time</mat-icon>
-        <h4 mat-line> Rescheduling </h4>
-      </a>
-      <a mat-list-item [routerLink]="['/reservations']" routerLinkActive="selected">
-        <mat-icon mat-list-icon>local_offer</mat-icon>
-        <h4 mat-line> Reservations </h4>
-      </a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-    <div class="title">
-      Personal
-    </div>
-    <mat-nav-list class="side-bottom-nav">
-      <a mat-list-item *ngIf="!!user" [routerLink]="['/profile/']" routerLinkActive="selected">
-        <div mat-list-icon class="thumbnail-container">
-          <img *ngIf="user?.thumbnailUrl" class="thumbnail" [src]="user?.thumbnailUrl">
-          <mat-icon *ngIf="!user?.thumbnailUrl">person</mat-icon>
-        </div>
-        <h4 mat-line> {{ user?.firstName }} {{ user?.lastName }} </h4>
-      </a>
-      <a mat-list-item [matMenuTriggerFor]="menu" aria-label="More options">
-        <mat-icon mat-list-icon>more_horiz</mat-icon>
-        <h4 mat-line> More </h4>
-      </a>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>LOGOUT</span>
-        </button>
-      </mat-menu>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content class="content-container">
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="console-container" [class.console-is-mobile]="mobileQuery.matches">
+  <mat-sidenav-container class="main-container">
+    <mat-sidenav class="side-nav mat-elevation-z2" #snav [opened]="mobileQuery.matches ? false : true"
+      [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
+      <div class="side-nav-header">
+        <img class="logo-icon" src="assets/images/logo.png" />
+        <h1 class="logo-text">aion</h1>
+      </div>
+      <mat-nav-list class="side-top-nav">
+        <a mat-list-item [routerLink]="['/home']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>home</mat-icon>
+          <h4 mat-line> Home </h4>
+        </a>
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+      <div class="title">
+        Sections
+      </div>
+      <mat-nav-list class="side-top-nav">
+        <a mat-list-item [routerLink]="['/events']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>event</mat-icon>
+          <h4 mat-line> Events </h4>
+        </a>
+        <a mat-list-item [routerLink]="['/locations']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>room</mat-icon>
+          <h4 mat-line> Locations </h4>
+        </a>
+        <a mat-list-item [routerLink]="['/users']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>people</mat-icon>
+          <h4 mat-line> Users </h4>
+        </a>
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+      <div class="title">
+        Requests
+      </div>
+      <mat-nav-list class="side-top-nav">
+        <a mat-list-item [routerLink]="['/reschedule']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>access_time</mat-icon>
+          <h4 mat-line> Rescheduling </h4>
+        </a>
+        <a mat-list-item [routerLink]="['/reservations']" routerLinkActive="selected">
+          <mat-icon mat-list-icon>local_offer</mat-icon>
+          <h4 mat-line> Reservations </h4>
+        </a>
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+      <div class="title">
+        Personal
+      </div>
+      <mat-nav-list class="side-bottom-nav">
+        <a mat-list-item *ngIf="!!user" [routerLink]="['/profile/']" routerLinkActive="selected">
+          <div mat-list-icon class="thumbnail-container">
+            <img *ngIf="user?.thumbnailUrl" class="thumbnail" [src]="user?.thumbnailUrl">
+            <mat-icon *ngIf="!user?.thumbnailUrl">person</mat-icon>
+          </div>
+          <h4 mat-line> {{ user?.firstName }} {{ user?.lastName }} </h4>
+        </a>
+        <a mat-list-item [matMenuTriggerFor]="menu" aria-label="More options">
+          <mat-icon mat-list-icon>more_horiz</mat-icon>
+          <h4 mat-line> More </h4>
+        </a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>LOGOUT</span>
+          </button>
+        </mat-menu>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-toolbar *ngIf="mobileQuery.matches ? true : false">
+        <mat-toolbar-row class="primary-color">
+          <button mat-icon-button (click)="snav.toggle()" class="menu-button">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
