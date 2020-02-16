@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { EventService } from 'src/app/services/event.service';
 import { first } from 'rxjs/operators';
@@ -20,6 +20,10 @@ export class SubjectsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
+  }
+  
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
   }
   
   constructor(
@@ -45,6 +49,11 @@ export class SubjectsComponent implements OnInit {
         this.fetchSubjects();
       }
     });
+  }
+
+  filter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   fetchSubjects() {

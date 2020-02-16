@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { GroupService } from 'src/app/services/group.service';
 import { GroupCreateEditComponent } from './group-create-edit/group-create-edit.component';
@@ -20,6 +20,10 @@ export class GroupsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
   }
 
   constructor(
@@ -45,6 +49,11 @@ export class GroupsComponent implements OnInit {
         this.fetchResources();
       }
     });
+  }
+
+  filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   fetchResources() {

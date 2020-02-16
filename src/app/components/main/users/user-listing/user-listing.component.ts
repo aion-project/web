@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { UsersCreateComponent } from '../users-create/users-create.component';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/model/User';
 
@@ -20,6 +20,10 @@ export class UserListingComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
   }
 
   constructor(
@@ -50,6 +54,11 @@ export class UserListingComponent implements OnInit {
         this.fetchUsers();
       }
     });
+  }
+
+  filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   fetchUsers() {

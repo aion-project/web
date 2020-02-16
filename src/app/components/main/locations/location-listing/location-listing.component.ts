@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocationCreateEditComponent } from '../location-create-edit/location-create-edit.component';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { LocationService } from 'src/app/services/location.service';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
@@ -19,6 +19,10 @@ export class LocationListingComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
   }
 
   constructor(
@@ -44,6 +48,11 @@ export class LocationListingComponent implements OnInit {
         this.fetchLocations();
       }
     });
+  }
+
+  filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   fetchLocations() {
