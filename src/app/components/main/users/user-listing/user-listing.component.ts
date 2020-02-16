@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { UsersCreateComponent } from '../users-create/users-create.component';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-user-listing',
@@ -14,7 +16,11 @@ export class UserListingComponent implements OnInit {
   isAdmin: boolean;
   currentUser: any;
   displayedColumns: string[] = ['firstName', 'lastName', 'email'];
-  displayedData: any;
+  displayedData = new MatTableDataSource<User>([]);
+
+  @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
+    this.displayedData.paginator = paginator;
+  }
 
   constructor(
     private dialog: MatDialog,
@@ -48,7 +54,7 @@ export class UserListingComponent implements OnInit {
 
   fetchUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      this.displayedData = users;
+      this.displayedData.data = users
     });
   }
 }

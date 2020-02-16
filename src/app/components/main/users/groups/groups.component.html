@@ -11,11 +11,11 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="isFetching && !displayedData"></app-loader>
-      <div class="error-view" *ngIf="displayedData && displayedData.length == 0">
+      <div class="error-view" *ngIf="displayedData && displayedData.data.length == 0">
         <img src="assets/images/draw/groups.svg">
         <label>Groups will appear here...</label>
       </div>
-      <div *ngIf="displayedData && displayedData.length > 0">
+      <div *ngIf="displayedData && displayedData.data.length > 0">
         <table mat-table [dataSource]="displayedData">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -29,6 +29,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
             [routerLink]="['/users/groups', row.id]"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>

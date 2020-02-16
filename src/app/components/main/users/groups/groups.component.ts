@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { GroupService } from 'src/app/services/group.service';
 import { GroupCreateEditComponent } from './group-create-edit/group-create-edit.component';
+import { Group } from 'src/app/model/Group';
 
 @Component({
   selector: 'app-groups',
@@ -15,7 +16,11 @@ export class GroupsComponent implements OnInit {
   isAdmin: boolean;
   currentUser: any;
   displayedColumns: string[] = ['name', 'description'];
-  displayedData: any;
+  displayedData = new MatTableDataSource<Group>([]);
+
+  @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
+    this.displayedData.paginator = paginator;
+  }
 
   constructor(
     private dialog: MatDialog,
@@ -46,7 +51,7 @@ export class GroupsComponent implements OnInit {
     this.isFetching = true;
     this.groupService.getAll().subscribe({
       next: (groups => {
-        this.displayedData = groups;
+        this.displayedData.data = groups;
       }),
       error: () => {
         this.isFetching = false;

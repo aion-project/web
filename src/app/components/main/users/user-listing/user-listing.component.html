@@ -11,11 +11,11 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!displayedData"></app-loader>
-      <div class="error-view" *ngIf="displayedData && displayedData.length == 0">
+      <div class="error-view" *ngIf="displayedData && displayedData.data.length == 0">
         <img src="assets/images/draw/users.svg">
         <label>Users will appear here...</label>
       </div>
-      <div *ngIf="displayedData && displayedData.length > 0">
+      <div *ngIf="displayedData && displayedData.data.length > 0">
         <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef> Firstname </th>
@@ -33,6 +33,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
             [routerLink]="['/users/listing', row.id]"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
