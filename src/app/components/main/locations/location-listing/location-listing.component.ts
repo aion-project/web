@@ -15,7 +15,7 @@ export class LocationListingComponent implements OnInit {
 
   isAdmin: boolean;
   displayedColumns: string[] = ['name', 'level', 'description'];
-  displayedData = new MatTableDataSource<Location>([]);
+  displayedData = new MatTableDataSource<Location>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;

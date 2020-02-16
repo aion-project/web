@@ -10,12 +10,12 @@
     <mat-card-subtitle>Locations in the system</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
-      <app-loader *ngIf="!displayedData"></app-loader>
-      <div class="error-view" *ngIf="displayedData && displayedData.data.length == 0">
+      <app-loader *ngIf="!displayedData.data"></app-loader>
+      <div class="error-view" *ngIf="displayedData.data && displayedData.data.length == 0">
         <img src="assets/images/draw/locations.svg">
         <label>Locations will appear here...</label>
       </div>
-      <div *ngIf="displayedData && displayedData.data.length > 0">
+      <div *ngIf="displayedData.data && displayedData.data.length > 0">
         <mat-form-field class="filter-form">
           <mat-label>Filter</mat-label>
           <input matInput (keyup)="filter($event)" placeholder="Filter">

@@ -16,7 +16,7 @@ export class ResourcesComponent implements OnInit {
   isAdmin: boolean;
   currentUser: any;
   displayedColumns: string[] = ['name', 'description'];
-  displayedData = new MatTableDataSource<Resource>([]);
+  displayedData = new MatTableDataSource<Resource>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;

@@ -16,7 +16,7 @@ export class GroupsComponent implements OnInit {
   isAdmin: boolean;
   currentUser: any;
   displayedColumns: string[] = ['name', 'description'];
-  displayedData = new MatTableDataSource<Group>([]);
+  displayedData = new MatTableDataSource<Group>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;

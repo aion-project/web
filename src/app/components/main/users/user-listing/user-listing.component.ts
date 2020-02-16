@@ -16,7 +16,7 @@ export class UserListingComponent implements OnInit {
   isAdmin: boolean;
   currentUser: any;
   displayedColumns: string[] = ['firstName', 'lastName', 'email'];
-  displayedData = new MatTableDataSource<User>([]);
+  displayedData = new MatTableDataSource<User>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;

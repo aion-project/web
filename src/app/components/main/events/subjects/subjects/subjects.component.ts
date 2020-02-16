@@ -16,7 +16,7 @@ export class SubjectsComponent implements OnInit {
 
   isAdmin: boolean;
   displayedColumns: string[] = ['name', 'description'];
-  displayedData = new MatTableDataSource<Subject>([]);
+  displayedData = new MatTableDataSource<Subject>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
