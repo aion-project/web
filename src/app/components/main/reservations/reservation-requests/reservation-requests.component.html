@@ -4,7 +4,11 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!reservations"></app-loader>
-      <mat-accordion>
+      <div class="error-view" *ngIf="reservations && reservations.length == 0">
+        <img src="assets/images/draw/review_open.svg">
+        <label>Pending requests will appear here...</label>
+      </div>
+      <mat-accordion *ngIf="reservations && reservations.length > 0">
         <mat-expansion-panel *ngFor="let reservation of reservations">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -32,7 +36,8 @@
             {{ reservation.location.name }}
           </div>
           <div>
-            <div *ngIf="isAcademic && reservation.status === 'REVIEWED'">Waiting to be accepted by managerial staff</div>
+            <div *ngIf="isAcademic && reservation.status === 'REVIEWED'">Waiting to be accepted by managerial staff
+            </div>
             <div *ngIf="isManagerial && reservation.status === 'PENDING'">Waiting to be reviewed by academic staff</div>
           </div>
           <div>
@@ -40,7 +45,7 @@
               (click)="onReview(reservation.id)" color="primary">Review</button>
             <button mat-raised-button *ngIf="isManagerial && reservation.status === 'REVIEWED'"
               (click)="onApprove(reservation.id)" color="primary">Approve</button>
-            <button mat-raised-button (click)="onDecline(reschedule.id)" color="warn">Decline</button>
+            <button mat-raised-button (click)="onDecline(reservation.id)" color="warn">Decline</button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
@@ -51,8 +56,12 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!closedReservations"></app-loader>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let reservation of closedReservations">
+      <div class="error-view" *ngIf="closedReservations && closedReservations.length == 0">
+        <img src="assets/images/draw/review_close.svg">
+        <label>Closed requests will appear here...</label>
+      </div>
+      <mat-accordion *ngIf="closedReservations && closedReservations.length > 0">
+        <mat-expansion-panel *ngFor="let reservation of closedReservations" [ngClass]="reservation.status">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ reservation.event }}

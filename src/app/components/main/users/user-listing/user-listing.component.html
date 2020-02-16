@@ -11,23 +11,29 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!displayedData"></app-loader>
-      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef> Firstname </th>
-          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-        </ng-container>
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef> Lastname </th>
-          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-        </ng-container>
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
-          [routerLink]="['/users/listing', row.id]"></tr>
-      </table>
+      <div class="error-view" *ngIf="displayedData && displayedData.length == 0">
+        <img src="assets/images/draw/users.svg">
+        <label>Users will appear here...</label>
+      </div>
+      <div *ngIf="displayedData && displayedData.length > 0">
+        <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> Firstname </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Lastname </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
+            [routerLink]="['/users/listing', row.id]"></tr>
+        </table>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

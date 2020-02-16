@@ -8,7 +8,7 @@
     <div class="container">
       <mat-card class="section">
         <mat-card-title>Time Table</mat-card-title>
-        <mat-card-subtitle>Events thats asigned to you</mat-card-subtitle>
+        <mat-card-subtitle>Events thats assigned to you</mat-card-subtitle>
         <mat-card-content class="table-content">
           <full-calendar defaultView="timeGridWeek" [header]="calendarHeaders" [buttonText]="calendarButtons" [plugins]="calendarPlugins" [events]="gridEvents" [editable]="true" [eventStartEditable]="true"
           [minTime]="'06:00:00'" [maxTime]="'21:00:00'" [nowIndicator]="true" [allDaySlot]="false" (eventClick)="handleEventClick($event)" (eventDrop)="handleEventDrop($event)"></full-calendar>

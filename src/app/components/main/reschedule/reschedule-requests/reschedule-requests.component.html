@@ -4,7 +4,11 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!reschedules"></app-loader>
-      <mat-accordion>
+      <div class="error-view" *ngIf="reschedules && reschedules.length == 0">
+        <img src="assets/images/draw/review_open.svg">
+        <label>Pending requests will appear here...</label>
+      </div>
+      <mat-accordion *ngIf="reschedules && reschedules.length > 0">
         <mat-expansion-panel *ngFor="let reschedule of reschedules">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -44,8 +48,12 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!doneReschedules"></app-loader>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let reschedule of doneReschedules">
+      <div class="error-view" *ngIf="doneReschedules && doneReschedules.length == 0">
+        <img src="assets/images/draw/review_close.svg">
+        <label>Closed requests will appear here...</label>
+      </div>
+      <mat-accordion *ngIf="doneReschedules && doneReschedules.length > 0">
+        <mat-expansion-panel *ngFor="let reschedule of doneReschedules" [ngClass]="reschedule.status">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ reschedule.event.name }}

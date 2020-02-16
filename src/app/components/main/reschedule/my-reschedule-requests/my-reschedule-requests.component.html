@@ -4,8 +4,12 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!reschedules"></app-loader>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let reschedule of reschedules">
+      <div class="error-view" *ngIf="reschedules && reschedules.length == 0">
+        <img src="assets/images/draw/schedule.svg">
+        <label>Your reschedule requests will appear here...</label>
+      </div>
+      <mat-accordion *ngIf="reschedules && reschedules.length > 0">
+        <mat-expansion-panel *ngFor="let reschedule of reschedules" [ngClass]="reschedule.status">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ reschedule.event.name }}

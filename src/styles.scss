@@ -38,3 +38,43 @@
 .background {
   height: 300px;
 }
+
+.mat-expansion-panel {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+// Section styles
+.REVIEWED {
+  background-color: #fddeb1;
+}
+
+.ACCEPTED {
+  background-color: #d0fcc5;
+}
+
+.DECLINED {
+  background-color: #ffc8b9;
+}
+
+// Errors
+.error-view {
+  margin-top: 6rem !important;
+  margin-bottom: 2rem !important;
+  display: flex;
+  object-fit: contain;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-view img {
+  width: 50%;
+  height: auto;
+  margin: auto;
+}
+
+.error-view label {
+  color: #888888;
+  margin-top: 2rem;
+  font-size: 18px;
+}

@@ -11,23 +11,30 @@
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!displayedData"></app-loader>
-      <table *ngIf="displayedData" mat-table [dataSource]="displayedData">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-        <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef> Time </th>
-          <td mat-cell *matCellDef="let element"> {{element.startDateTime | date : 'short'}} {{ element.endDateTime | date : 'short' }} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
-          [routerLink]="['/events/listing', row.id]"></tr>
-      </table>
+      <div class="error-view" *ngIf="displayedData && displayedData.length == 0">
+        <img src="assets/images/draw/events.svg">
+        <label>Events will appear here...</label>
+      </div>
+      <div *ngIf="displayedData && displayedData.length > 0">
+        <table mat-table [dataSource]="displayedData">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.startDateTime | date : 'short'}}
+              {{ element.endDateTime | date : 'short' }} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" mat-ripple class="table-row"
+            [routerLink]="['/events/listing', row.id]"></tr>
+        </table>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
