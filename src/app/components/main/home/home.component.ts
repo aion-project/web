@@ -49,7 +49,9 @@ export class HomeComponent implements OnInit {
           id: schedule.scheduleId,
           title: schedule.name,
           start: startMoment,
-          end: endMoment
+          end: endMoment,
+          backgroundColor: schedule.color,
+          borderColor: schedule.color
         };
       });
     });
