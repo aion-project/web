@@ -27,7 +27,7 @@ export class AssignUserComponent implements OnInit, OnDestroy {
   elements: any[];
 
   constructor(
-    public dialogRef: MatDialogRef<SelectElementComponent>,
+    public dialogRef: MatDialogRef<AssignUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AssignUserData,
     private userService: UserService,
   ) { }

@@ -14,7 +14,7 @@ import { Subject } from 'src/app/model/Subject';
 export class ChangeSubjectComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'description'];
-  displayedData = new MatTableDataSource<Subject>(null);
+  displayedData = new MatTableDataSource<Subject>([]);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;

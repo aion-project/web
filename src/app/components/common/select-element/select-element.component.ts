@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { map, distinctUntilChanged } from 'rxjs/operators';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { GroupService } from 'src/app/services/group.service';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { ResourceService } from 'src/app/services/resource.service';
 
 export const SelectElementType = {
@@ -21,13 +21,18 @@ export interface SelectElementData {
   templateUrl: './select-element.component.html',
   styleUrls: ['./select-element.component.scss']
 })
-export class SelectElementComponent implements OnInit, OnDestroy {
+export class SelectElementComponent implements OnInit {
 
-  search = new FormControl('');
-  searchSubscription: Subscription;
+  displayedColumns: string[] = ['name', 'description'];
+  displayedData = new MatTableDataSource<any>([]);
 
-  unfilteredElements: any[];
-  elements: any[];
+  @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
+    this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
+  }
 
   constructor(
     public dialogRef: MatDialogRef<SelectElementComponent>,
@@ -38,15 +43,11 @@ export class SelectElementComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fetchElements();
-    this.searchSubscription = this.search.valueChanges.pipe(distinctUntilChanged()).subscribe(query => {
-      this.elements = this.unfilteredElements.filter(element => element.name.toLowerCase().includes(query.toLowerCase()));
-    });
   }
 
-  ngOnDestroy() {
-    if (this.searchSubscription && !this.searchSubscription.closed) {
-      this.searchSubscription.unsubscribe();
-    }
+  filter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   fetchElements() {
@@ -61,8 +62,7 @@ export class SelectElementComponent implements OnInit, OnDestroy {
         return !(this.data.current != null && this.data.current.some(it => it.id === element.id));
       });
     })).subscribe((elements: any[]) => {
-      this.unfilteredElements = elements;
-      this.elements = elements;
+      this.displayedData.data = elements;
     });
   }
 
