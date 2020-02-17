@@ -15,6 +15,7 @@ import { CreateScheduleData, CreateScheduleComponent } from './create-schedule/c
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/app/model/Schedule';
 import { User } from 'src/app/model/User';
+import { AppConfig } from 'src/app/config/app-config';
 
 @Component({
   selector: 'app-event-detail',
@@ -231,6 +232,19 @@ export class EventDetailComponent implements OnInit {
 
   fetchEventInfo() {
     this.eventService.get(this.eventId).pipe(first()).subscribe(event => {
+      let schedules = event.schedules;
+      event.schedules = schedules.map(schedule => {
+        let users = schedule.users;
+
+        schedule.users = users.map(user => {
+          if (user.thumbnailUrl != null) {
+            const url = AppConfig.BASE_URL + user.thumbnailUrl;
+            user.thumbnailUrl = url;
+          }
+          return user;
+        });
+        return schedule;
+      });
       this.event = event;
       console.log(event);
     });

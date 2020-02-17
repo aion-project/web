@@ -50,25 +50,61 @@
 // Schedule styles
 .schedule-row {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.schedule-time {
+    display: flex;
     align-items: center;
+}
+
+.schedule-time label {
+    color: #2196f3;
+    font-weight: 600;
+}
+
+.schedule-info {
+    display: flex;
+}
+
+.info-item-list {
+    display: flex;
+    align-items: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.info-av {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.info-img {
+    width: 24px;
+    height: 24px;
+}
+
+.info-item .mat-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.user-remove {
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    margin-left: 4px;
 }
 
 .schedule-repeat {
     font-weight: 600;
-}
-
-.schedule-location {
-    background-color: grey;
-    border-radius: 4px;
-    padding: 4px 8px;
-    margin: 0 8px;
-    cursor: pointer;
-}
-
-.schedule-users {
-    display: flex;
-}
-
-.schedule-assign-user {
-    margin-left: 8px;
 }

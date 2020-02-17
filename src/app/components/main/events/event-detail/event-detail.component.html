@@ -28,50 +28,68 @@
       </div>
       <div *ngIf="event?.schedules.length > 0">
         <div *ngFor="let schedule of event.schedules" class="schedule-row">
-          <div>
-            {{ schedule.startDateTime | date: 'short' }} - {{ schedule.endDateTime | date: 'short' }}
+          <div class="schedule-time">
+            <label>From&nbsp;</label>
+            <div>{{ schedule.startDateTime | date: 'short' }}</div>
+            <label>&nbsp;to&nbsp;</label>
+            <div>{{ schedule.endDateTime | date: 'short' }}</div>
+            <span class="schedule-repeat" *ngIf="schedule.repeatType != 'NONE'">&nbsp;{{ schedule.repeatType }}</span>
+            <label *ngIf="schedule.repeatType != 'NONE'">&nbsp;until&nbsp;</label>
+            <div *ngIf="schedule.repeatType != 'NONE'">{{ schedule.until | date: 'short' }}</div>
+            <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
-          <span class="schedule-repeat" *ngIf="schedule.repeatType != 'NONE'">&nbsp;{{ schedule.repeatType }}</span>
-          <div class="schedule-location" [routerLink]="['/locations/listing/', schedule.location.id]">
-            {{ schedule.location.name }}</div>
-          <div class="schedule-users">
-            <mat-chip-list *ngIf="schedule.users">
-              <mat-chip [removable]="isAdmin" *ngFor="let user of schedule.users"
-                (removed)="onRemoveUser(schedule, user)">
-                {{ user.firstName }} {{ user.lastName }}
-                <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
-              </mat-chip>
-            </mat-chip-list>
-            <mat-chip *ngIf="isAdmin" class="schedule-assign-user" [removable]="true" (click)="onAddUser(schedule)">
+          <div class="schedule-info">
+            <div class="info-item" [routerLink]="['/locations/listing/', schedule.location.id]">
+              <div class="info-av">
+                <mat-icon>room</mat-icon>
+              </div>
+              <div>{{ schedule.location.name }}</div>
+            </div>
+            <div class="info-item-list" *ngFor="let user of schedule.users">
+              <div class="info-item">
+                <div class="info-av">
+                  <img *ngIf="user && user.thumbnailUrl" class="info-img" [src]="user.thumbnailUrl">
+                  <mat-icon *ngIf="user && !user.thumbnailUrl">person</mat-icon>
+                </div>
+                <div>{{ user.firstName }} {{ user.lastName }}</div>
+                <button *ngIf="isAdmin" mat-icon-button class="user-remove" color="warn" (click)="onRemoveUser(schedule, user)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            <mat-chip *ngIf="isAdmin" class="schedule-assign-user" [removable]="true" (click)="onAddUser(schedule)"
+              (removed)="onAddUser(schedule)">
               Assign
               <mat-icon matChipRemove *ngIf="true">add</mat-icon>
             </mat-chip>
           </div>
-          <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="onRemoveSchedule(schedule)">
-            <mat-icon>close</mat-icon>
-          </button>
         </div>
       </div>
-      <button *ngIf="isAdmin" mat-button (click)="onCreateSchedule()">
-        <mat-icon>add</mat-icon>
-        Add Schedule
-      </button>
+      <div class="actions">
+        <button *ngIf="isAdmin" mat-stroked-button (click)="onCreateSchedule()">
+          <mat-icon>add</mat-icon>
+          Add Schedule
+        </button>
+      </div>
     </mat-card-content>
     <div class="card-section-title subsection">Subject</div>
     <mat-card-content>
       <div *ngIf="!event.subject">Event doesn't have a subject yet.</div>
       <mat-chip-list *ngIf="event.subject">
-        <mat-chip [style.background-color]="event.subject.color" [removable]="isAdmin" (removed)="onSubjectRemove(event.subject)">
+        <mat-chip [style.background-color]="event.subject.color" [removable]="isAdmin"
+          (removed)="onSubjectRemove(event.subject)">
           {{ event.subject.name }}
           <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="isAdmin" class="actions">
-        <button mat-flat-button *ngIf="event.subject" (click)="onSubjectChange()">
+        <button mat-stroked-button *ngIf="event.subject" (click)="onSubjectChange()">
           <mat-icon>edit</mat-icon>
           Change Subject
         </button>
-        <button mat-flat-button *ngIf="!event.subject" (click)="onSubjectChange()">
+        <button mat-stroked-button *ngIf="!event.subject" (click)="onSubjectChange()">
           <mat-icon>add</mat-icon>
           Add Subject
         </button>

@@ -2,7 +2,33 @@
     overflow: visible;
 }
 
-.user-item {
+.content .listing-content {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.content table {
+    width: 100%;
+}
+
+.table-row {
+    cursor: pointer;
+}
+
+.user {
     display: flex;
     align-items: center;
+}
+
+.user-pic {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.user-img {
+    width: 24px;
+    height: 24px;
 }
