@@ -29,13 +29,6 @@
       <owl-date-time #timeEnd></owl-date-time>
       <mat-icon matSuffix [owlDateTimeTrigger]="timeEnd">calendar_today</mat-icon>
     </mat-form-field>
-
-    <mat-form-field class="form-full-width">
-      <input matInput [owlDateTime]="until" [owlDateTimeTrigger]="until" formControlName="until"
-        placeholder="Until Date/Time" autocomplete="off">
-      <owl-date-time #until></owl-date-time>
-      <mat-icon matSuffix [owlDateTimeTrigger]="until">calendar_today</mat-icon>
-    </mat-form-field>
   </form>
   <div class="repeat-mode">
     <label id="repeat-radio-group-label">Repeating</label>
@@ -45,6 +38,12 @@
       </mat-radio-button>
     </mat-radio-group>
   </div>
+  <mat-form-field *ngIf="repeatMode != 'NONE'" class="form-full-width">
+    <input matInput [owlDateTime]="until" [owlDateTimeTrigger]="until" [formControl]="untilForm"
+      placeholder="Until start of" autocomplete="off">
+    <owl-date-time [pickerType]="'calendar'" #until></owl-date-time>
+    <mat-icon matSuffix [owlDateTimeTrigger]="until">calendar_today</mat-icon>
+  </mat-form-field>
   <div class="location">
     <div class="location-title">Location</div>
     <div *ngIf="!selectedLocation">Haven't selected an location yet.</div>

@@ -25,8 +25,8 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   scheduleForm = new FormGroup({
     startDateTime: new FormControl('', Validators.required),
     endDateTime: new FormControl('', Validators.required),
-    until: new FormControl(''),
   });
+  untilForm = new FormControl();
   repeatMode = 'NONE';
   repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY];
   selectedLocation: Location = null;
@@ -35,10 +35,6 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   error: any;
   warning: any;
   isLoading = false;
-  dateTimePickerSettings = {
-    bigBanner: true,
-    timePicker: true
-  };
 
   startDateSubscription: Subscription;
   formStatusSubscription: Subscription;
@@ -64,8 +60,19 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
       if (confilct) {
         this.warning = 'There are confilcts with current schedules. Procede with caution.';
       }
-      console.log(confilct);
-      console.log(event);
+
+      let endDateTime = this.scheduleForm.controls.endDateTime.value as string;
+      if (!endDateTime || endDateTime.length == 0) {
+        this.scheduleForm.controls.endDateTime.setValue(moment(event).add(2, "hours").toISOString())
+      }
+
+      let until = this.untilForm.value as string;
+      if (!until || until.length == 0) {
+        this.untilForm.setValue(moment(event).add(1, "days").toISOString())
+      }
+
+      this.selectedLocation = null;
+      this.locations = [];
     });
   }
 
@@ -82,12 +89,30 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     console.log('Submit');
     const startDateTime = this.scheduleForm.controls.startDateTime.value as string;
     const endDateTime = this.scheduleForm.controls.endDateTime.value as string;
-    const until = this.scheduleForm.controls.until.value as string;
+    const until = this.untilForm.value as string;
     const repeat = this.repeatMode;
+
+    // Validations
     let location = null;
     if (this.selectedLocation != null) {
       location = this.selectedLocation.id;
     } else { return; }
+
+    if (!moment(startDateTime).isBefore(endDateTime)) {
+      this.error = "End date time should be after start date time"
+      return;
+    }
+
+    if (repeat != 'NONE') {
+      if (!until || until.length == 0) {
+        this.error = "Must provide a until start of date to recurring dates"
+        return;
+      } else if (!moment(endDateTime).isBefore(until)) {
+        this.error = "Until starting date should be after end date time"
+        return;
+      }
+    }
+
     console.log('sending');
 
     this.isLoading = true;
