@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { LocationService } from 'src/app/services/location.service';
 import { Location } from 'src/app/model/Location';
 import { SubjectService } from 'src/app/services/subject.service';
@@ -13,7 +13,16 @@ import { Subject } from 'src/app/model/Subject';
 })
 export class ChangeSubjectComponent implements OnInit {
 
-  subjects: Subject[];
+  displayedColumns: string[] = ['name', 'description'];
+  displayedData = new MatTableDataSource<Subject>(null);
+
+  @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
+    this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
+  }
 
   constructor(
     public dialogRef: MatDialogRef<ChangeSubjectComponent>,
@@ -25,9 +34,14 @@ export class ChangeSubjectComponent implements OnInit {
     this.fetchRoles();
   }
 
+  filter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
+  }
+
   fetchRoles() {
     this.subjectService.getAll().pipe(first()).subscribe((subjects) => {
-      this.subjects = subjects;
+      this.displayedData.data = subjects;
     });
   }
 

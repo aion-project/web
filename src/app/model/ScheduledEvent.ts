@@ -4,4 +4,5 @@ export interface ScheduledEvent {
     name: string;
     startDateTime: Date;
     endDateTime: Date;
+    color?: string;
 }

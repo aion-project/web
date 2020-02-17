@@ -38,7 +38,7 @@ export class SubjectDetailComponent implements OnInit {
     });
   }
 
-  onEditEvent() {
+  onEditSubject() {
     const dialogRef = this.dialog.open(SubjectCreateEditComponent, {
       width: '640px',
       data: this.subjectId

@@ -7,7 +7,8 @@
     </button>
   </mat-toolbar>
   <mat-card class="section">
-    <mat-card-subtitle>Subjects in the system</mat-card-subtitle>
+    <mat-card-title>Subjects</mat-card-title>
+    <mat-card-subtitle>All the subjects in the system</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content class="listing-content">
       <app-loader *ngIf="!displayedData.data"></app-loader>
@@ -16,10 +17,12 @@
         <label>Subjects will appear here...</label>
       </div>
       <div *ngIf="displayedData.data && displayedData.data.length > 0">
-        <mat-form-field class="filter-form">
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="filter($event)" placeholder="Filter">
-        </mat-form-field>
+        <div class="filter-outer">
+          <mat-form-field class="filter-inner">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="filter($event)" placeholder="Filter">
+          </mat-form-field>
+        </div>
         <table mat-table matSort [dataSource]="displayedData">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
