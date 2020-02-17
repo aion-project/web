@@ -97,15 +97,6 @@ export class EventService {
     return this.http.post(EventService.EVENT_URL + eventId + '/removeLocation', data);
   }
 
-  reschedule(eventId: string, oldDate: Date, newDate: Date, type: string) {
-    const data = {
-      oldDateTime: moment(oldDate).utc(true).toISOString(),
-      newDateTime: moment(newDate).utc(true).toISOString(),
-      type
-    };
-    return this.http.post(EventService.EVENT_URL + eventId + '/reschedule', data);
-  }
-
   private toEvent = res => res as Event;
   private toScheduledEvent = res => res as ScheduledEvent;
 }

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EventCreateEditComponent } from '../../events/event-create-edit/event-create-edit.component';
 import { EventService } from 'src/app/services/event.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-event-reschedule',
@@ -26,7 +27,7 @@ export class EventRescheduleComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EventCreateEditComponent>,
     @Inject(MAT_DIALOG_DATA) public event,
-    private eventService: EventService,
+    private scheduleService: ScheduleService,
   ) { }
 
   ngOnInit() {
@@ -43,7 +44,7 @@ export class EventRescheduleComponent implements OnInit {
     const type = this.changeMode;
 
     this.isLoading = true;
-    this.eventService.reschedule(this.event.event.id, oldDate, newDate, type).subscribe(() => {
+    this.scheduleService.reschedule(this.event.event.groupId, this.event.event.id, oldDate, newDate, type).subscribe(() => {
       this.isLoading = false;
       this.dialogRef.close(true);
     }, (err) => {

@@ -41,10 +41,12 @@ export class HomeComponent implements OnInit {
   fetchMyEvents() {
     this.eventService.getMine().subscribe(events => {
       this.gridEvents = events.map(schedule => {
+        console.log(schedule);
         const startMoment = moment(schedule.startDateTime).toDate();
         const endMoment = moment(schedule.endDateTime).toDate();
         return {
-          id: schedule.eventId,
+          groupId: schedule.eventId,
+          id: schedule.scheduleId,
           title: schedule.name,
           start: startMoment,
           end: endMoment
@@ -54,8 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   handleEventClick(event) {
-    const eventId = event.event._def.publicId;
-    console.log(eventId);
+    const eventId = event.event.groupId;
+    console.log(event);
     this.router.navigate(['events/listing', eventId]);
   }
 

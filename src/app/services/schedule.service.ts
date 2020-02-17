@@ -34,6 +34,16 @@ export class ScheduleService {
     return this.http.post(ScheduleService.SCHEDULE_URL, data);
   }
 
+  reschedule(eventId: string, scheduleId: string, oldDate: Date, newDate: Date, type: string) {
+    const data = {
+      oldDateTime: moment(oldDate).utc(true).toISOString(),
+      newDateTime: moment(newDate).utc(true).toISOString(),
+      type: type,
+      event: eventId
+    };
+    return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + '/reschedule', data);
+  }
+
   delete(id: string) {
     return this.http.delete(ScheduleService.SCHEDULE_URL + id);
   }
