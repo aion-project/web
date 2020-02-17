@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
-import { LocationService } from 'src/app/services/location.service';
 import { first } from 'rxjs/operators';
-import { LocationCreateEditComponent } from '../../locations/location-create-edit/location-create-edit.component';
 import { EventService } from 'src/app/services/event.service';
 import { EventCreateEditComponent } from '../event-create-edit/event-create-edit.component';
 import { Subject } from 'rxjs';
-import { Event } from 'src/app/model/Event';
+import { Event, EventDisp } from 'src/app/model/Event';
 
 @Component({
   selector: 'app-event-listing',
@@ -17,8 +15,8 @@ import { Event } from 'src/app/model/Event';
 export class EventListingComponent implements OnInit {
 
   isAdmin: boolean;
-  displayedColumns: string[] = ['name', 'description'];
-  displayedData = new MatTableDataSource<Event>(null);
+  displayedColumns: string[] = ['name', 'description', 'subject'];
+  displayedData = new MatTableDataSource<EventDisp>(null);
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
@@ -60,7 +58,17 @@ export class EventListingComponent implements OnInit {
 
   fetchEvents() {
     this.eventService.getAll().pipe(first()).subscribe(events => {
-      this.displayedData.data = events;
+      console.log(events);
+      this.displayedData.data = events.map(event => {
+
+        return {
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          subject: !!event.subject ? event.subject.name : "",
+          groups: ""
+        } as EventDisp;
+      });
     });
   }
 

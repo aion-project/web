@@ -14,3 +14,11 @@ export interface Event {
     schedules?: Schedule[];
     reschedules?: Reschedule[];
 }
+
+export interface EventDisp {
+    id: string;
+    name: string;
+    description?: string;
+    groups: string;
+    subject?: string;
+}
