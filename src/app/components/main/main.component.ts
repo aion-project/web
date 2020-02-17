@@ -15,7 +15,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
   mobileQuery: MediaQueryList;
   user: User;
@@ -30,8 +30,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.mobileQuery = this.media.matchMedia('(max-width: 1024px)');
-    this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
     this.userService.me(true).pipe(
       filter(user => user != null),
     ).subscribe(res => {
@@ -47,7 +47,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
   logout() {

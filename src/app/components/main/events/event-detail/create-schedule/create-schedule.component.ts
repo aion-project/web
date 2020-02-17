@@ -61,14 +61,14 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
         this.warning = 'There are confilcts with current schedules. Procede with caution.';
       }
 
-      let endDateTime = this.scheduleForm.controls.endDateTime.value as string;
-      if (!endDateTime || endDateTime.length == 0) {
-        this.scheduleForm.controls.endDateTime.setValue(moment(event).add(2, "hours").toISOString())
+      const endDateTime = this.scheduleForm.controls.endDateTime.value as string;
+      if (!endDateTime || endDateTime.length === 0) {
+        this.scheduleForm.controls.endDateTime.setValue(moment(event).add(2, 'hours').toISOString());
       }
 
-      let until = this.untilForm.value as string;
-      if (!until || until.length == 0) {
-        this.untilForm.setValue(moment(event).add(1, "days").toISOString())
+      const until = this.untilForm.value as string;
+      if (!until || until.length === 0) {
+        this.untilForm.setValue(moment(event).add(1, 'days').toISOString());
       }
 
       this.selectedLocation = null;
@@ -99,16 +99,16 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     } else { return; }
 
     if (!moment(startDateTime).isBefore(endDateTime)) {
-      this.error = "End date time should be after start date time"
+      this.error = 'End date time should be after start date time';
       return;
     }
 
-    if (repeat != 'NONE') {
-      if (!until || until.length == 0) {
-        this.error = "Must provide a until start of date to recurring dates"
+    if (repeat !== 'NONE') {
+      if (!until || until.length === 0) {
+        this.error = 'Must provide a until start of date to recurring dates';
         return;
       } else if (!moment(endDateTime).isBefore(until)) {
-        this.error = "Until starting date should be after end date time"
+        this.error = 'Until starting date should be after end date time';
         return;
       }
     }

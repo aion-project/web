@@ -4,7 +4,7 @@ import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/m
 import { LocationService } from 'src/app/services/location.service';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { Location } from "src/app/model/Location";
+import { Location } from 'src/app/model/Location';
 
 @Component({
   selector: 'app-location-listing',

@@ -23,11 +23,11 @@ export class EventListingComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
   }
-  
+
   @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
     this.displayedData.sort = sort;
   }
-  
+
   constructor(
     private dialog: MatDialog,
     private userService: UserService,

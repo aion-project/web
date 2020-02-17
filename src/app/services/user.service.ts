@@ -50,7 +50,7 @@ export class UserService {
     );
   }
 
-  isRoleIn(roles: String[]): Observable<boolean> {
+  isRoleIn(roles: string[]): Observable<boolean> {
     return this.me().pipe(
       first(),
       map((user: any) => user.roles.some(it => roles.includes(it.name)))

@@ -63,7 +63,7 @@ export class UserListingComponent implements OnInit {
 
   fetchUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      this.displayedData.data = users
+      this.displayedData.data = users;
     });
   }
 }

@@ -12,7 +12,7 @@ import { ConfirmDialogComponent } from 'src/app/components/common/confirm-dialog
   styleUrls: ['./reservation-requests.component.scss']
 })
 export class ReservationRequestsComponent implements OnInit {
-  
+
   isAcademic: boolean;
   isManagerial: boolean;
   reservations: Reservation[];

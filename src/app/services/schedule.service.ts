@@ -38,7 +38,7 @@ export class ScheduleService {
     const data = {
       oldDateTime: moment(oldDate).utc(true).toISOString(),
       newDateTime: moment(newDate).utc(true).toISOString(),
-      type: type,
+      type,
       event: eventId
     };
     return this.http.post(ScheduleService.SCHEDULE_URL + scheduleId + '/reschedule', data);

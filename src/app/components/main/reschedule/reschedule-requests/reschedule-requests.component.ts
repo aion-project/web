@@ -70,5 +70,5 @@ export class RescheduleRequestsComponent implements OnInit {
       this.doneReschedules = reschedules;
     });
   }
-  
+
 }

@@ -52,9 +52,9 @@ export class CreateReservationComponent implements OnInit, OnDestroy {
       }
     });
     this.startDateSubscription = this.reservationForm.controls.startDateTime.valueChanges.subscribe(event => {
-      let endDateTime = this.reservationForm.controls.endDateTime.value as string;
-      if (!endDateTime || endDateTime.length == 0) {
-        this.reservationForm.controls.endDateTime.setValue(moment(event).add(2, "hours").toISOString())
+      const endDateTime = this.reservationForm.controls.endDateTime.value as string;
+      if (!endDateTime || endDateTime.length === 0) {
+        this.reservationForm.controls.endDateTime.setValue(moment(event).add(2, 'hours').toISOString());
       }
 
       this.selectedLocation = null;
@@ -83,7 +83,7 @@ export class CreateReservationComponent implements OnInit, OnDestroy {
     } else { return; }
 
     if (!moment(startDateTime).isBefore(endDateTime)) {
-      this.error = "End date time should be after start date time"
+      this.error = 'End date time should be after start date time';
       return;
     }
 

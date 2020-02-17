@@ -32,11 +32,11 @@ export class ReservationService {
 
   create(event: string, description: string, startDateTime: Date, endDateTime: Date, location: string) {
     const data = {
-      event: event,
-      description: description,
+      event,
+      description,
       startDateTime: moment(startDateTime).utc(true).toISOString(),
       endDateTime: moment(endDateTime).utc(true).toISOString(),
-      location: location,
+      location,
     };
     console.log(data);
     return this.http.post(ReservationService.RESERVATION_URL, data);
