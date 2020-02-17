@@ -36,6 +36,7 @@ export class CreateReservationComponent implements OnInit, OnDestroy {
   };
 
   formStatusSubscription: Subscription;
+  startDateSubscription: Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<CreateReservationComponent>,
@@ -50,11 +51,23 @@ export class CreateReservationComponent implements OnInit, OnDestroy {
         this.locations = [];
       }
     });
+    this.startDateSubscription = this.reservationForm.controls.startDateTime.valueChanges.subscribe(event => {
+      let endDateTime = this.reservationForm.controls.endDateTime.value as string;
+      if (!endDateTime || endDateTime.length == 0) {
+        this.reservationForm.controls.endDateTime.setValue(moment(event).add(2, "hours").toISOString())
+      }
+
+      this.selectedLocation = null;
+      this.locations = [];
+    });
   }
 
   ngOnDestroy() {
     if (this.formStatusSubscription && !this.formStatusSubscription.closed) {
       this.formStatusSubscription.unsubscribe();
+    }
+    if (this.startDateSubscription && !this.startDateSubscription.closed) {
+      this.startDateSubscription.unsubscribe();
     }
   }
 
@@ -68,6 +81,12 @@ export class CreateReservationComponent implements OnInit, OnDestroy {
     if (this.selectedLocation != null) {
       location = this.selectedLocation.id;
     } else { return; }
+
+    if (!moment(startDateTime).isBefore(endDateTime)) {
+      this.error = "End date time should be after start date time"
+      return;
+    }
+
     console.log('sending');
 
     this.isLoading = true;
