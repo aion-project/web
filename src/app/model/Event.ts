@@ -20,5 +20,6 @@ export interface EventDisp {
     name: string;
     description?: string;
     groups: string;
-    subject?: string;
+    subject: string;
+    subjectColor: string;
 }

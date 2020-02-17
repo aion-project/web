@@ -66,6 +66,7 @@ export class EventListingComponent implements OnInit {
           name: event.name,
           description: event.description,
           subject: !!event.subject ? event.subject.name : "",
+          subjectColor: !!event.subject ? event.subject.color : "#ffffff",
           groups: ""
         } as EventDisp;
       });

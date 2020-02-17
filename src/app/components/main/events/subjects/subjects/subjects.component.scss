@@ -15,3 +15,15 @@
 .table-row {
     cursor: pointer;
 }
+
+.subject-name {
+    display: flex;
+    align-items: center;
+}
+
+.subject-color {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 12px;
+}

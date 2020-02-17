@@ -42,7 +42,7 @@
                 <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <mat-chip class="schedule-assign-user" [removable]="true" (click)="onAddUser(schedule)">
+            <mat-chip *ngIf="isAdmin" class="schedule-assign-user" [removable]="true" (click)="onAddUser(schedule)">
               Assign
               <mat-icon matChipRemove *ngIf="true">add</mat-icon>
             </mat-chip>
@@ -61,7 +61,7 @@
     <mat-card-content>
       <div *ngIf="!event.subject">Event doesn't have a subject yet.</div>
       <mat-chip-list *ngIf="event.subject">
-        <mat-chip [removable]="isAdmin" (removed)="onSubjectRemove(event.subject)">
+        <mat-chip [style.background-color]="event.subject.color" [removable]="isAdmin" (removed)="onSubjectRemove(event.subject)">
           {{ event.subject.name }}
           <mat-icon matChipRemove *ngIf="isAdmin">cancel</mat-icon>
         </mat-chip>

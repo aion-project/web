@@ -58,6 +58,7 @@ export class SubjectsComponent implements OnInit {
 
   fetchSubjects() {
     this.subjectService.getAll().pipe(first()).subscribe(subjects => {
+      console.log(subjects);
       this.displayedData.data = subjects;
     });
   }
