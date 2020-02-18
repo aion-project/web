@@ -4,8 +4,8 @@
 </div>
 <div mat-dialog-content class="content">
   <form class="event-form" [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
-    <span class="error" *ngIf="error">{{error}}</span>
-    <span class="warning" *ngIf="warning">{{warning}}</span>
+    <div class="error" *ngIf="error">{{error}}</div>
+    <div class="warning" *ngIf="warning">{{warning}}</div>
 
     <div class="current-schedules">
       <label>Current Schedules</label>

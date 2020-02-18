@@ -69,7 +69,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
         return moment(event).isBetween(moment(schedule.startDateTime), moment(schedule.until));
       });
       if (confilct) {
-        this.warning = 'There are confilcts with current schedules. Procede with caution.';
+        this.warning = 'You are about to schedule during a current scheduled period. Procede with caution.';
       }
 
       const endDateTime = this.scheduleForm.controls.endDateTime.value as string;
