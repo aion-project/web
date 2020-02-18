@@ -10,3 +10,19 @@
     flex-basis: 360px;
     margin: auto;
 }
+
+.side-nav-header {
+    display: flex;
+    padding-bottom: 8px;
+}
+  
+.side-nav-header .logo-icon {
+    height: 42px;
+    margin: auto 0;
+}
+  
+.side-nav-header .logo-text {
+    margin-left: 6px;
+    font-size: 28px;
+    color: #555 !important;
+}
