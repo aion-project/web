@@ -31,7 +31,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY];
   selectedLocation: Location = null;
   loadingLocations = false;
-  
+
   displayedColumns: string[] = ['name', 'level', 'quantity', 'ac'];
   displayedData = new MatTableDataSource<any>(null);
 

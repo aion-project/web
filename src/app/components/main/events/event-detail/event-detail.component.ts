@@ -232,9 +232,9 @@ export class EventDetailComponent implements OnInit {
 
   fetchEventInfo() {
     this.eventService.get(this.eventId).pipe(first()).subscribe(event => {
-      let schedules = event.schedules;
+      const schedules = event.schedules;
       event.schedules = schedules.map(schedule => {
-        let users = schedule.users;
+        const users = schedule.users;
 
         schedule.users = users.map(user => {
           if (user.thumbnailUrl != null) {

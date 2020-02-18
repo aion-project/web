@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userService.me().subscribe(user => {
       this.user = user;
-    })
+    });
     this.fetchMyEvents();
   }
 
@@ -75,11 +75,11 @@ export class HomeComponent implements OnInit {
   }
 
   handleEventDrop(event) {
-    let reschedulingEvent = this.events.filter(scheduleEvent => {
+    const reschedulingEvent = this.events.filter(scheduleEvent => {
       return scheduleEvent.eventId === event.event.groupId && scheduleEvent.scheduleId === event.event.id;
     })[0];
-    let privilagedUser = reschedulingEvent.users.filter(user => {
-      user.id === this.user.id;
+    const privilagedUser = reschedulingEvent.users.filter(user => {
+      return user.id === this.user.id;
     })[0];
     if (privilagedUser) {
       const dialogRef = this.dialog.open(EventRescheduleComponent, {
@@ -90,14 +90,14 @@ export class HomeComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.fetchMyEvents();
-          this.snackBar.open("Reschedule request created successfully.", "", {
+          this.snackBar.open('Reschedule request created successfully.', '', {
             duration: 3000
           });
         }
         event.revert();
       });
     } else {
-      this.snackBar.open("You are not privilaged to reschedule this event.", "", {
+      this.snackBar.open('You are not privilaged to reschedule this event.', '', {
         duration: 3000
       });
       event.revert();

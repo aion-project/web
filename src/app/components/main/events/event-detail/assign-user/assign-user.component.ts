@@ -58,7 +58,7 @@ export class AssignUserComponent implements OnInit {
           const url = AppConfig.BASE_URL + item.thumbnailUrl + '?random+\=' + Math.random();
           item.thumbnailUrl = url;
         }
-        item.name = item.firstName + " " + item.lastName
+        item.name = item.firstName + ' ' + item.lastName;
         return item;
       });
     });
