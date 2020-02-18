@@ -1,5 +1,41 @@
 .mat-dialog-content {
-    overflow: visible !important;
+    overflow: scroll !important;
+}
+
+.current-schedules {
+    margin-bottom: 1rem;
+}
+
+.schedule-time {
+    display: flex;
+    align-items: center;
+}
+
+.schedule-time label {
+    color: #2196f3;
+    font-weight: 600;
+}
+
+.schedule-repeat {
+    font-weight: 600;
+}
+
+.schedule-info {
+    display: flex;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.info-av {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .repeat-mode {
@@ -7,8 +43,10 @@
     flex-direction: column;
 }
 
-.repeat-radio-group {
+label {
     margin-top: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .repeat-radio-button {
@@ -19,8 +57,21 @@
     margin-top: 16px;
 }
 
-.location-title {
-    margin-bottom: 4px;
+.listing-content {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.content table {
+    width: 100%;
+}
+
+.table-row {
+    cursor: pointer;
+}
+
+.location-padding {
+    margin: 8px 0;
 }
 
 .avail-locations {

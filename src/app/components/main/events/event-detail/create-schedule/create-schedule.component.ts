@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { ScheduleType, Schedule } from 'src/app/model/Schedule';
@@ -30,7 +30,18 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   repeatMode = 'NONE';
   repeatModes = [ScheduleType.NONE, ScheduleType.DAILY, ScheduleType.WEEKLY];
   selectedLocation: Location = null;
-  locations: Location[] = [];
+  loadingLocations = false;
+  
+  displayedColumns: string[] = ['name', 'level', 'quantity', 'ac'];
+  displayedData = new MatTableDataSource<any>(null);
+
+  @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
+    this.displayedData.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, { static: false }) set sort(sort: MatSort) {
+    this.displayedData.sort = sort;
+  }
 
   error: any;
   warning: any;
@@ -50,7 +61,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     this.formStatusSubscription = this.scheduleForm.statusChanges.pipe(distinctUntilChanged()).subscribe(status => {
       if (status === 'INVALID') {
         this.selectedLocation = null;
-        this.locations = [];
+        this.displayedData.data = [];
       }
     });
     this.startDateSubscription = this.scheduleForm.controls.startDateTime.valueChanges.subscribe(event => {
@@ -72,7 +83,7 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
       }
 
       this.selectedLocation = null;
-      this.locations = [];
+      this.displayedData.data = [];
     });
   }
 
@@ -83,6 +94,11 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
     if (this.startDateSubscription && !this.startDateSubscription.closed) {
       this.startDateSubscription.unsubscribe();
     }
+  }
+
+  filter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.displayedData.filter = filterValue.trim().toLowerCase();
   }
 
   onSubmit() {
@@ -143,11 +159,13 @@ export class CreateScheduleComponent implements OnInit, OnDestroy {
   }
 
   onCheckLocations() {
-    this.locations = [];
+    this.loadingLocations = true;
+    this.displayedData.data = [];
     const startDateTime = this.scheduleForm.controls.startDateTime.value as string;
 
     this.locationService.getAvailable(new Date(startDateTime)).pipe(first()).subscribe(locations => {
-      this.locations = locations;
+      this.loadingLocations = false;
+      this.displayedData.data = locations;
     });
   }
 

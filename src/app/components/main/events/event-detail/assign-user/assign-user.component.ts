@@ -48,13 +48,9 @@ export class AssignUserComponent implements OnInit {
 
   fetchElements() {
     this.userService.getAvailable(this.data.schedule.startDateTime).pipe(map((elements: any[]) => {
-      return elements.map(element => {
-        const filteredRoles = element.roles.filter(role => role.name === 'lecturer' || role.name === 'instructor');
-
-        element.roles = filteredRoles;
-        return element;
-      }).filter((element: any) => {
-        return !(this.data.current != null && this.data.current.some(it => it.id === element.id)) && element.roles.length > 0;
+      console.log(elements);
+      return elements.filter((element: any) => {
+        return !(this.data.current != null && this.data.current.some(it => it.id === element.id));
       });
     })).subscribe((elements: any[]) => {
       this.displayedData.data = elements.map(item => {
