@@ -5,6 +5,7 @@ import { EventCreateEditComponent } from '../../events/event-create-edit/event-c
 import { EventService } from 'src/app/services/event.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-event-reschedule',
@@ -22,7 +23,7 @@ export class EventRescheduleComponent implements OnInit {
 
   error: any;
   isLoading = false;
-  rescheduleModes = [ {key: 'TEMP', value: 'Temporary'}, {key: 'PERM', value: 'Permanant'} ];
+  rescheduleModes = [{ key: 'TEMP', value: 'Temporary' }, { key: 'PERM', value: 'Permanant' }];
 
   constructor(
     public dialogRef: MatDialogRef<EventCreateEditComponent>,
@@ -42,6 +43,11 @@ export class EventRescheduleComponent implements OnInit {
     const oldDate = this.event.oldEvent.start;
     const newDate = this.event.event.start;
     const type = this.changeMode;
+
+    if (!moment(newDate).isBefore(Date.now())) {
+      this.error = 'Rescheduled date time should be in the future';
+      return;
+    }
 
     this.isLoading = true;
     this.scheduleService.reschedule(this.event.event.groupId, this.event.event.id, oldDate, newDate, type).subscribe(() => {

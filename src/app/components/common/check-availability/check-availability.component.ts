@@ -27,6 +27,7 @@ export class CheckAvailabilityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data);
     this.date.valueChanges.pipe(distinctUntilChanged()).subscribe(date => {
       this.fetchCurrentEvents(date);
     });

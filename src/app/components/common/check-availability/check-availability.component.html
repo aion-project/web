@@ -1,4 +1,7 @@
-<h1 mat-dialog-title>Check availability</h1>
+<div class="mat-dialog-header">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <h1 mat-dialog-title>Check Availability</h1>
+</div>
 <div mat-dialog-content class="content">
   <mat-form-field class="form-full-width">
     <input matInput [owlDateTime]="dateTime" [owlDateTimeTrigger]="dateTime" [formControl]="date"
@@ -9,13 +12,16 @@
   <div>
     <div *ngIf="currentEvents.length == 0" class="current-event">
       <div>
-        Location doesn't have any event at the given time.
+        No events at the given time.
       </div>
     </div>
     <div *ngFor="let event of currentEvents" class="current-event">
       <div>{{ event.name }}</div>
       <div>
         ({{ event.startDateTime | date : "shortTime" }} - {{ event.endDateTime | date : "shortTime" }})
+      </div>
+      <div>
+        {{ event.location.name }}
       </div>
       <div *ngFor="let group of event.groups">
         {{ group.name }}

@@ -17,7 +17,8 @@ import {
   MatRadioModule,
   MatExpansionModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
@@ -43,6 +44,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     MatExpansionModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatInputModule,
@@ -65,6 +67,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     MatExpansionModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
   ]
 })
 export class MaterialModule { }
