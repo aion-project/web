@@ -44,7 +44,8 @@ export class EventRescheduleComponent implements OnInit {
     const newDate = this.event.event.start;
     const type = this.changeMode;
 
-    if (!moment(newDate).isBefore(Date.now())) {
+
+    if (moment(newDate).isBefore(moment(Date.now()))) {
       this.error = 'Rescheduled date time should be in the future';
       return;
     }

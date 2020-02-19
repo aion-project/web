@@ -3,6 +3,7 @@
   <h1 mat-dialog-title>Reschedule Event</h1>
 </div>
 <div mat-dialog-content class="content">
+  <div *ngIf="error" class="error">{{ error }}</div>
   <div>{{ event.oldEvent.title }}</div>
   <div>From: {{ event.oldEvent.start | date: 'medium' }} - {{ event.oldEvent.end | date: 'medium' }}</div>
 
