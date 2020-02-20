@@ -17,6 +17,7 @@ export class UserListingComponent implements OnInit {
   currentUser: any;
   displayedColumns: string[] = ['firstName', 'lastName', 'email'];
   displayedData = new MatTableDataSource<User>(null);
+  count: number;
 
   @ViewChild(MatPaginator, { static: false }) set paginator(paginator: MatPaginator) {
     this.displayedData.paginator = paginator;
@@ -65,5 +66,8 @@ export class UserListingComponent implements OnInit {
     this.userService.getAll().pipe(first()).subscribe(users => {
       this.displayedData.data = users;
     });
+    this.userService.count().subscribe(count => {
+      this.count = count;
+    })
   }
 }

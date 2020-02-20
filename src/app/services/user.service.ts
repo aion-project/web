@@ -69,6 +69,10 @@ export class UserService {
     return this.http.get(UserService.USER_URL).pipe(map((res: any[]) => res.map(this.toUser)));
   }
 
+  count(): Observable<number> {
+    return this.http.get(UserService.USER_URL + "count").pipe(tap((res: any) => console.log("CEC", res)));
+  }
+
   getEvents(userId: string): Observable<ScheduledEvent[]> {
     return this.http.get(UserService.USER_URL + userId + '/events').pipe(map((res: any[]) => res.map(this.toScheduledEvent)));
   }
