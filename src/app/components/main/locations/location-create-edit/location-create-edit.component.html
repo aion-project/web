@@ -8,11 +8,11 @@
     <span class="error" *ngIf="error">{{error}}</span>
 
     <mat-form-field class="form-full-width">
-      <input matInput type="text" formControlName="name" placeholder="Name">
+      <input matInput type="text" formControlName="name" placeholder="Name" required>
     </mat-form-field>
 
     <mat-form-field class="form-full-width">
-      <input matInput type="text" formControlName="level" placeholder="Level">
+      <input matInput type="text" formControlName="level" placeholder="Level" required>
     </mat-form-field>
 
     <mat-form-field class="form-full-width">
@@ -20,7 +20,7 @@
     </mat-form-field>
 
     <mat-form-field class="form-full-width">
-      <input matInput type="number" formControlName="quantity" placeholder="Quantity">
+      <input matInput type="number" formControlName="quantity" placeholder="Quantity" required>
     </mat-form-field>
 
     <div class="ac-container">

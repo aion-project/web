@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GroupService } from 'src/app/services/group.service';
@@ -14,7 +14,7 @@ import { Group } from 'src/app/model/Group';
 export class GroupCreateEditComponent implements OnInit {
 
   groupForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
 
@@ -43,6 +43,9 @@ export class GroupCreateEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.groupForm.invalid)
+      return;
+
     const name = this.groupForm.controls.name.value as string;
     const description = this.groupForm.controls.description.value as string;
     this.isLoading = true;

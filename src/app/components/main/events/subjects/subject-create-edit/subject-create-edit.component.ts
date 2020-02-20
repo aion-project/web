@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ResourceCreateEditComponent } from '../../../locations/resources/resource-create-edit/resource-create-edit.component';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SubjectCreateEditComponent implements OnInit {
 
   subjectForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
 
@@ -44,6 +44,9 @@ export class SubjectCreateEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.subjectForm.invalid)
+      return;
+
     const name = this.subjectForm.controls.name.value as string;
     const description = this.subjectForm.controls.description.value as string;
     this.isLoading = true;

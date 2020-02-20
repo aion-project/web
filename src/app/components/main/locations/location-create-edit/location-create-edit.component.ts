@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocationService } from 'src/app/services/location.service';
@@ -14,10 +14,10 @@ import { Observable } from 'rxjs';
 export class LocationCreateEditComponent implements OnInit {
 
   locationForm = new FormGroup({
-    name: new FormControl(''),
-    level: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    level: new FormControl('', Validators.required),
     description: new FormControl(''),
-    quantity: new FormControl(0),
+    quantity: new FormControl(0, Validators.required),
     ac: new FormControl(false),
   });
 
@@ -49,6 +49,9 @@ export class LocationCreateEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.locationForm.invalid)
+      return;
+
     const name = this.locationForm.controls.name.value as string;
     const level = this.locationForm.controls.level.value as string;
     const description = this.locationForm.controls.description.value as string;

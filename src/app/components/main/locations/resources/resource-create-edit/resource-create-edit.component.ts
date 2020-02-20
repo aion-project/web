@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Resource } from 'src/app/model/Resource';
 import { ResourceService } from 'src/app/services/resource.service';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class ResourceCreateEditComponent implements OnInit {
 
   resourceForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
 
@@ -30,6 +30,9 @@ export class ResourceCreateEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.resourceForm.invalid)
+      return;
+
     this.isEditing = this.resourceId != null;
     if (this.isEditing) {
       this.resourceService.get(this.resourceId).subscribe((res: any) => {
