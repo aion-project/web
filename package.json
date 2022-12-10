@@ -31,7 +31,7 @@
     "@fullcalendar/timegrid": "^4.4.0",
     "@okta/okta-angular": "^1.4.0",
     "@okta/okta-signin-widget": "^3.7.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",
     "path": "^0.12.7",
